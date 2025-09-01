@@ -1,7 +1,5 @@
 import Image from "next/image";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
-import { MarqueeDemo } from "@/components/Marquee";
-import LogoSlider from "@/components/LogoSlider";
 
 export default function Home() {
   return (
