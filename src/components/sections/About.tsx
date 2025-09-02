@@ -3,7 +3,7 @@ import { ShimmerButton } from '../magicui/shimmer-button'
 
 const About = ()  => {
   return (
-    <div className='text-white flex justify-center'>
+    <div className='text-white flex justify-center h-screen bg-yellow-500'>
 
         <div>
                 <ShimmerButton className="shadow-2xl gap-2">

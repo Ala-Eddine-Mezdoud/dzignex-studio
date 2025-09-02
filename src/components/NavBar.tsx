@@ -18,7 +18,11 @@ export default function Navbar() {
     >
       <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo */}
-        <span className="font-bold text-xl">Dzignex Studio</span>
+        <span className="font-bold text-xl">
+                        <Link href="/" className="hover:underline">
+                Dzignex Studio
+              </Link>
+          </span>
 
         {/* Desktop Menu */}
         <ul className="hidden sm:flex gap-6 list-none m-0 p-0">
