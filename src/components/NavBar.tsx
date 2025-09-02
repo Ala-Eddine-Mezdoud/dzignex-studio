@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -21,16 +22,20 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden sm:flex gap-6 list-none m-0 p-0">
-          <li>About</li>
-          <li>Projects</li>
-          <li>Testimonials</li>
           <li>
-            <a
-              href="/contact"
-              className="bg-blue-500 px-3 py-2 rounded-lg text-white hover:bg-blue-600 transition"
-            >
+              <Link href="/about" className="hover:underline">
+                About
+              </Link>
+          </li>
+          <li>
+            <Link  href="/projects">
+            Projects
+            </Link>
+          </li>
+          <li>
+            <Link  href="/contact" className="bg-blue-500 px-3 py-2 rounded-lg text-white hover:bg-blue-600 transition">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
 
