@@ -24,6 +24,7 @@ export default function Home() {
   {/* Foreground */}
     <Landing />
     <About />
+    <div className="h-[128px]"></div>
     <Projects />
     <Services />
     <Process />
