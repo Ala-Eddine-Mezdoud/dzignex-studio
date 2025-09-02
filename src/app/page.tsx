@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import About from "@/components/sections/About";
 import Landing from "@/components/sections/Landing";
 import Projects from "@/components/sections/Projects";
@@ -8,7 +6,6 @@ import Process from "@/components/sections/Process";
 import Testimonials from "@/components/sections/Testimonials";
 import Faqs from "@/components/sections/Faqs";
 import Launch from "@/components/sections/Launch";
-import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
@@ -31,7 +28,6 @@ export default function Home() {
     <Testimonials />
     <Faqs />
     <Launch />
-    <Footer />
 </div>
 
 

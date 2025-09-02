@@ -8,7 +8,7 @@ const Faqs = () => {
               <div>
                       <ShimmerButton className="shadow-2xl gap-2">
                         <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white lg:text-lg">
-                          FAQ's
+                          {"FAQ's"}
                         </span>
                       </ShimmerButton>
               </div>
