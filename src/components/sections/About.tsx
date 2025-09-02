@@ -13,20 +13,21 @@ const About = ()  => {
           </ShimmerButton>
       </div>
 
-      <div className="grid w-full h-full bg-gray-500 grid-rows-2 lg:grid-rows-1 lg:grid-cols-3 gap-5">
-        <div className="bg-sky-500 flex items-center justify-center">
-          <h1>{"["}Dezignex Studio{"]"}</h1>
-        </div>
+<div className="grid w-full bg-gray-500 grid-rows-2 lg:grid-rows-1 lg:grid-cols-3 gap-2">
+  <div className="bg-sky-500 flex items-center justify-center lg:h-auto">
+    <h1>{"["}Dezignex Studio{"]"}</h1>
+  </div>
 
-        <div className="bg-violet-500 flex flex-col items-center justify-center lg:col-span-2 w-full h-full">
-          <div className="grid grid-rows-4 lg:grid-cols-2 lg:grid-rows-2 gap-4 w-full h-full">
-            <div className="bg-red-500 flex items-center justify-center aspect-square w-full h-full">Years</div>
-            <div className="bg-yellow-500 flex items-center justify-center aspect-square w-full h-full">Projects</div>
-            <div className="bg-blue-500 flex items-center justify-center aspect-square w-full h-full">Happy Clients</div>
-            <div className="bg-green-500 flex items-center justify-center aspect-square w-full h-full">Satisfaction</div>
-          </div>
-        </div>
-      </div>
+  <div className="bg-violet-500 flex flex-col items-center justify-center lg:col-span-2">
+    <div className="grid grid-rows-4 lg:grid-cols-2 lg:grid-rows-2 gap-1 w-full h-full gap-2">
+      <div className="bg-red-500 flex items-center justify-center ">Years</div>
+      <div className="bg-yellow-500 flex items-center justify-center ">Projects</div>
+      <div className="bg-blue-500 flex items-center justify-center ">Happy Clients</div>
+      <div className="bg-green-500 flex items-center justify-center ">Satisfaction</div>
+    </div>
+  </div>
+</div>
+
     </div>
   )
 }
