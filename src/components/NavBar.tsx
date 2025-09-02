@@ -27,6 +27,11 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <ul className="hidden sm:flex gap-6 list-none m-0 p-0">
           <li>
+              <Link href="/" className="hover:underline">
+                Home
+              </Link>
+          </li>
+          <li>
               <Link href="/about" className="hover:underline">
                 About
               </Link>
@@ -57,17 +62,26 @@ export default function Navbar() {
       {open && (
         <div className="sm:hidden bg-black/80 backdrop-blur-xl border-t border-white/5 px-4 py-3">
           <ul className="flex flex-col gap-4">
-            <li>About</li>
-            <li>Projects</li>
-            <li>Testimonials</li>
-            <li>
-              <a
-                href="/contact"
-                className="bg-blue-500 block text-center px-3 py-2 rounded-lg text-white hover:bg-blue-600 transition"
-              >
-                Contact
-              </a>
-            </li>
+         <li>
+              <Link href="/" className="hover:underline">
+                Home
+              </Link>
+          </li>
+          <li>
+              <Link href="/about" className="hover:underline">
+                About
+              </Link>
+          </li>
+          <li>
+            <Link  href="/projects">
+            Projects
+            </Link>
+          </li>
+          <li>
+            <Link  href="/contact" className="bg-blue-500 px-3 py-2 rounded-lg text-white hover:bg-blue-600 transition">
+              Contact
+            </Link>
+          </li>
           </ul>
         </div>
       )}

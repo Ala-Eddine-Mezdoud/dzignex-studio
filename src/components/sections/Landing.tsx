@@ -5,7 +5,7 @@ import Image from 'next/image';
 const Landing = () => {
   return (
   <div className="flex items-center justify-center h-screen text-white">
-    <div className="flex flex-col items-center gap-10 text-center relative top-10 w-full">
+    <div className="flex flex-col items-center lg:gap-25 gap-15 text-center relative  bottom-30 w-full">
       
       {/* Shimmer Button */}
       <ShimmerButton className="shadow-2xl gap-2">
@@ -17,7 +17,7 @@ const Landing = () => {
 
       {/* Heading + Paragraph */}
       <div className="flex flex-col gap-6 max-w-5xl px-4">
-        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
           Simplifying brands and driving Success through strategic design
         </h1>
         <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto">
