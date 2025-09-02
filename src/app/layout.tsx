@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
+import Navbar from "@/components/NavBar";
 import "./globals.css";
 
 
@@ -19,38 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={` ${dmSans.className} antialiased bg-[#000300] `}
-      >
-<nav
-  className="
-    sticky top-0 z-50 w-full 
-    bg-white/1 backdrop-blur-2xl 
-    border-b border-white/5
-    text-white
-  "
->
-  <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4 py-3">
-    <span className="font-bold text-xl">Dzignex Studio</span>
-    <ul className="flex gap-6 list-none m-0 p-0">
-      <li> </li>
-      <li>About</li>
-      <li>Projects</li>
-      <li>Testimonials</li>
-      <li>
-        <a
-          href="/contact"
-          className="bg-blue-500 px-3 py-2 rounded-lg text-white hover:bg-blue-600 transition"
-        >
-          Contact
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-
-
+      <body className={` ${dmSans.className} antialiased bg-[#000300] `} >
+        <Navbar />
         {children}
       </body>
     </html>
