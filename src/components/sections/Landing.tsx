@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 const Landing = () => {
   return (
-  <div className="flex items-center justify-center h-screen text-white">
-    <div className="flex flex-col items-center lg:gap-25 gap-15 text-center relative  bottom-30 w-full">
+  <div className="flex items-center justify-center  text-white">
+    <div className="flex flex-col items-center lg:gap-25 gap-15 text-center relative  mt-30 w-full">
       
       {/* Shimmer Button */}
       <ShimmerButton className="shadow-2xl gap-2">

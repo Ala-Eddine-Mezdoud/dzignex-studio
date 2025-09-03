@@ -19,14 +19,22 @@ export default function Home() {
   </div>
 
   {/* Foreground */}
+    <div className="h-screen">
+
     <Landing />
+    </div>
     <About />
     <div className="h-[128px]"></div>
     <Projects />
+    <div className="h-[128px]"></div>
     <Services />
+    <div className="h-[128px]"></div>
     <Process />
+    <div className="h-[128px]"></div>
     <Testimonials />
+    <div className="h-[128px]"></div>
     <Faqs />
+    <div className="h-[128px]"></div>
     <Launch />
 </div>
 
