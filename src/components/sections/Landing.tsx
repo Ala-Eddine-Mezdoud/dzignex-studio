@@ -17,7 +17,7 @@ const Landing = () => {
 
       {/* Heading + Paragraph */}
       <div className="flex flex-col gap-6 max-w-5xl px-4">
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium">
           Simplifying brands and driving Success through strategic design
         </h1>
         <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto">
