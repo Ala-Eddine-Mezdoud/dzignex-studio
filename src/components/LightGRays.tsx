@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react';
+
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
 
 export type RaysOrigin =
@@ -77,16 +78,25 @@ const LightRays: React.FC<LightRaysProps> = ({
   distortion = 0.0,
   className = ''
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const uniformsRef = useRef<any>(null);
-  const rendererRef = useRef<Renderer | null>(null);
-  const mouseRef = useRef({ x: 0.5, y: 0.5 });
-  const smoothMouseRef = useRef({ x: 0.5, y: 0.5 });
-  const animationIdRef = useRef<number | null>(null);
-  const meshRef = useRef<any>(null);
-  const cleanupFunctionRef = useRef<(() => void) | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const observerRef = useRef<IntersectionObserver | null>(null);
+const containerRef = useRef<HTMLDivElement>(null);
+
+// uniforms in OGL are an object mapping names to { value }
+const uniformsRef = useRef<Record<string, { value: unknown }> | null>(null);
+
+const rendererRef = useRef<Renderer | null>(null);
+
+const mouseRef = useRef<{ x: number; y: number }>({ x: 0.5, y: 0.5 });
+const smoothMouseRef = useRef<{ x: number; y: number }>({ x: 0.5, y: 0.5 });
+
+const animationIdRef = useRef<number | null>(null);
+
+const meshRef = useRef<Mesh | null>(null);
+
+const cleanupFunctionRef = useRef<(() => void) | null>(null);
+
+const [isVisible, setIsVisible] = useState(false);
+const observerRef = useRef<IntersectionObserver | null>(null);
+
 
   useEffect(() => {
     if (!containerRef.current) return;
