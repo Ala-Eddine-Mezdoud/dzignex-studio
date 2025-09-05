@@ -5,24 +5,8 @@ import Image from 'next/image'
 
 const Process = () => {
   return (
-    <div className='relative w-full  flex justify-center  overflow-hidden border rounded-xl border-gray-700 pr-5 pl-5'>
+    <div className='relative w-full  flex justify-center  overflow-hidden  rounded-xl  pr-5 pl-5'>
       
-      {/* Background LightRays */}
-      <div className='absolute inset-0 -z-10'>
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#110eff"
-          raysSpeed={1.5}
-          lightSpread={2}
-          rayLength={2}
-          followMouse={true}
-          mouseInfluence={0.1}
-          noiseAmount={0.1}
-          distortion={0.05}
-          className="w-full h-full"
-          fadeDistance={2}
-        />
-      </div>
 
       {/* Foreground content */}
  <div className="flex  justify-center  text-white flex-wrap gap-20">

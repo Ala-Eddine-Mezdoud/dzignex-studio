@@ -3,6 +3,7 @@ import { ShimmerButtonLight } from '../magicui/shimmer-button-light'
 import LightRays from '../LightGRays'
 import Image from 'next/image'
 import { MarqueeDemo } from '../MarqueeDemo'
+import { MarqueeLogo } from '../MarqueeLogo'
 
 const Testimonials = () => {
   return (
@@ -49,6 +50,8 @@ const Testimonials = () => {
 <div className="w-full">
 
 <MarqueeDemo />
+<div className='h-12'></div>
+<MarqueeLogo />
 
 </div>
 <div className='h-16'></div>

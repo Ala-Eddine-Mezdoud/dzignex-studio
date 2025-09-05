@@ -36,6 +36,7 @@ export default function Home() {
     <Faqs />
     <div className="h-[128px]"></div>
     <Launch />
+    <div className="h-[128px]"></div>
 </div>
 
 
