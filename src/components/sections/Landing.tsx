@@ -5,28 +5,30 @@ import Image from 'next/image';
 const Landing = () => {
   return (
   <div className="flex items-center justify-center  text-white">
-    <div className="flex flex-col items-center lg:gap-25 gap-15 text-center relative  mt-30 w-full">
+    <div className="flex flex-col items-center lg:gap-[48px] gap-[40px] text-center relative  mt-[92px] w-full">
       
       {/* Shimmer Button */}
       <ShimmerButton className="shadow-2xl gap-2">
-        <Image src="/Icon.png" alt="Icon" width={35} height={35} />
+        <Image src="/Icon.svg" alt="Icon" width={36} height={36} />
         <span className="whitespace-pre-wrap text-sm font-medium tracking-tight text-white sm:text-base lg:text-lg">
           Proudly Serving 40+ Clients
         </span>
       </ShimmerButton>
 
       {/* Heading + Paragraph */}
-      <div className="flex flex-col gap-6 max-w-5xl px-4">
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-medium">
+      <div className="flex flex-col gap-[24px] max-w-6xl px-4  items-center">
+        <h1
+          className="text-4xl scale-100  sm:scale-100 sm:text-5xl lg:text-7xl font-medium sm:w-[90%] lg:w-full sm:leading-[80px] sm:tracking-[-4px] tracking-[-1.5px] "
+        >
           Simplifying brands and driving Success through strategic design
         </h1>
-        <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto sm:w-[50%] text-[15px]">
           We craft bold identities and digital experiences for brands ready to make their mark.
         </p>
       </div>
 
       {/* CTA Button */}
-      <button className="bg-gray-100 text-black px-6 py-3 rounded-md text-base sm:text-lg font-semibold">
+      <button className="bg-[#F3F6FF] px-6 py-3 sm:pt-4 sm:pb-4 mt-[4px] sm:pl-8 sm:pr-8 text-lg hover:bg-[#0c3eff] hover:text-[#F3F6FF] rounded-lg text-black  transition font-semibold">
         Book Free Consultation
       </button>
     </div>

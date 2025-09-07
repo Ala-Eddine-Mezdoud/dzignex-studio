@@ -32,7 +32,7 @@ export default function Navbar() {
         <ul className="hidden sm:flex gap-8 list-none m-0 p-0 text-xl font-semibold">
           <li>
               <Link href="/" className="hover:border-b border-[#0c3eff] pb-1 text-[#0c3eff] ">
-                Homes
+                Home
               </Link>
           </li>
           <li>
@@ -46,7 +46,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link  href="/contact" className="bg-[#0c3eff] pt-2 pb-2  pl-6 pr-6 rounded-lg text-white hover:bg-blue-600 transition ml-20">
+            <Link  href="/contact" className="bg-[#0c3eff] pt-3 pb-3  pl-6 pr-6 rounded-lg text-white hover:bg-blue-600 transition ml-12">
               Contact Us
             </Link>
           </li>
