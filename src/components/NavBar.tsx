@@ -46,7 +46,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link  href="/contact" className="bg-[#0c3eff] pt-3 pb-3  pl-6 pr-6 rounded-lg text-white hover:bg-blue-600 transition ml-12">
+            <Link  href="/contact" className="bg-[#0c3eff] py-3  pl-6 pr-6 rounded-lg text-white hover:bg-blue-600 transition ml-12">
               Contact Us
             </Link>
           </li>

@@ -28,7 +28,7 @@ const Landing = () => {
       </div>
 
       {/* CTA Button */}
-      <button className="bg-[#F3F6FF] px-6 py-3 sm:pt-4 sm:pb-4 mt-[4px] sm:pl-8 sm:pr-8 text-lg hover:bg-[#0c3eff] hover:text-[#F3F6FF] rounded-lg text-black  transition font-semibold">
+      <button className="bg-[#F3F6FF] px-6 py-2 sm:py-3 mt-[12px] sm:px-4 text-lg rounded-lg text-black font-semibold transition-colors duration-300 ease-in-out hover:bg-[#0c3eff] hover:text-[#F3F6FF] focus:outline-none focus:ring-2 focus:ring-[#0c3eff] focus:ring-offset-2">
         Book Free Consultation
       </button>
     </div>

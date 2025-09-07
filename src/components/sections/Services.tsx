@@ -1,58 +1,45 @@
 import React from 'react'
-import { ShimmerButtonLight } from '../magicui/shimmer-button-light'
-import LightRays from '../LightGRays'
 import Image from 'next/image'
+import DarkVeil from '../DarkVeil'
+import { ShimmerButton } from '../magicui/shimmer-button'
+
 
 const Services = () => {
   return (
-    <div className='relative w-full  flex justify-center  overflow-hidden border rounded-xl border-gray-700 pr-5 pl-5'>
+    <div className='relative w-full  flex justify-center  overflow-hidden border rounded-[40px] shadow-[0_5px_20px_0_#01011033] bg-black  backdrop-blur-2xl border border-white/10 pr-5 pl-5 '>
       
       {/* Background LightRays */}
-      <div className='absolute inset-0 -z-10'>
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#110eff"
-          raysSpeed={1.5}
-          lightSpread={2}
-          rayLength={2}
-          followMouse={true}
-          mouseInfluence={0.1}
-          noiseAmount={0.1}
-          distortion={0.05}
-          className="w-full h-full"
-          fadeDistance={2}
+      <div className='absolute inset-0 -z-10 h-160 '>
+        <DarkVeil 
+        speed={1.5}
+        hueShift={10}
         />
       </div>
 
       {/* Foreground content */}
- <div className="flex  justify-center  text-white flex-wrap gap-20">
-    <div className="flex flex-col items-center lg:gap-5 gap-15 text-center relative mt-20 w-full">
-      
-      {/* Shimmer Button */}
-      <ShimmerButtonLight className="shadow-2xl gap-2">
-        <Image src="/Icon.png" alt="Icon" width={35} height={35} />
+ <div className="flex  justify-center px-[32px] pb-[40px] text-white flex-wrap gap-20">
+      <div className="flex justify-center items-center flex-wrap gap-[40px] text-center">
+        <div className='w-full flex justify-center mt-[128px]'>
+
+      <ShimmerButton className="shadow-2xl gap-2">
+        <Image src="/projects.svg" alt="Icon" width={36} height={36} />
         <span className="whitespace-pre-wrap text-sm font-medium tracking-tight text-white sm:text-base lg:text-lg">
-          Services
+          Projects
         </span>
-      </ShimmerButtonLight>
-
-      {/* Heading + Paragraph */}
-      <div className="flex flex-col gap-6 max-w-5xl px-4 items-center ">
-        <h1 className="text-2xl sm:text-4xl lg:text-4xl font-medium lg:w-[60%]">Expertly Crafted Solutions for Ambitious Brands</h1>
-        <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto">
-          Powerful visual storytelling crafted to overcome your challenges and accelerate your brand’s success.
-        </p>
+      </ShimmerButton>
+        </div>
+        <h1 className="text-white text-[35px] sm:text-[40px] tracking-[-2px] leading-[42px] font-medium  sm:w-[50%]">
+          Discover The Impact Behind Every Brand
+        </h1>
       </div>
-
-    </div>
-<div className="w-full">
+<div className="">
 
   {/* Project Cards Wrapper */}
-  <div className="grid gap-5 lg:grid-cols-3 ">
-    {[1, 2, 3].map((i) => (
+  <div className="grid gap-[24px] lg:grid-cols-3 ">
+    {[1, 2, 3,4,5,6].map((i) => (
       <div
         key={i}
-        className="bg-white/10 p-2 rounded-xl flex flex-col gap-5"
+        className=" p-2 rounded-[20px] flex flex-col gap-5 bg-[#05071C] border border-[#f3f6ff]/10"
       >
         {/* Info */}
         <div className="relative  p-4 flex flex-col gap-5 justify-between items-start text-white rounded-lg">
@@ -82,7 +69,6 @@ const Services = () => {
   </div>
 
 </div>
-<div className='h-16'></div>
 
   </div>
 
