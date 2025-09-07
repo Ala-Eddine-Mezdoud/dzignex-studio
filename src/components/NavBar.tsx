@@ -29,9 +29,9 @@ export default function Navbar() {
           </span>
 
         {/* Desktop Menu */}
-        <ul className="hidden sm:flex gap-8 list-none m-0 p-0 text-xl font-semibold">
+        <ul className="hidden sm:flex gap-8 list-none m-0 p-0 text-[18px] font-semibold">
           <li>
-              <Link href="/" className="hover:border-b border-[#0c3eff] pb-1 text-[#0c3eff]">
+              <Link href="/" className="hover:border-b border-[#0c3eff] pb-1 text-[#0c3eff] ">
                 Home
               </Link>
           </li>
