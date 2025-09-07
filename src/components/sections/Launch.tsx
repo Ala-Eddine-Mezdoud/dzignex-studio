@@ -1,11 +1,11 @@
 import React from 'react'
-import { ShimmerButtonLight } from '../magicui/shimmer-button-light'
 import LightRays from '../LightGRays'
 import Image from 'next/image'
+import { ShimmerButton } from '../magicui/shimmer-button'
 
 const Launch = () => {
   return (
-    <div className='relative w-full  flex justify-center  overflow-hidden border rounded-xl border-gray-700 pr-5 pl-5'>
+    <div className='relative w-full  flex justify-center  overflow-hidden border rounded-[40px] border-gray-700 pr-5 pl-5'>
       
       {/* Background LightRays */}
       <div className='absolute inset-0 -z-10'>
@@ -25,28 +25,32 @@ const Launch = () => {
       </div>
 
       {/* Foreground content */}
- <div className="flex  justify-center  text-white flex-wrap gap-20">
-    <div className="flex flex-col items-center lg:gap-5 gap-15 text-center relative mt-20 w-full">
-      
-      {/* Shimmer Button */}
-      <ShimmerButtonLight className="shadow-2xl gap-2">
-        <Image src="/Icon.png" alt="Icon" width={35} height={35} />
+ <div className="flex  justify-center  text-white flex-wrap gap-[40px]">
+      <div className="flex justify-center items-center flex-wrap gap-[40px] text-center">
+
+        <div className='w-full flex flex-wrap justify-center mt-[80px] '>
+
+      <ShimmerButton className="shadow-2xl gap-2">
+        <Image src="/projects.svg" alt="Icon" width={36} height={36} />
         <span className="whitespace-pre-wrap text-sm font-medium tracking-tight text-white sm:text-base lg:text-lg">
           Launch you brand
         </span>
-      </ShimmerButtonLight>
+      </ShimmerButton>
+        </div>
 
-      {/* Heading + Paragraph */}
-      <div className="flex flex-col gap-6 max-w-5xl px-4 items-center ">
-        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-medium lg:w-[60%]">Defining the Future of
-Your Brand Today</h1>
-        <p className="text-base sm:text-lg lg:text-lg text-gray-400 max-w-2xl mx-auto">
+        <div className='w-full flex justify-center'>
+        <h1 className="text-white text-[35px] sm:text-[60px] tracking-[-3px] leading-[62px] font-medium  w-[50%]">
+          Defining the Future of Your Brand Today
+        </h1>
+        </div>
+
+       <p className="text-base sm:text-lg lg:text-[18px] text-[#f3f6ff]/60 max-w-2xl mx-auto sm:w-[33%] w-[30%] text-[15px] -mt-[22px]">
           Unlock the full potential of your brand with tailored solutions and expert support.
-        </p>
+      </p>
+
       </div>
 
-    </div>
-      <button className="bg-gray-100 text-black px-6 py-3 mb-15 -mt-10 rounded-md text-base sm:text-lg font-semibold">
+    <button className="bg-[#0c3eff] px-6 py-2 sm:py-3 mt-[12px] mb-[80px] sm:px-8 text-lg rounded-lg text-[#f3f6ff] border-3 border-[#f3f6ff]/15 font-semibold transition-colors duration-300 ease-in-out hover:bg-[#0632cd] hover:text-[#F3F6FF] focus:outline-none focus:ring-2 focus:ring-[#0c3eff] focus:ring-offset-2">
         Book Free Consultation
       </button>
   </div>

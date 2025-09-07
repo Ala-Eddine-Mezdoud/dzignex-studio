@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="bg-[#0B0B19] text-gray-300 py-12 px-6">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-6xl mx-auto flex flex-wrap gap-8 justify-between">
         {/* Left Section */}
         <div>
           <h2 className="text-2xl font-bold text-white">
@@ -12,8 +12,10 @@ const Footer = () => {
           <p className="mt-6">dzignex.studio@gmail.com</p>
         </div>
 
+        <div className="flex flex-wrap justify-between text-[16px] text-[#f3f6ff]  w-[339px]">
+
         {/* Quick Links */}
-        <div>
+        <div className="">
           <h3 className="text-white font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li><a href="#" className="hover:text-white">Home</a></li>
@@ -36,11 +38,12 @@ const Footer = () => {
           </ul>
         </div>
       </div>
+        </div>
 
       {/* Bottom Bar */}
       <div className="max-w-6xl mx-auto mt-12 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
         <p>© {new Date().getFullYear()} Dzignex Studio</p>
-        <div className="flex space-x-6 mt-4 md:mt-0">
+        <div className="flex gap-[52px] text-[16px] text-[#f3f6ff]/60 mt-4 md:mt-0">
           <span>All Rights Reserved</span>
           <a href="#" className="hover:text-white">Terms & Conditions</a>
         </div>

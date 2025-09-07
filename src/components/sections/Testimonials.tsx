@@ -8,7 +8,7 @@ import { ShimmerButton } from '../magicui/shimmer-button'
 
 const Testimonials = () => {
   return (
-    <div className='relative w-full  flex justify-center  overflow-hidden border rounded-xl border-gray-700 pr-5 pl-5'>
+    <div className='relative w-full  flex justify-center  overflow-hidden border rounded-[40px] border-gray-700 pr-5 pl-5'>
       
       {/* Background LightRays */}
       <div className='absolute inset-0 -z-10'>
@@ -36,13 +36,13 @@ const Testimonials = () => {
       <ShimmerButton className="shadow-2xl gap-2">
         <Image src="/projects.svg" alt="Icon" width={36} height={36} />
         <span className="whitespace-pre-wrap text-sm font-medium tracking-tight text-white sm:text-base lg:text-lg">
-          Projects
+          Testimonials
         </span>
       </ShimmerButton>
         </div>
 
         <div className='w-full flex justify-center'>
-        <h1 className="text-white text-[35px] sm:text-[40px] tracking-[-2px] leading-[42px] font-medium  w-[33%]">
+        <h1 className="text-white text-[35px] sm:text-[40px] tracking-[-2px] leading-[42px] font-medium  ">
           Voices That Drive Us Forward
         </h1>
         </div>
