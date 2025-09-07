@@ -6,7 +6,7 @@ import { ShimmerButton } from '../magicui/shimmer-button'
 
 const Services = () => {
   return (
-    <div className='relative w-full  flex justify-center  overflow-hidden border rounded-[40px] shadow-[0_5px_20px_0_#01011033] bg-black  backdrop-blur-2xl border border-white/10 pr-5 pl-5 '>
+    <div className='relative w-full  flex justify-center  overflow-hidden border rounded-[20px] sm:rounded-[40px] shadow-[0_5px_20px_0_#01011033] bg-black  backdrop-blur-2xl border border-white/10 pr-5 pl-5 '>
       
       {/* Background LightRays */}
       <div className='absolute inset-0 -z-10 h-160 '>
@@ -17,7 +17,7 @@ const Services = () => {
       </div>
 
       {/* Foreground content */}
- <div className="flex  justify-center px-[32px] pb-[40px] text-white flex-wrap gap-20">
+ <div className="flex  justify-center sm:px-[32px] px-[5px] pb-[40px] text-white flex-wrap gap-20">
       <div className="flex justify-center items-center flex-wrap gap-[40px] text-center">
 
         <div className='w-full flex flex-wrap justify-center mt-[128px]'>

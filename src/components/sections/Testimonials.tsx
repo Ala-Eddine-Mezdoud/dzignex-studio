@@ -4,6 +4,7 @@ import LightRays from '../LightGRays'
 import Image from 'next/image'
 import { MarqueeDemo } from '../MarqueeDemo'
 import { MarqueeLogo } from '../MarqueeLogo'
+import { ShimmerButton } from '../magicui/shimmer-button'
 
 const Testimonials = () => {
   return (
@@ -28,25 +29,29 @@ const Testimonials = () => {
 
       {/* Foreground content */}
  <div className="flex  justify-center  text-white flex-wrap gap-20">
-    <div className="flex flex-col items-center lg:gap-5 gap-15 text-center relative mt-20 w-full">
-      
-      {/* Shimmer Button */}
-      <ShimmerButtonLight className="shadow-2xl gap-2">
-        <Image src="/Icon.png" alt="Icon" width={35} height={35} />
+      <div className="flex justify-center items-center flex-wrap gap-[40px] text-center">
+
+        <div className='w-full flex flex-wrap justify-center mt-[128px] '>
+
+      <ShimmerButton className="shadow-2xl gap-2">
+        <Image src="/projects.svg" alt="Icon" width={36} height={36} />
         <span className="whitespace-pre-wrap text-sm font-medium tracking-tight text-white sm:text-base lg:text-lg">
-          Testimonials
+          Projects
         </span>
-      </ShimmerButtonLight>
+      </ShimmerButton>
+        </div>
 
-      {/* Heading + Paragraph */}
-      <div className="flex flex-col gap-6 max-w-5xl px-4 items-center ">
-        <h1 className="text-2xl sm:text-4xl lg:text-4xl font-medium ">Voices That Drive Us Forward</h1>
-        <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto">
+        <div className='w-full flex justify-center'>
+        <h1 className="text-white text-[35px] sm:text-[40px] tracking-[-2px] leading-[42px] font-medium  w-[33%]">
+          Voices That Drive Us Forward
+        </h1>
+        </div>
+
+       <p className="text-base sm:text-lg lg:text-[16px] text-[#f3f6ff]/60 max-w-2xl mx-auto sm:w-[33%] w-[30%] text-[15px] -mt-[20px]">
           Real experiences. Bold results. See how we’ve transformed brands through true partnership.
-        </p>
-      </div>
+      </p>
 
-    </div>
+      </div>
 <div className="w-full">
 
 <MarqueeDemo />

@@ -19,6 +19,7 @@ const About = ()  => {
   <div className="grid w-full lg:grid-cols-3 gap-6">
     {/* Left Column */}
     <div className="bg-[#0C3EFF]/10 flex flex-col gap-40 py-6 px-6  rounded-xl border-1 border-[#F3F6FF]/10">
+
     <div className='flex flex-wrap gap-5 tracking-[-1px] '>
 
       <h1 className="text-[24px] font-bold ">{"["}DEZIGNEX STUDIO{"]"}</h1>
@@ -28,8 +29,9 @@ const About = ()  => {
         Because good enough isn’t in our vocabulary.
       </p>
     </div>
-      <button className="bg-[#F3F6FF] px-6 py-2 sm:py-3 mt-[12px] sm:px-4 text-lg rounded-lg text-black font-semibold transition-colors duration-300 ease-in-out hover:bg-[#0c3eff] hover:text-[#F3F6FF] focus:outline-none focus:ring-2 focus:ring-[#0c3eff] focus:ring-offset-2">
-        Book Free Consultation
+    
+      <button className="bg-[#F3F6FF] px-6 py-2 sm:py-3 mt-[40px] tracking-[-1px] sm:px-4 text-lg rounded-lg text-black font-semibold transition-colors duration-300 ease-in-out hover:bg-[#0c3eff] hover:text-[#F3F6FF] focus:outline-none focus:ring-2 focus:ring-[#0c3eff] focus:ring-offset-2">
+        Explore More
       </button>
     </div>
 

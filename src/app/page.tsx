@@ -15,7 +15,7 @@ export default function Home() {
     className="absolute inset-0 -z-10 h-[88vh] w-full bg-red-500 bg-center bg-no-repeat"
     style={{ backgroundImage: "url('/HeroBackgound.png')" }}
   >
-    <div className="absolute bottom-0 inset-x-0 h-80 bg-gradient-to-t from-black to-black/0" />
+   <div className="absolute bottom-0 inset-x-0 h-80 bg-gradient-to-t from-black to-black/0" />
   </div>
 
   {/* Foreground */}

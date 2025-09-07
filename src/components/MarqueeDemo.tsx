@@ -57,37 +57,41 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative h-full w-84 cursor-pointer overflow-hidden rounded-xl border p-4 border-gray-700",
+        "relative h-[360px] w-[400px] cursor-pointer overflow-hidden rounded-[20px] border border-[#f3f6ff]/10 p-[20px] bg-[#0C3EFF]/10",
         // light styles
         " bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // dark styles
-        " dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
       )}
     >
-      <div className="flex flex-row items-center gap-2 border-b-1 border-gray-600 pb-5">
-        <Image className="rounded-full" width="32" height="32" alt="" src={img} />
-        <div className="flex flex-col">
-          <figcaption className="text-sm font-medium dark:text-white">
+      <div className="flex flex-row items-center gap-[16px] border-b-1 border-[#f3f6ff]/20 pb-5">
+        <Image className="rounded-full" width="56" height="56" alt="" src={img} />
+        <div className="flex flex-col gap-[4px]">
+          <figcaption className="text-[24px] font-medium leading-[26px] tracking-[-1px] dark:text-white">
             {name}
           </figcaption>
-          <p className="text-xs font-medium dark:text-white/40">{username}</p>
+          <p className="text-[18px] tracking-[-1px] leading-[20px] text-[#f3f6ff]/60">{username}</p>
         </div>
       </div>
-      <blockquote className="mt-2 text-md text-gray-400">{body}</blockquote>
+      <blockquote className="mt-[24px] text-md text-[#f3f6ff]/80 text-justify ">{body}</blockquote>
     </figure>
   );
 };
 
 export function MarqueeDemo() {
   return (
-    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-      <Marquee pauseOnHover className="[--duration:20s]">
-        {firstRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
-        ))}
-      </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
-    </div>
+<div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
+  <Marquee pauseOnHover className="[--duration:20s]">
+    {firstRow.map((review) => (
+      <ReviewCard key={review.username} {...review} />
+    ))}
+  </Marquee>
+
+  {/* Left overlay */}
+  <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black  to-transparent backdrop-blur-sm"></div>
+
+  {/* Right overlay */}
+  <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black to-transparent backdrop-blur-sm"></div>
+</div>
+
   );
 }

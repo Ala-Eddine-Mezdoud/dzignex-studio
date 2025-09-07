@@ -15,9 +15,9 @@ export function FaqsDemo() {
     >
 
 
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Product Information</AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4 text-balance ">
+      <AccordionItem value="item-1" className="rounded-[20px] border-[#f3f6ff]/10 bg-[#010110] text-[#f3f6ff] px-8">
+        <AccordionTrigger className="text-[22px]">Product Information</AccordionTrigger>
+        <AccordionContent className="flex flex-col gap-4 text-balance r text-[18px]">
           <p>
             Our flagship product combines cutting-edge technology with sleek
             design. Built with premium materials, it offers unparalleled
@@ -31,7 +31,7 @@ export function FaqsDemo() {
       </AccordionItem>
 
 
-      <AccordionItem value="item-2">
+      <AccordionItem value="item-2" className="rounded-[20px] border-[#f3f6ff]/10 bg-[#010110]  ">
         <AccordionTrigger>Shipping Details</AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
           <p>
@@ -46,7 +46,7 @@ export function FaqsDemo() {
         </AccordionContent>
       </AccordionItem>
 
-      <AccordionItem value="item-3">
+      <AccordionItem value="item-3" className="rounded-[20px] border-[#f3f6ff]/10 bg-[#010110]  ">
         <AccordionTrigger>Return Policy</AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
           <p>
@@ -63,7 +63,7 @@ export function FaqsDemo() {
       </AccordionItem>
 
 
-      <AccordionItem value="item-4">
+      <AccordionItem value="item-4" className="rounded-[20px] border-[#f3f6ff]/10 bg-[#010110]  ">
         <AccordionTrigger>Return Policy</AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
           <p>
@@ -80,7 +80,7 @@ export function FaqsDemo() {
       </AccordionItem>
 
 
-      <AccordionItem value="item-5">
+      <AccordionItem value="item-5" className="rounded-[20px] border-[#f3f6ff]/10 bg-[#010110]  ">
         <AccordionTrigger>Return Policy</AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
           <p>
@@ -97,7 +97,7 @@ export function FaqsDemo() {
       </AccordionItem>
 
 
-      <AccordionItem value="item-6">
+      <AccordionItem value="item-6" className="rounded-[20px] border-[#f3f6ff]/10 bg-[#010110]  ">
         <AccordionTrigger>Return Policy</AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance">
           <p>
