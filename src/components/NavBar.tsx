@@ -32,22 +32,22 @@ export default function Navbar() {
         <ul className="hidden sm:flex gap-8 list-none m-0 p-0 text-xl font-semibold">
           <li>
               <Link href="/" className="hover:border-b border-[#0c3eff] pb-1 text-[#0c3eff] ">
-                Home
+                HOME
               </Link>
           </li>
           <li>
               <Link href="/about" className="hover:border-b pb-1">
-                About Us
+                ABOUT US
               </Link>
           </li>
           <li>
             <Link  href="/projects" className="hover:border-b pb-1">
-            Projects
+            PROJECTS
             </Link>
           </li>
           <li>
             <Link  href="/contact" className="bg-[#0c3eff] py-3  pl-6 pr-6 rounded-lg text-white hover:bg-blue-600 transition ml-12">
-              Contact Us
+              CONTACT US
             </Link>
           </li>
         </ul>

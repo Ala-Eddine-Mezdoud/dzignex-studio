@@ -34,7 +34,7 @@ const Testimonials = () => {
         <div className='w-full flex flex-wrap justify-center mt-[128px] '>
 
       <ShimmerButton className="shadow-2xl gap-2">
-        <Image src="/projects.svg" alt="Icon" width={36} height={36} />
+        <Image src="/testimonialsIcon.svg" alt="Icon" width={36} height={36} />
         <span className="whitespace-pre-wrap text-sm font-medium tracking-tight text-white sm:text-base lg:text-lg">
           Testimonials
         </span>
