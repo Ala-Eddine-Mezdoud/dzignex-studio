@@ -42,7 +42,7 @@ const Testimonials = () => {
         </div>
 
         <div className='w-full flex justify-center'>
-        <h1 className="text-white text-[35px] sm:text-[40px] tracking-[-2px] leading-[42px] font-medium  ">
+        <h1 className="text-white text-[35px] sm:text-[40px] tracking-[-2px] leading-[42px] font-medium sm:w-full w-[30%] ">
           Voices That Drive Us Forward
         </h1>
         </div>
@@ -52,7 +52,8 @@ const Testimonials = () => {
       </p>
 
       </div>
-<div className="w-full">
+
+<div className="w-full relative">
 
 <MarqueeDemo />
 <div className='h-12'></div>
@@ -61,7 +62,6 @@ const Testimonials = () => {
 </div>
 <div className='h-16'></div>
 
-  </div>
   
 {/* Left overlay - smooth fade */}
 <div className="absolute inset-y-0 left-0 w-48 
@@ -72,6 +72,7 @@ const Testimonials = () => {
   bg-gradient-to-l from-black/80 via-black/10 to-transparent
   pointer-events-none" />
 
+  </div>
 
 
 

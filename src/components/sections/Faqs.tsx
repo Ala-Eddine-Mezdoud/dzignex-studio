@@ -23,12 +23,12 @@ const Faqs = () => {
         </div>
 
         <div className='w-full flex justify-center'>
-        <h1 className="text-white text-[35px] sm:text-[40px] tracking-[-2px] leading-[42px] font-medium  w-[33%]">
+        <h1 className="text-white text-[35px] sm:text-[40px] tracking-[-2px] leading-[42px] font-medium  sm:w-[33%]">
           Frequently Asked Questions
         </h1>
         </div>
 
-       <p className="text-base sm:text-lg lg:text-[16px] text-[#f3f6ff]/60 max-w-2xl mx-auto sm:w-[33%] w-[30%] text-[15px] -mt-[20px]">
+       <p className="text-base sm:text-lg lg:text-[16px] text-[#f3f6ff]/60 max-w-2xl mx-auto sm:w-[33%] w-full text-[15px] -mt-[20px]">
           Got questions? Find quick answers to the most common inquiries right here in our FAQ.
       </p>
 
