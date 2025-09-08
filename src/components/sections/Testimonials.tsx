@@ -1,5 +1,4 @@
 import React from 'react'
-import { ShimmerButtonLight } from '../magicui/shimmer-button-light'
 import LightRays from '../LightGRays'
 import Image from 'next/image'
 import { MarqueeDemo } from '../MarqueeDemo'
