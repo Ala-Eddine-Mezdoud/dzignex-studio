@@ -1,5 +1,4 @@
 import React from 'react'
-import { ShimmerButtonLight } from '../magicui/shimmer-button-light'
 import Image from 'next/image'
 import { ShimmerButton } from '../magicui/shimmer-button'
 
@@ -41,18 +40,22 @@ const Process = () => {
       {
         title: "Book a Call",
         description: "Initiate a transformative strategic consultation to align on your brand goals and project scope.",
+        img:'/bookacallIcon.svg'
       },
       {
         title: "Research & Discovery",
         description: "Conduct comprehensive market and audience analysis to inform a targeted design strategy.",
+        img:'/searchIcon.svg'
       },
       {
         title: "Design & Build",
         description: "Develop refined, tailored design solutions that effectively communicate your brand’s value.",
+        img:'/designIcon.svg'
       },
       {
         title: "Launch & Deliver",
         description: "Execute a seamless launch, delivering all assets with ongoing support to ensure sustained success.",
+        img:'/launchServiceIcon.svg'
       },
     ].map((step, i) => (
       <div
@@ -60,7 +63,12 @@ const Process = () => {
         className="bg-black border border-[#f3f6ff]/15 p-2 rounded-[20px] flex flex-wrap justify-center gap-5 p-4 "
       >
         <div className='w-full flex justify-center'>
-        <div className='h-[64px] w-[64px] bg-white rounded-full'></div>
+        <div className='h-[64px] w-[64px] bg-white rounded-full flex justify-center items-center'>
+          <Image
+              src={step.img}
+              height={32}
+              width={32} alt={''}          />
+        </div>
         </div>
         <h1 className='font-medium text-[23px] tracking-[-1x]'>{step.title}</h1>
         <p className='text-[#f3f6ff]/60 text-center text-[15px] tracking-[-1px]'>{step.description}</p>

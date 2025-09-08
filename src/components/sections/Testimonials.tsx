@@ -48,7 +48,7 @@ const Testimonials = () => {
         </div>
 
        <p className="text-base sm:text-lg lg:text-[16px] text-[#f3f6ff]/60 max-w-2xl mx-auto sm:w-[33%] w-[30%] text-[15px] -mt-[20px]">
-          Real experiences. Bold results. See how we’ve transformed brands through true partnership.
+          Real experiences. Bold results. See how we've transformed brands through true partnership.
       </p>
 
       </div>
@@ -62,6 +62,19 @@ const Testimonials = () => {
 <div className='h-16'></div>
 
   </div>
+  
+{/* Left overlay - smooth fade */}
+<div className="absolute inset-y-0 left-0 w-48 
+  bg-gradient-to-r from-black/80 via-black/10 to-transparent
+  pointer-events-none" />
+{/* Right overlay - smooth fade */}
+<div className="absolute inset-y-0 right-0 w-48 
+  bg-gradient-to-l from-black/80 via-black/10 to-transparent
+  pointer-events-none" />
+
+
+
+
 
     </div>
   )

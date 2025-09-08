@@ -4,41 +4,67 @@ import Image from "next/image";
 
 const reviews = [
   {
-    name: "Omar.B",
-    username: "Founder, TimePlus",
-    body: "Very satisfied with the experience with Dzignex Studio! Thank you for the fast service, attentive listening to our needs, and the professional quality of communication and execution. Excellent value for money that exceeded our expectations.",
-    img: "https://avatar.vercel.sh/jack",
+    img: "/logo1.svg",
   },
   {
-    name: "Abdennour.A",
-    username: "Founder, Avure Skincare",
-    body: "We've been working with Dzignex Studio for months and we are truly impressed by your professionalism, responsiveness, and eye for modern, minimalist design. You perfectly captured our vision at Avure and translated it into a strong visual identity. A talented and dedicated partner we highly recommend. Thank you for your great work!",
-    img: "https://avatar.vercel.sh/jill",
+    img: "/logo2.svg",
   },
   {
-    name: "Abdennour.B",
-    username: "Founder, SLeek Marketing Agency",
-    body: "Honestly, I really liked your work! the logo shows the spirit and identity of my project with a modern touch, the colors, the writing and the design are well chosen and give a professional and creative result. it's exactly the image I wanted for my clients. Thank you for your professionalism and hard work.",
-    img: "https://avatar.vercel.sh/john",
+    img: "/logo3.svg",
   },
   {
-    name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
+    img: "/logo4.svg",
   },
   {
-    name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
+    img: "/logo5.svg",
   },
   {
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
+    img: "/logo6.svg",
   },
+  {
+    img: "/logo7.svg",
+  },
+  {
+    img: "/logo8.svg",
+  },
+  {
+    img: "/logo9.svg",
+  },
+  {
+    img: "/logo10.svg",
+  },
+  {
+    img: "/logo11.svg",
+  },
+  {
+    img: "/logo12.svg",
+  },
+  {
+    img: "/logo13.svg",
+  },
+  {
+    img: "/logo14.svg",
+  },
+  {
+    img: "/logo15.svg",
+  },
+  {
+    img: "/logo16.svg",
+  },
+  {
+    img: "/logo17.svg",
+  },
+  {
+    img: "/logo18.svg",
+  },
+  {
+    img: "/logo19.svg",
+  },
+  {
+    img: "/logo20.svg",
+  },
+
+
 ];
 
 const firstRow = reviews.slice(0, reviews.length / 2);
@@ -51,15 +77,12 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative h-full w-32 cursor-pointer overflow-hidden rounded-xl p-4 ",
-        // light styles
-        " bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-        // dark styles
-        " dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
+        "relative h-full w-32 cursor-pointer overflow-hidden rounded-xl p-4  flex justify-center items-center",
+
       )}
     >
-      <div className="flex flex-row items-center gap-2 justify-center ">
-        <Image className="rounded-full" width="32" height="32" alt="" src={img} />
+      <div className="flex flex items-center gap-2 justify-center ">
+        <Image className="rounded-full" width="64" height="64" alt="" src={img} />
       </div>
     </figure>
   );
@@ -67,14 +90,12 @@ const ReviewCard = ({
 
 export function MarqueeLogo() {
   return (
-    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-      <Marquee pauseOnHover className="[--duration:20s]">
-        {firstRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
+    <div className="relative flex w-full flex items-center justify-center overflow-hidden">
+      <Marquee  className="[--duration:20s]  ">
+        {firstRow.map((review,index) => (
+          <ReviewCard key={index} {...review} />
         ))}
       </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
     </div>
   );
 }

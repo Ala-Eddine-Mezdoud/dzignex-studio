@@ -31,7 +31,6 @@ export default function Home() {
     <Process />
     <div className="h-[160px]"></div>
     <Testimonials />
-    <div className="h-[160px]"></div>
     <Faqs />
     <div className="h-[160px]"></div>
     <Launch />
