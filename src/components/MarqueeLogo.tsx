@@ -91,7 +91,7 @@ const ReviewCard = ({
 export function MarqueeLogo() {
   return (
     <div className="relative flex w-full flex items-center justify-center overflow-hidden">
-      <Marquee  className="[--duration:20s]  ">
+      <Marquee reverse className="[--duration:20s]  ">
         {firstRow.map((review,index) => (
           <ReviewCard key={index} {...review} />
         ))}
