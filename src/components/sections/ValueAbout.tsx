@@ -21,7 +21,7 @@ const ValueAbout = () => {
                     />
                     <p className='sm:text-[24px] text-[28px] whitespace-pre-line font-medium tracking-[-1px] leading-[30px]'>{"Specialized \nExpertise"}</p>
                 </div>
-                <div className='sm:whitespace-pre-line text-[16px] sm:text-[18px] w-full sm:w-auto'>
+                <div className='sm:whitespace-pre-line text-[16px] sm:text-[18px] w-full sm:w-auto text-[#f3f6ff]/80'>
                     {"Our three co-founders bring senior-level skills across \nBranding, Packaging, and UI/UX. Diverse backgrounds merge \ninto one unified creative vision."}
                 </div>
             </div>
@@ -36,7 +36,7 @@ const ValueAbout = () => {
                     />
                     <p className='sm:text-[24px] text-[28px] whitespace-pre-line font-medium tracking-[-1px] leading-[30px]'>{"Specialized \nExpertise"}</p>
                 </div>
-                <div  className='sm:whitespace-pre-line  text-[16px] sm:text-[18px] w-full sm:w-auto'>
+                <div  className='sm:whitespace-pre-line  text-[16px] sm:text-[18px] w-full sm:w-auto text-[#f3f6ff]/80'>
                     {"Our three co-founders bring senior-level skills across \nBranding, Packaging, and UI/UX. Diverse backgrounds merge \ninto one unified creative vision."}
                 </div>
             </div>
@@ -51,7 +51,7 @@ const ValueAbout = () => {
                     />
                     <p className='sm:text-[24px] text-[28px] whitespace-pre-line font-medium tracking-[-1px] leading-[30px]'>{"Specialized \nExpertise"}</p>
                 </div>
-                <div  className='sm:whitespace-pre-line  text-[16px] sm:text-[18px] w-full sm:w-auto'>
+                <div  className='sm:whitespace-pre-line  text-[16px] sm:text-[18px] w-full sm:w-auto text-[#f3f6ff]/80'>
                     {"Our three co-founders bring senior-level skills across \nBranding, Packaging, and UI/UX. Diverse backgrounds merge \ninto one unified creative vision."}
                 </div>
             </div>
@@ -66,7 +66,7 @@ const ValueAbout = () => {
                     />
                     <p className='sm:text-[24px] text-[28px] whitespace-pre-line font-medium tracking-[-1px] leading-[30px]'>{"Specialized \nExpertise"}</p>
                 </div>
-                <div  className='sm:whitespace-pre-line  text-[16px] sm:text-[18px] w-full sm:w-auto'>
+                <div  className='sm:whitespace-pre-line  text-[16px] sm:text-[18px] w-full sm:w-auto text-[#f3f6ff]/80'>
                     {"Our three co-founders bring senior-level skills across \nBranding, Packaging, and UI/UX. Diverse backgrounds merge \ninto one unified creative vision."}
                 </div>
             </div>

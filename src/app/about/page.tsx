@@ -1,7 +1,7 @@
-import { TextReveal } from '@/components/magicui/text-reveal'
 import AboutText from '@/components/sections/AboutText'
 import Faqs from '@/components/sections/Faqs'
 import LandingAbout from '@/components/sections/LandingAbout'
+import AboutUs from '@/components/sections/AboutUs'
 import Process from '@/components/sections/Process'
 import Services from '@/components/sections/Services'
 import Testimonials from '@/components/sections/Testimonials'
@@ -15,6 +15,8 @@ const page = () => {
         <LandingAbout />
         <div className='h-[160px]'></div>
         <AboutText />
+        <div className='h-[160px]'></div>
+        <AboutUs />
         <div className='h-[160px]'></div>
         <ValueAbout />
         <div className='h-[160px]'></div>
