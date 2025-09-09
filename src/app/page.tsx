@@ -9,7 +9,7 @@ import Launch from "@/components/sections/Launch";
 
 export default function Home() {
   return (
-<div className="relative min-h-screen overflow-hidden w-full max-w-7xl mx-auto px-4">
+<div className="relative min-h-screen overflow-hidden w-full max-w-7xl mx-auto px-4 ">
   {/* Background */}
   <div
     className="absolute inset-0 -z-10 h-[88vh] w-full bg-red-500 bg-center bg-no-repeat"

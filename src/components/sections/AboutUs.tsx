@@ -12,7 +12,7 @@ const AboutUs = () => {
 
   return (
     <div className='text-[#F3F6FF] w-full'>
-      <div className='w-full flex justify-start mb-[40px]'>
+      <div className='w-full flex justify-center sm:justify-start mb-[40px]'>
         <ShimmerButtonAbout className='shadow-2xl gap-2 rounded-sm h-[42px]' borderRadius = "10px">
         <span className='h-2 w-2 rounded-full bg-white'></span>
           <span className='whitespace-pre-wrap text-sm font-medium tracking-tight text-white sm:text-base lg:text-lg'>
@@ -25,7 +25,7 @@ const AboutUs = () => {
         {/* Left: Heading + Stats */}
         <div className='flex flex-col gap-[64px]'>
           <div>
-            <h2 className='whitespace-pre-line text-[40px] sm:text-[40px] lg:text-[40px] tracking-[-2px] leading-[42px] text-[#f3f6ff]/90 font-medium'>
+            <h2 className='sm:whitespace-pre-line text-[40px] sm:text-[40px] lg:text-[40px] tracking-[-2px] leading-[42px] text-[#f3f6ff]/90 font-medium'>
               {"Explore Who We Are and \nHow We Make a Difference"}
             </h2>
             <p className='mt-[24px] text-[14px] sm:text-[18px]  tracking-[-1px] leading-[22px] text-[#f3f6ff]/60 max-w-xl whitespace-pre-line'>
@@ -33,7 +33,7 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-0 gap-y-10 sm:gap-y-14">
+          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-0 gap-y-10 sm:gap-y-8">
             {stats.map((item, idx) => (
               <div key={idx} className="flex flex-col">
                 <span className="text-[44px] sm:text-[50px] font-semibold tracking-[-1px] text-[#0C3EFF]">

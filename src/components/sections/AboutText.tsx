@@ -12,7 +12,7 @@ export default function AboutText() {
         </TextReveal>
         <TextReveal
           variant="blur"
-          className=" text-[32px] sm:hidden block text-foreground  text-center w-full tracking-[-1.9px] leading-[32px]"
+          className=" text-[30px] sm:hidden block text-foreground  text-center w-full tracking-[-1.9px] leading-[32px]"
         >
           {"Dzignex Studio is framed \nnot just as a business, but a \ndynamic story of friendship, \ncourage, and creativity, \ninviting clients to be part of \nthe next chapter."}
         </TextReveal>

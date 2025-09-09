@@ -12,7 +12,7 @@ const Services = () => {
       <div className='absolute inset-0 -z-10 h-160 '>
         <DarkVeil 
         speed={1.5}
-        hueShift={10}
+        hueShift={22}
         />
       </div>
 

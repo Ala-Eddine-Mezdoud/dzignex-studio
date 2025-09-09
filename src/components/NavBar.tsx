@@ -3,9 +3,13 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav
@@ -22,30 +26,47 @@ export default function Navbar() {
     >
       <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4 py-3 w-full">
         {/* Logo */}
-        <span className="font-bold text-xl">
-          <Link href="/" className="hover:underline">
-            Dzignex Studio
+        <span className="font-bold text-xl flex items-center">
+          <Link href="/" className="hover:underline mt-4">
+            <Image src="/Logo.svg" alt="logo" width={202} height={44}/>
           </Link>
         </span>
 
         {/* Desktop Menu */}
-        <ul className="hidden sm:flex gap-8 list-none m-0 p-0 text-xl font-semibold">
+        <ul className="hidden sm:flex gap-8 list-none m-0 p-0 text-xl font-medium tracking-[-1px]">
           <li>
             <Link
               href="/"
-              className="hover:border-b border-[#0c3eff] pb-1 text-[#0c3eff]"
+              className={clsx(
+                'hover:border-b pb-1 text-[#f3f6ff]/60 ',
+                {
+                  'text-[#f3f6ff]/100': pathname === "/",
+                },
+              )}
             >
-              HOME
+              Home
             </Link>
           </li>
           <li>
-            <Link href="/about" className="hover:border-b pb-1">
-              ABOUT US
+            <Link href="/about" 
+                          className={clsx(
+                            'hover:border-b pb-1 text-[#f3f6ff]/60 ',
+                            {
+                              'text-[#f3f6ff]/100': pathname === "/about",
+                            },
+                          )}
+            >
+              About Us
             </Link>
           </li>
           <li>
-            <Link href="/projects" className="hover:border-b pb-1">
-              PROJECTS
+            <Link href="/projects"               className={clsx(
+                'hover:border-b pb-1 text-[#f3f6ff]/60 ',
+                {
+                  'text-[#f3f6ff]/100': pathname === "/projects",
+                },
+              )}>
+              Projects
             </Link>
           </li>
           <li>
@@ -53,7 +74,7 @@ export default function Navbar() {
               href="/contact"
               className="bg-[#0c3eff] py-3 pl-6 pr-6 rounded-lg text-white hover:bg-blue-600 transition ml-12"
             >
-              CONTACT US
+              Contact Us
             </Link>
           </li>
         </ul>

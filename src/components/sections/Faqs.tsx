@@ -7,7 +7,9 @@ const Faqs = () => {
   return (
     <div className='relative w-full  flex justify-center  overflow-hidden  pr-5 pl-5'>
       
+    <div className='absolute inset-0 w-screen left-1/2 -translate-x-1/2 '>
 
+    </div>
       {/* Foreground content */}
  <div className="flex  justify-center  text-white flex-wrap gap-20">
       <div className="flex justify-center items-center flex-wrap gap-[40px] text-center">

@@ -6,7 +6,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='relative min-h-screen overflow-hidden w-full max-w-7xl mx-auto px-4 container'>
+    <div className='relative min-h-screen overflow-hidden w-full max-w-7xl mx-auto px-4 '>
       
       <LandingContact />
       <div className='h-[160px]'></div>
