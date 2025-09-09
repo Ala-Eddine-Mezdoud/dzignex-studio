@@ -8,7 +8,7 @@ export default function AboutText() {
           variant="blur"
           className="text-[32px] sm:text-[54px] hidden sm:block text-foreground  text-center w-full tracking-[-1.9px] leading-[60px]"
         >
-          {"Dzignex Studio is framed not just as a \nbusiness, but a dynamic story of friendship, \ncourage, and creativity—inviting clients to be \npart of the next chapter."}
+          {"Dzignex Studio is framed not just as a \nbusiness, but a dynamic story of friendship, \ncourage, and creativity, inviting clients to be \npart of the next chapter."}
         </TextReveal>
         <TextReveal
           variant="blur"

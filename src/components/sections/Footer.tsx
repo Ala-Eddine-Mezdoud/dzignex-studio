@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0B0B19] text-gray-300 py-12 px-6">
+    <footer className="bg-[#000115] text-gray-300 py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-wrap gap-8 justify-between">
         {/* Left Section */}
         <div>
@@ -16,8 +16,8 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div className="">
-          <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-          <ul className="space-y-2">
+          <h3 className="text-[#f3f6ff] font-semibold mb-4">Quick Links</h3>
+          <ul className="space-y-2 text-[#f3f6ff]/60">
             <li><a href="#" className="hover:text-white">Home</a></li>
             <li><a href="#" className="hover:text-white">About</a></li>
             <li><a href="#" className="hover:text-white">Portfolio</a></li>
@@ -28,8 +28,8 @@ const Footer = () => {
 
         {/* Social */}
         <div>
-          <h3 className="text-white font-semibold mb-4">Social</h3>
-          <ul className="space-y-2">
+          <h3 className="text-[#f3f6ff] font-semibold mb-4">Social</h3>
+          <ul className="space-y-2 text-[#f3f6ff]/60" >
             <li><a href="#" className="hover:text-white">LinkedIn</a></li>
             <li><a href="#" className="hover:text-white">Instagram</a></li>
             <li><a href="#" className="hover:text-white">Facebook</a></li>

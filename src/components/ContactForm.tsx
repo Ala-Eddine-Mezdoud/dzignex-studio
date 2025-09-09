@@ -7,75 +7,119 @@ const ContactForm = () => {
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Full Name */}
           <div className="flex flex-col">
-            <label className="mb-2 font-medium text-[#f3f6ff]">Full Name*</label>
+            <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Full Name*</label>
             <input
               type="text"
               placeholder="Enter your full name"
-              className="p-3 rounded-md bg-[#0c0c1d] text-white placeholder-gray-400 outline-none"
+              className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff]"
             />
           </div>
 
           {/* Email Address */}
           <div className="flex flex-col">
-            <label className="mb-2 font-medium text-[#f3f6ff]">Email Address*</label>
+            <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Email Address*</label>
             <input
               type="email"
               placeholder="Enter your email address"
-              className="p-3 rounded-md bg-[#0c0c1d] text-white placeholder-gray-400 outline-none"
+              className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff]"
             />
           </div>
 
           {/* Company Name */}
           <div className="flex flex-col">
-            <label className="mb-2 font-medium text-[#f3f6ff]">Company / Business Name*</label>
+            <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Company / Business Name*</label>
             <input
               type="text"
               placeholder="Enter company name"
-              className="p-3 rounded-md bg-[#0c0c1d] text-white placeholder-gray-400 outline-none"
+              className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff]"
             />
           </div>
 
           {/* Industry */}
           <div className="flex flex-col">
-            <label className="mb-2 font-medium text-[#f3f6ff]">Industry*</label>
-            <select className="p-3 rounded-md bg-[#0c0c1d] text-white outline-none">
-              <option value="">Select your industry</option>
-              <option value="tech">Technology</option>
-              <option value="finance">Finance</option>
-              <option value="health">Healthcare</option>
-              <option value="education">Education</option>
-            </select>
+            <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Industry*</label>
+            <div className="relative">
+              <select
+                className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff] outline-none appearance-none w-full  pr-10"
+                style={{
+                  WebkitAppearance: "none",
+                  MozAppearance: "none",
+                  appearance: "none",
+                }}
+              >
+                <option value="">Select your industry</option>
+                <option value="tech">Technology</option>
+                <option value="finance">Finance</option>
+                <option value="health">Healthcare</option>
+                <option value="education">Education</option>
+              </select>
+              <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-[#f3f6ff]">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 10l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </div>
           </div>
 
-          {/* Service Required */}
           <div className="flex flex-col">
-            <label className="mb-2 font-medium text-[#f3f6ff]">Service Required*</label>
-            <select className="p-3 rounded-md bg-[#0c0c1d] text-white outline-none">
-              <option value="">Select your service</option>
-              <option value="web">Web Development</option>
-              <option value="design">UI/UX Design</option>
-              <option value="mobile">Mobile App</option>
-            </select>
+            <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Service Required*</label>
+            <div className="relative">
+              <select
+                className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff] outline-none appearance-none w-full pr-10"
+                style={{
+                  WebkitAppearance: "none",
+                  MozAppearance: "none",
+                  appearance: "none",
+                }}
+              >
+                <option value="">Select your industry</option>
+                <option value="tech">Technology</option>
+                <option value="finance">Finance</option>
+                <option value="health">Healthcare</option>
+                <option value="education">Education</option>
+              </select>
+              <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-[#f3f6ff]">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 10l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </div>
           </div>
 
-          {/* Project Budget */}
           <div className="flex flex-col">
-            <label className="mb-2 font-medium text-[#f3f6ff]">Project Budget*</label>
-            <select className="p-3 rounded-md bg-[#0c0c1d] text-white outline-none">
-              <option value="">Select your range</option>
-              <option value="1k-5k">$1,000 - $5,000</option>
-              <option value="5k-10k">$5,000 - $10,000</option>
-              <option value="10k+">$10,000+</option>
-            </select>
+            <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Projet Budget*</label>
+            <div className="relative">
+              <select
+                className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff] outline-none appearance-none w-full pr-10"
+                style={{
+                  WebkitAppearance: "none",
+                  MozAppearance: "none",
+                  appearance: "none",
+                }}
+              >
+                <option value="">Select your industry</option>
+                <option value="tech">Technology</option>
+                <option value="finance">Finance</option>
+                <option value="health">Healthcare</option>
+                <option value="education">Education</option>
+              </select>
+              <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-[#f3f6ff]">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 10l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </div>
           </div>
+
+
 
           {/* Project Details */}
           <div className="flex flex-col md:col-span-2">
-            <label className="mb-2 font-medium text-[#f3f6ff]">Project Details*</label>
+            <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Project Details*</label>
             <textarea
               rows={5}
               placeholder="Let us know about your project idea"
-              className="p-3 rounded-md bg-[#0c0c1d] text-white placeholder-gray-400 outline-none"
+              className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff]"
             />
           </div>
 

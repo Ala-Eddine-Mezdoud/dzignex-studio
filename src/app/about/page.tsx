@@ -7,13 +7,17 @@ import Services from '@/components/sections/Services'
 import Testimonials from '@/components/sections/Testimonials'
 import ValueAbout from '@/components/sections/ValueAbout'
 import React from 'react'
+import LightRays from '@/components/LightGRays'
 
 const page = () => {
   return (
     <div className='relative min-h-screen overflow-hidden w-full max-w-7xl mx-auto px-4'>
 
+
+
+
         <LandingAbout />
-        <div className='h-[160px]'></div>
+        <div className='h-[256px]'></div>
         <AboutText />
         <div className='h-[160px]'></div>
         <AboutUs />

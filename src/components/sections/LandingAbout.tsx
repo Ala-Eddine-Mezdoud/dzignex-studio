@@ -1,10 +1,25 @@
 import React from 'react'
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import Image from 'next/image';
+import LightRays from '../LightGRays';
 
 const LandingAbout = () => {
   return (
   <div className="flex items-center justify-center  text-white">
+
+<div className="fixed mt-[88px] inset-0 -z-10 w-screen h-screen ">
+    <LightRays
+        raysOrigin="top-center"
+        raysColor="#0c3eff"
+        raysSpeed={1.5}
+        lightSpread={0.8}
+        rayLength={1.2}
+        followMouse={true}
+        mouseInfluence={0.1}
+        noiseAmount={0.1}
+        distortion={0.05}
+         />
+  </div>
     <div className="flex flex-col items-center lg:gap-[48px] gap-[40px] text-center relative  mt-[92px] w-full">
       
       {/* Shimmer Button */}
