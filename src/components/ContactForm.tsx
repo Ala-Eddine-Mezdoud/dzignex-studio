@@ -40,7 +40,7 @@ const ContactForm = () => {
             <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Industry*</label>
             <div className="relative">
               <select
-                className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff] outline-none appearance-none w-full  pr-10"
+                className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-[#f3f6ff]/60 placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff] outline-none appearance-none w-full  pr-10"
                 style={{
                   WebkitAppearance: "none",
                   MozAppearance: "none",
@@ -65,14 +65,14 @@ const ContactForm = () => {
             <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Service Required*</label>
             <div className="relative">
               <select
-                className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff] outline-none appearance-none w-full pr-10"
+                className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-[#f3f6ff]/60 placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff] outline-none appearance-none w-full pr-10"
                 style={{
                   WebkitAppearance: "none",
                   MozAppearance: "none",
                   appearance: "none",
                 }}
               >
-                <option value="">Select your industry</option>
+                <option value="">Select your service</option>
                 <option value="tech">Technology</option>
                 <option value="finance">Finance</option>
                 <option value="health">Healthcare</option>
@@ -90,14 +90,14 @@ const ContactForm = () => {
             <label className="mb-2 font-medium  text-[18px] leading-[24px] tracking-[-1px] text-[#f3f6ff]">Projet Budget*</label>
             <div className="relative">
               <select
-                className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff] outline-none appearance-none w-full pr-10"
+                className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-[#f3f6ff]/60 placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff] outline-none appearance-none w-full pr-10"
                 style={{
                   WebkitAppearance: "none",
                   MozAppearance: "none",
                   appearance: "none",
                 }}
               >
-                <option value="">Select your industry</option>
+                <option value="">Select your range</option>
                 <option value="tech">Technology</option>
                 <option value="finance">Finance</option>
                 <option value="health">Healthcare</option>
@@ -119,7 +119,7 @@ const ContactForm = () => {
             <textarea
               rows={5}
               placeholder="Let us know about your project idea"
-              className="p-3 rounded-md bg-[#0c0c1d] h-[56px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff]"
+              className="p-3 rounded-md bg-[#0c0c1d] h-[180px] border border-[#f3f6ff]/10 text-white placeholder-[#f3f6ff]/60 placeholder-tracking-[-1px] placeholder-tracking-[20px] placeholder-[16px] outline-none focus:border-[#0c3eff]"
             />
           </div>
 
