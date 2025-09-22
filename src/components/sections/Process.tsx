@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { ShimmerButton } from '../magicui/shimmer-button'
+import MagicBento from '../MagicBento'
 
 const Process = () => {
   return (
@@ -60,7 +61,7 @@ const Process = () => {
     ].map((step, i) => (
       <div
         key={i}
-        className="bg-black border border-[#f3f6ff]/15 p-2 rounded-[20px] flex flex-wrap justify-center gap-5 p-4 "
+        className="card--border-glow bg-black border border-[#f3f6ff]/15 p-4 rounded-[20px] flex flex-wrap justify-center gap-5 p-4 "
       >
         <div className='w-full flex justify-center'>
         <div className='h-[64px] w-[64px] bg-white rounded-full flex justify-center items-center'>
@@ -75,6 +76,9 @@ const Process = () => {
       </div>
     ))}
   </div>
+
+
+
 
 </div>
 <div className='h-16'></div>

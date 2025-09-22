@@ -7,7 +7,7 @@ const LandingAbout = () => {
   return (
   <div className="flex items-center justify-center  text-white">
 
-<div className="fixed mt-[88px] inset-0 -z-10 w-screen h-screen ">
+<div className="absolute mt-[88px] -z-10 w-screen h-screen ">
     <LightRays
         raysOrigin="top-center"
         raysColor="#0c3eff"

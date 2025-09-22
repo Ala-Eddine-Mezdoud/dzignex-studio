@@ -174,3 +174,44 @@
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
+
+
+
+.card--border-glow {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.card--border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 6px;
+  background: radial-gradient(
+    200px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(132, 0, 255, 0.3) 0%,
+    rgba(132, 0, 255, 0.15) 40%,
+    transparent 70%
+  );
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card--border-glow:hover::after,
+.card--border-glow:active::after {
+  opacity: 1;
+}
+
+.card--border-glow:hover,
+.card--border-glow:active {
+  box-shadow: 0 4px 20px rgba(12, 62, 255, 0.5), 0 0 30px rgba(12, 62, 255, 0.5);
+}
