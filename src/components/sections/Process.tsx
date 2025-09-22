@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { ShimmerButton } from '../magicui/shimmer-button'
-import MagicBento from '../MagicBento'
+
 
 const Process = () => {
   return (
