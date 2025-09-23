@@ -20,10 +20,10 @@ const Landing = () => {
         <h1
           className="text-4xl scale-100  sm:scale-100 sm:text-5xl lg:text-7xl font-medium sm:w-[90%] lg:w-full sm:leading-[80px] sm:tracking-[-4px] tracking-[-1.5px] "
         >
-          Simplifying brands and driving Success through strategic design
+          We Don’t Just Design, We Build Brands That Scale Your Sales.
         </h1>
         <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto sm:w-[50%] text-[15px]">
-          We craft bold identities and digital experiences for brands ready to make their mark.
+          Design that speaks, packaging that sells, and brands people remember.
         </p>
       </div>
 

@@ -23,10 +23,8 @@ const About = ()  => {
     <div className='flex flex-wrap gap-5 tracking-[-1px] '>
 
       <h1 className="text-[24px] font-bold ">{"["}DEZIGNEX STUDIO{"]"}</h1>
-      <p className='text-[18px]'>
-        We are a strategic creative agency that turns bold visions into landmark brands. 
-        We build identities and experiences that don’t just follow trends, they set them. 
-        Because good enough isn’t in our vocabulary.
+      <p className='text-[18px] text-justify'>
+        At Dzignex, every project starts with a question “How can we make this unforgettable?” From branding that tells your story, to packaging that makes people stop, look, and buy we don’t just make things pretty. We make them work.
       </p>
     </div>
     
@@ -38,10 +36,10 @@ const About = ()  => {
     {/* Right Column */}
     <div className="lg:col-span-2 grid lg:grid-cols-2 gap-4">
       {[
-        { value: "5+", label: "Years", desc: "Crafting bold brand identities and digital experiences that deliver real impact across diverse industries." },
-        { value: "100+", label: "Projects", desc: "From startups to established leaders, we’ve brought visionary ideas to life through strategic creativity." },
-        { value: "40+", label: "Happy Clients", desc: "Trusted partners who value our commitment to pushing boundaries and achieving extraordinary results." },
-        { value: "95%", label: "Satisfaction", desc: "Delivering work that not only meets but exceeds expectations making every brand unforgettable." },
+        { value: "5+", label: "Years", desc: "Expertise and experience across diverse industries. Designs made to get noticed." },
+        { value: "100+", label: "Projects", desc: "From cosmetics, pharma to SaaS, B2B, and event branding Fresh ideas real business impact." },
+        { value: "40+", label: "Happy Clients", desc: "Partners who trust our work. Results they keep coming back for." },
+        { value: "95%", label: "Satisfaction", desc: "Delivering beyond expectations. Clients remember, brands grow." },
       ].map((item, idx) => (
         <div key={idx} className="bg-[#0C3EFF]/10 flex flex-col gap-2 py-4 px-6 rounded-lg border-1 border-[#F3F6FF]/10">
           <div className="flex justify-between relative">
