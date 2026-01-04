@@ -13,7 +13,7 @@ export default function Home() {
     <div className="relative overflow-hidden w-full max-w-7xl mx-auto px-4 ">
       {/* Background */}
       <div className="absolute inset-0 ">
-        <div style={{ width: '100%', height: '600px', position: 'relative', marginTop: '50px', scale: 1.2}}>
+        <div style={{ width: '100%', height: '600px', position: 'relative', marginTop: '50px', scale: 1.2 }}>
           <Orb
             hoverIntensity={0.5}
             rotateOnHover={true}

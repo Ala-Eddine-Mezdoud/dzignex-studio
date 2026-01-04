@@ -49,10 +49,6 @@ const Projects = () => {
                 </div>
 
                 <div className="w-full flex flex-wrap gap-5 text-[16px] tracking-[-1px] leading-[20px] text-[#61616A]">
-                  <div className="w-full flex justify-between  pb-4 border-b border-gray-200">
-                    <p>Client:</p>
-                    <p className='text-[#010110]'>Client Name</p>
-                  </div>
                   <div className="w-full flex justify-between ">
                     <p>Service:</p>
                     <p className='text-[#010110]'>Service Name</p>
