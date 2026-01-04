@@ -1,5 +1,5 @@
 import React from 'react'
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
+import { ShimmerButton } from "../../components/magicui/shimmer-button";
 import Image from 'next/image';
 
 const LandingContact = () => {

@@ -1,4 +1,4 @@
-import { TextReveal } from '@/components/ui/text-reveal';
+import { TextReveal } from '../../components/ui/text-reveal';
 
 export default function Component() {
   return (
