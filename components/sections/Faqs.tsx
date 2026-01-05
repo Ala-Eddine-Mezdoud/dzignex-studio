@@ -15,7 +15,7 @@ const Faqs = () => {
           </div>
 
           <div className='w-full flex justify-center'>
-            <h1 className="text-white text-[35px] whitespace-pre-line sm:text-[40px] tracking-[-2px] leading-[42px] font-medium  sm:w-[33%]">
+            <h1 className="text-white text-[35px] whitespace-pre-line sm:text-[40px] tracking-[-2px] leading-[42px] font-medium ">
               Frequently Asked Questions
             </h1>
           </div>

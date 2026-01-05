@@ -23,8 +23,6 @@ const page = () => {
       <div className='h-[160px]'></div>
       <ValueAbout />
       <div className='h-[160px]'></div>
-      <Services />
-      <div className='h-[160px]'></div>
       <Process />
       <div className='h-[160px]'></div>
       <Testimonials />
