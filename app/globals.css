@@ -116,4 +116,7 @@
   --color-grey: rgba(243, 246, 255, 0.15);
   --color-hostx: #f3ff00;
   --color-blue: #0c3eff;
+  --color-white: #f3f6ff;
+  --color-grey: #262626;
+  --color-grey-secondary: #d4d4d4;
 }

@@ -27,7 +27,7 @@ const Landing = () => {
           >
             We Don’t Just Design, We Build Brands That Scale Your Sales.
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto sm:w-[40%] text-[15px]">
+          <p className="text-base sm:text-lg lg:text-xl text-grey-secondary max-w-2xl mx-auto sm:w-[40%] text-[15px]">
             Design that speaks, packaging that sells, and brands people remember.
           </p>
         </div>

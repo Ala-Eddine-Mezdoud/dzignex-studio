@@ -1,21 +1,17 @@
 import Image from 'next/image'
-
+import Header from "../Header"
 const Projects = () => {
   return (
     <div className="text-white flex justify-center flex-wrap gap-[80px] ">
 
       <div className='mx-auto max-w-7xl border-l border-r border-grey pt-16'>
 
-        {/* Header */}
-        <div className="flex justify-center items-center flex-wrap gap-[40px] text-center mb-16">
-          <div className='w-full flex flex-wrap justify-center'>
-            <h1 className='text-sm text-blue font-bold uppercase'>Projects</h1>
-          </div>
-          <h1 className="text-white text-[35px] sm:text-[40px] tracking-[-2px] leading-[42px] font-medium  sm:w-[50%]">
-            Discover The Impact Behind Every Brand
-          </h1>
-        </div>
 
+        <Header
+          microTitle="Projects"
+          title="Discover The Impact Behind Every Brand"
+          description={`Every project follows a proven path from discovery to delivery \nensuring your vision becomes an unforgettable reality.`}
+        />
         <div className='flex flex-wrap gap-8'>
           {/* Project Card */}
           <div
@@ -31,7 +27,7 @@ const Projects = () => {
             </div>
 
             {/* Info */}
-            <div className="relative bg-slate-950 p-[20px] flex flex-col gap-32 justify-between items-start text-white  lg:order-1">
+            <div className="relative bg-grey p-[20px] flex flex-col gap-32 justify-between items-start text-white  lg:order-1">
               <div className="flex flex-col gap-[32px] w-full">
                 <div className="flex flex-wrap gap-[24px]">
                   <Image
@@ -75,7 +71,7 @@ const Projects = () => {
             </div>
 
             {/* Info */}
-            <div className="relative bg-slate-950 p-[20px] flex flex-col gap-32 justify-between items-start text-white  lg:order-1">
+            <div className="relative bg-grey p-[20px] flex flex-col gap-32 justify-between items-start text-white  lg:order-1">
               <div className="flex flex-col gap-[32px] w-full">
                 <div className="flex flex-wrap gap-[24px]">
                   <Image

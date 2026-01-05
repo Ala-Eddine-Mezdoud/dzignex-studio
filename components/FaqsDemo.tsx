@@ -15,7 +15,7 @@ export function FaqsDemo() {
     >
 
 
-      <AccordionItem value="item-1" className=" border-[#f3f6ff]/10  text-[#f3f6ff] px-8  w-full">
+      <AccordionItem value="item-1" className=" border-[#f3f6ff]/10  text-[#f3f6ff] px-8  w-full" >
         <AccordionTrigger className="text-[22px] font-medium tracking-[-1px] w-full">What do I need to get started?</AccordionTrigger>
 
         <AccordionContent className="flex flex-col gap-4 text-balance r text-[18px] text-[#f3f6ff]/80 ">

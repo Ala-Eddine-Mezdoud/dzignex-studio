@@ -19,7 +19,7 @@ export default function Navbar() {
         border-b border-grey
         text-white
         flex justify-center items-center
-        h-[88px]
+        h-18
         shadow-[0_5px_20px_0_#01011033]
         
       "
@@ -28,7 +28,7 @@ export default function Navbar() {
         {/* Logo */}
         <span className="font-bold text-xl flex items-center">
           <Link href="/" className="hover:underline mt-4">
-            <Image src="/Logo.svg" alt="logo" width={202} height={44} />
+            <Image src="/Logo.svg" alt="logo" width={180} height={44} />
           </Link>
         </span>
 
@@ -38,9 +38,9 @@ export default function Navbar() {
             <Link
               href="/"
               className={clsx(
-                'hover:border-b pb-1 text-[#f3f6ff]/60 ',
+                'hover:text-white/80 transition duration-300 ease-in-out ',
                 {
-                  'text-[#f3f6ff]/100': pathname === "/",
+                  'text-white': pathname === "/",
                 },
               )}
             >
@@ -50,9 +50,9 @@ export default function Navbar() {
           <li>
             <Link href="/about"
               className={clsx(
-                'hover:border-b pb-1 text-[#f3f6ff]/60 ',
+                'hover:text-white/80 transition duration-300 ease-in-out ',
                 {
-                  'text-[#f3f6ff]/100': pathname === "/about",
+                  'text-white': pathname === "/about",
                 },
               )}
             >
@@ -61,23 +61,25 @@ export default function Navbar() {
           </li>
           <li>
             <Link href="/projects" className={clsx(
-              'hover:border-b pb-1 text-[#f3f6ff]/60 ',
+              ' hover:text-white/80 transition duration-300 ease-in-out',
               {
-                'text-[#f3f6ff]/100': pathname === "/projects",
+                'text-white': pathname === "/projects",
               },
             )}>
               Projects
             </Link>
           </li>
-          <li>
-            <Link
-              href="/contact"
-              className="bg-[#0c3eff] py-3 pl-6 pr-6 rounded-lg text-white hover:bg-blue-600 transition ml-12"
-            >
-              Contact Us
-            </Link>
-          </li>
+
         </ul>
+
+        <div>
+          <Link
+            href="/contact"
+            className="bg-[#0c3eff] py-3 pl-6 pr-6 rounded-lg text-white hover:bg-blue-600 transition ml-12"
+          >
+            Contact Us
+          </Link>
+        </div>
 
         {/* Mobile Hamburger */}
         <button
