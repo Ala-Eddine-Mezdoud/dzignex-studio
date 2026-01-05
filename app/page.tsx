@@ -10,37 +10,14 @@ import Orb from "../components/Orb";
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden w-full max-w-7xl mx-auto px-4 ">
-      {/* Background */}
-      <div className="absolute inset-0 ">
-        <div style={{ width: '100%', height: '600px', position: 'relative', marginTop: '50px', scale: 1.2 }}>
-          <Orb
-            hoverIntensity={0.5}
-            rotateOnHover={true}
-            hue={0}
-            forceHoverState={false}
-          />
-        </div>
-      </div>
-
-      {/* Foreground */}
-      <div className="h-screen">
-        <Landing />
-      </div>
+    <div className="relative overflow-hidden w-full  mx-auto ">
+      <Landing />
       <About />
-      <div className="h-[160px]"></div>
       <Projects />
-      <div className="h-[160px]"></div>
-      <Services />
-      <div className="h-[160px]"></div>
       <Process />
-      <div className="h-[160px]"></div>
       <Testimonials />
-      <div className="h-[160px]"></div>
       <Faqs />
-      <div className="h-[160px]"></div>
       <Launch />
-      <div className="h-[160px]"></div>
     </div>
 
 

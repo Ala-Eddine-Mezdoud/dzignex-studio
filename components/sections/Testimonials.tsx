@@ -1,43 +1,17 @@
-import React from 'react'
-import LightRays from '../LightGRays'
-import Image from 'next/image'
 import { MarqueeDemo } from '../MarqueeDemo'
-import { MarqueeLogo } from '../MarqueeLogo'
-import { ShimmerButton } from '../magicui/shimmer-button'
 
 const Testimonials = () => {
   return (
-    <div className='relative w-full  flex justify-center  overflow-hidden  rounded-[40px] pr-5 pl-5'>
+    <div className='relative w-full max-w-7xl mx-auto flex justify-center  overflow-hidden   pr-5 pl-5 border-l border-r border-grey '>
 
-      {/* Background LightRays */}
-      <div className='absolute inset-0 -z-10'>
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#110eff"
-          raysSpeed={1.5}
-          lightSpread={2}
-          rayLength={2}
-          followMouse={true}
-          mouseInfluence={0.1}
-          noiseAmount={0.1}
-          distortion={0.05}
-          className="w-full h-full"
-          fadeDistance={2}
-        />
-      </div>
+
 
       {/* Foreground content */}
       <div className="flex  justify-center  text-white flex-wrap gap-20">
         <div className="flex justify-center items-center flex-wrap gap-[40px] text-center">
 
-          <div className='w-full flex flex-wrap justify-center mt-[128px] '>
-
-            <ShimmerButton className="shadow-2xl gap-2">
-              <Image src="/testimonialsIcon.svg" alt="Icon" width={36} height={36} />
-              <span className="whitespace-pre-wrap text-sm font-medium tracking-tight text-white sm:text-base lg:text-lg">
-                Testimonials
-              </span>
-            </ShimmerButton>
+          <div className='w-full flex flex-wrap justify-center mt-16 '>
+            <h1 className='text-sm text-blue font-bold uppercase'>Testimonials</h1>
           </div>
 
           <div className='w-full flex justify-center'>
@@ -52,12 +26,9 @@ const Testimonials = () => {
 
         </div>
 
-        <div className="w-full relative">
-
+        <div className="w-full relative ">
           <MarqueeDemo />
-
         </div>
-        <div className='h-16'></div>
 
 
         {/* Left overlay - smooth fade */}
@@ -70,7 +41,6 @@ const Testimonials = () => {
   pointer-events-none" />
 
       </div>
-
 
 
 
