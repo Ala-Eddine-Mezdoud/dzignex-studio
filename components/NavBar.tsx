@@ -16,19 +16,19 @@ export default function Navbar() {
       className="
         sticky top-0 z-50 w-full 
         backdrop-blur-2xl 
-        border-b border-white/10
+        border-b border-grey
         text-white
         flex justify-center items-center
         h-[88px]
         shadow-[0_5px_20px_0_#01011033]
-        bg-[#0C3EFF]/10
+        
       "
     >
-      <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4 py-3 w-full">
+      <div className="max-w-7xl mx-auto flex items-center justify-between py-3 w-full">
         {/* Logo */}
         <span className="font-bold text-xl flex items-center">
           <Link href="/" className="hover:underline mt-4">
-            <Image src="/Logo.svg" alt="logo" width={202} height={44}/>
+            <Image src="/Logo.svg" alt="logo" width={202} height={44} />
           </Link>
         </span>
 
@@ -48,24 +48,24 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/about" 
-                          className={clsx(
-                            'hover:border-b pb-1 text-[#f3f6ff]/60 ',
-                            {
-                              'text-[#f3f6ff]/100': pathname === "/about",
-                            },
-                          )}
+            <Link href="/about"
+              className={clsx(
+                'hover:border-b pb-1 text-[#f3f6ff]/60 ',
+                {
+                  'text-[#f3f6ff]/100': pathname === "/about",
+                },
+              )}
             >
               About Us
             </Link>
           </li>
           <li>
-            <Link href="/projects"               className={clsx(
-                'hover:border-b pb-1 text-[#f3f6ff]/60 ',
-                {
-                  'text-[#f3f6ff]/100': pathname === "/projects",
-                },
-              )}>
+            <Link href="/projects" className={clsx(
+              'hover:border-b pb-1 text-[#f3f6ff]/60 ',
+              {
+                'text-[#f3f6ff]/100': pathname === "/projects",
+              },
+            )}>
               Projects
             </Link>
           </li>
@@ -91,9 +91,8 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       <div
-        className={`sm:hidden fixed top-[88px] left-0 w-full h-screen bg-black/90 backdrop-blur-xl transition-transform duration-300 ${
-          open ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`sm:hidden fixed top-[88px] left-0 w-full h-screen bg-black/90 backdrop-blur-xl transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <ul className="flex flex-col gap-12 p-6 text-lg font-semibold items-center">
           <li className="bg-white/10 backdrop-blur-md px-12 py-4 rounded-[20px]">
