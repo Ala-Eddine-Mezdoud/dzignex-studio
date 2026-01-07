@@ -15,7 +15,7 @@ const Projects = () => {
         <div className='flex flex-wrap gap-8'>
           {/* Project Card */}
           <div
-            className="grid lg:grid-cols-3 items-stretch  w-full gap-5">
+            className="grid lg:grid-cols-3 items-stretch  w-full border-grey border-t border-b">
             {/* Image */}
             <div className="relative w-full h-64 sm:h-80 lg:h-auto bg-white/40  lg:col-span-2 lg:order-2">
               <Image
@@ -27,7 +27,7 @@ const Projects = () => {
             </div>
 
             {/* Info */}
-            <div className="relative bg-grey p-[20px] flex flex-col gap-32 justify-between items-start text-white  lg:order-1">
+            <div className="relative  p-[20px] flex flex-col gap-32 justify-between items-start text-white  lg:order-1">
               <div className="flex flex-col gap-[32px] w-full">
                 <div className="flex flex-wrap gap-[24px]">
                   <Image
@@ -59,7 +59,7 @@ const Projects = () => {
 
 
           <div
-            className="grid lg:grid-cols-3 items-stretch  w-full gap-5">
+            className="grid lg:grid-cols-3 items-stretch  w-full border-grey border-t border-b">
             {/* Image */}
             <div className="relative w-full h-64 sm:h-80 lg:h-auto bg-white/40  lg:col-span-2 lg:order-2">
               <Image
@@ -71,7 +71,7 @@ const Projects = () => {
             </div>
 
             {/* Info */}
-            <div className="relative bg-grey p-[20px] flex flex-col gap-32 justify-between items-start text-white  lg:order-1">
+            <div className="relative  p-[20px] flex flex-col gap-32 justify-between items-start text-white  lg:order-1">
               <div className="flex flex-col gap-[32px] w-full">
                 <div className="flex flex-wrap gap-[24px]">
                   <Image

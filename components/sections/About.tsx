@@ -9,14 +9,14 @@ const About = () => {
 
 
         <Header
-          microTitle="About"
+          microTitle="ABOUT"
           title="Trusted by Growing Startups"
           description={`Every project follows a proven path from discovery to delivery \nensuring your vision becomes an unforgettable reality.`}
         />
         {/* Main Grid */}
         <div className="grid w-full lg:grid-cols-3 mt-16">
           {/* Left Column */}
-          <div className="flex flex-col gap-40 py-6 px-6 border-1 border-[#F3F6FF]/15 bg-grey">
+          <div className="flex flex-col gap-40 py-6 px-6 border-1 border-[#F3F6FF]/15 ">
 
             <div className='flex flex-wrap gap-5 tracking-[-1px] '>
 
@@ -39,7 +39,7 @@ const About = () => {
               { value: "40+", label: "Happy Clients", desc: "Partners who trust our work. Results they keep coming back for." },
               { value: "95%", label: "Satisfaction", desc: "Delivering beyond expectations. Clients remember, brands grow." },
             ].map((item, idx) => (
-              <div key={idx} className="flex flex-col gap-2 py-4  border-1 border-white/15 bg-grey">
+              <div key={idx} className="flex flex-col gap-2 py-4  border-1 border-white/15 ">
                 <div className="flex justify-between relative px-6">
                   <h1 className="text-[60px] font-medium tracking-[-2.4px] text-[#fff]">{item.value}</h1>
                   <p className="absolute bottom-0 right-6 text-[18px] pb-2">{item.label}</p>
