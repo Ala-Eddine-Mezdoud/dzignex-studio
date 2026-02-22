@@ -1,25 +1,19 @@
-import About from "../components/sections/About";
-import Landing from "../components/sections/Landing";
-import Projects from "../components/sections/Projects";
-import Services from "../components/sections/Services";
-import Process from "../components/sections/Process";
-import Testimonials from "../components/sections/Testimonials";
-import Faqs from "../components/sections/Faqs";
-import Launch from "../components/sections/Launch";
-import Orb from "../components/Orb";
+import Landing from "../features/home/components/Landing"
+import Logos from "../features/home/components/Logos"
+import About from "../features/home/components/About"
+import Stats from "../features/home/components/Stats"
+import Values from "../features/home/components/Values"
 
-export default function Home() {
+const page = () => {
   return (
-    <div className="relative overflow-hidden w-full  mx-auto ">
-      <Landing />
+    <div>
+      <Landing className="pb-24 pt-60"/>
+      <Logos />
       <About />
-      <Projects />
-      <Process />
-      <Testimonials />
-      <Faqs />
-      <Launch />
+      <Stats />
+      <Values />
     </div>
-
-
-  );
+  )
 }
+
+export default page
