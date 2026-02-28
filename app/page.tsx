@@ -4,6 +4,7 @@ import About from "../features/home/components/About"
 import Stats from "../features/home/components/Stats"
 import Values from "../features/home/components/Values"
 import Projects from "../features/home/components/Projects"
+import Services from "../features/home/components/Services"
 
 const page = () => {
   return (
@@ -14,6 +15,7 @@ const page = () => {
       <Stats />
       <Values />
       <Projects />
+      <Services />
     </div>
   )
 }
