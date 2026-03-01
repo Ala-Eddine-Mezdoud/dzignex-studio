@@ -21,8 +21,8 @@ const Values = () => {
 
 
 
-        <div className="grid grid-cols-6 mt-16">
-          <div className="col-span-2">
+        <div className="grid grid-cols-6 mt-16 relative">
+          <div className="col-span-2 top-10  left-0 sticky self-start">
             <ul>
               <li className="text-dzignex-blue text-2xl uppercase font-bold">/Project 01</li>
               <li className="text-dzignex-white/70 text-xl uppercase font-bold">/Project 02</li>

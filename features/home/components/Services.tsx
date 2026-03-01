@@ -21,6 +21,7 @@ const Values = () => {
 
 
         <div className="mt-16 space-y-5">
+          
           <div className="bg-dzignex-white/3 border-1 border-dzignex-white/15">
             <div className=" grid grid-cols-6 p-8">
               <p className="col-span-2 text-2xl uppercase font-bold">01 <span className="text-dzignex-blue">/</span></p>
