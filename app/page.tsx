@@ -5,6 +5,10 @@ import Stats from "../features/home/components/Stats"
 import Values from "../features/home/components/Values"
 import Projects from "../features/home/components/Projects"
 import Services from "../features/home/components/Services"
+import Faq from "../features/home/components/Faq"
+import Testimonials from "../features/home/components/Testimonials"
+import NextStep from "../features/home/components/NextStep"
+import Footer from "../components/Footer"
 
 const page = () => {
   return (
@@ -16,6 +20,10 @@ const page = () => {
       <Values />
       <Projects />
       <Services />
+      <Testimonials />
+      <Faq />
+      <NextStep />
+      <Footer />
     </div>
   )
 }
