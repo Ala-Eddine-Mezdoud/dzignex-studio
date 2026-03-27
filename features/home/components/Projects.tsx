@@ -34,7 +34,7 @@ const Values = () => {
           <div className="col-span-4">
             <div className="w-full">
               <div className="bg-dzignex-blue/15 h-96 w-full"></div>
-              <div className="bg-dzignex-white/5 p-5 flex justify-between gap-16">
+              <div className="p-5 flex justify-between gap-16">
                 <p className="text-dzignex-blue text-2xl uppercase font-bold">/Project01</p>
                
                 <div className="flex flex-col justify-between">
@@ -47,10 +47,11 @@ const Values = () => {
                 </div>
               </div>
             </div>
+
             <div className="w-full">
               <div className="bg-dzignex-blue/15 h-96 w-full"></div>
-              <div className="bg-dzignex-white/5 p-5 flex justify-between gap-16">
-                <p className="text-dzignex-blue text-2xl uppercase font-bold">/Project01</p>
+              <div className="p-5 flex justify-between gap-16">
+                <p className="text-dzignex-blue text-2xl uppercase font-bold">/Project02</p>
                
                 <div className="flex flex-col justify-between">
                   <p>A complete brand identity designed for a product-focused lab, built to communicate clarity, credibility, and consistency across digital and physical touchpoints.</p>
@@ -62,10 +63,11 @@ const Values = () => {
                 </div>
               </div>
             </div>
+
             <div className="w-full">
               <div className="bg-dzignex-blue/15 h-96 w-full"></div>
-              <div className="bg-dzignex-white/5 p-5 flex justify-between gap-16">
-                <p className="text-dzignex-blue text-2xl uppercase font-bold">/Project01</p>
+              <div className="p-5 flex justify-between gap-16">
+                <p className="text-dzignex-blue text-2xl uppercase font-bold">/Project03</p>
                
                 <div className="flex flex-col justify-between">
                   <p>A complete brand identity designed for a product-focused lab, built to communicate clarity, credibility, and consistency across digital and physical touchpoints.</p>
@@ -77,10 +79,12 @@ const Values = () => {
                 </div>
               </div>
             </div>
+
+
             <div className="w-full">
               <div className="bg-dzignex-blue/15 h-96 w-full"></div>
-              <div className="bg-dzignex-white/5 p-5 flex justify-between gap-16">
-                <p className="text-dzignex-blue text-2xl uppercase font-bold">/Project01</p>
+              <div className="p-5 flex justify-between gap-16">
+                <p className="text-dzignex-blue text-2xl uppercase font-bold tracking-tighter">/Project04</p>
                
                 <div className="flex flex-col justify-between">
                   <p>A complete brand identity designed for a product-focused lab, built to communicate clarity, credibility, and consistency across digital and physical touchpoints.</p>

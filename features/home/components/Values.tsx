@@ -29,8 +29,8 @@ const Values = () => {
                   onMouseLeave={() => setHovered(null)}
                   className={`
                     h-96 text-5xl flex 
-                    transition-all duration-500 ease-in-out
-                    bg-dzignex-blue/15
+                    transition-all duration-500 ease-in-out border-2 border-dzignex-white/15 px-2 py-4
+                    hover:bg-dzignex-blue/10 
                     ${
                       hovered === null
                         ? i === 0

@@ -107,14 +107,14 @@ const Services = () => {
                 className="grid grid-cols-6 p-8 cursor-pointer group"
                 onClick={() => toggleAccordion(index)}
               >
-                <p className="col-span-2 text-2xl uppercase font-bold text-dzignex-white">
+                <p className="col-span-2 text-4xl uppercase font-bold text-dzignex-white">
                   {service.id} <span className="text-dzignex-blue">/</span>
                 </p>
                 <div className="col-span-4 flex justify-between items-center gap-4">
                   <p className="text-dzignex-white text-2xl uppercase font-bold group-hover:text-dzignex-blue transition-colors duration-300">
                     {service.title}
                   </p>
-                  <button className="text-dzignex-blue uppercase font-bold tracking-widest text-sm hover:underline transition-all">
+                  <button className={`${activeIndex === index ? 'text-dzignex-blue' : 'text-dzignex-white'} uppercase font-bold tracking-widest text-sm hover:underline transition-all`}>
                     {activeIndex === index ? 'Close details' : 'View details'}
                   </button>
                 </div>
