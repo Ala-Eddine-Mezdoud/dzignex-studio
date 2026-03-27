@@ -13,7 +13,7 @@ import Footer from "../components/Footer"
 const page = () => {
   return (
     <div>
-      <Landing className="pb-24"/>
+      <Landing />
       <Logos />
       <About />
       <Stats />
