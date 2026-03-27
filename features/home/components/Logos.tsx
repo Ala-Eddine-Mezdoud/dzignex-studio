@@ -20,7 +20,7 @@ const imageLogos = [
 const Logos = () => {
   return (
     <div className="border-t-2 border-b-2 border-dzignex-white/15 ">
-        <div className="container mx-auto border-l-2 border-r-2 border-dzignex-white/15 py-3">
+        <div className="container mx-auto border-l-2 border-r-2 border-dzignex-white/15 py-4 md:py-6 px-4 md:px-0">
 
                   <LogoLoop
                     logos={techLogos}

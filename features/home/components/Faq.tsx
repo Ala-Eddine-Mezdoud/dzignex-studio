@@ -41,19 +41,19 @@ const Faq = () => {
 
   return (
     <div className="border-b-2 border-dzignex-white/15">
-      <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 py-32 px-16">
-        <div className="grid grid-cols-6">
+      <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 py-16 px-6 md:py-32 md:px-16">
+        <div className="flex flex-col md:grid md:grid-cols-6 gap-8 md:gap-0">
           {/* Section Title */}
-          <p className="col-span-2 text-dzignex-blue font-bold text-2xl tracking-tight uppercase">
+          <p className="md:col-span-2 text-dzignex-blue font-bold text-xl md:text-2xl tracking-tight uppercase">
             [FAQ]
           </p>
 
           {/* Content */}
-          <div className="col-span-4 flex flex-col gap-8">
-            <p className="text-dzignex-white tracking-tighter text-4xl font-medium">
+          <div className="md:col-span-4 flex flex-col gap-8">
+            <p className="text-dzignex-white tracking-tighter text-3xl md:text-4xl font-medium leading-tight">
               Frequently Asked Questions
             </p>
-            <p className="text-dzignex-white/80 tracking-[0.005em] font-medium text-lg max-w-xl">Here are the most common questions we receive, you’ll likely find the answers you’re looking for below.</p>
+            <p className="text-dzignex-white/80 tracking-[0.005em] font-medium text-base md:text-lg max-w-xl">Here are the most common questions we receive, you’ll likely find the answers you’re looking for below.</p>
           </div>
         </div>
 
@@ -65,18 +65,18 @@ const Faq = () => {
               className={`bg-dzignex-white/3 border border-dzignex-white/15 transition-all duration-300 ${activeIndex === index ? 'bg-dzignex-white/7' : ''}`}
             >
               <div 
-                className="grid grid-cols-6 p-8 cursor-pointer group"
+                className="flex flex-col md:grid md:grid-cols-6 p-6 md:p-8 cursor-pointer group gap-4 md:gap-0"
                 onClick={() => toggleAccordion(index)}
               >
-                <p className="col-span-2 text-2xl uppercase font-bold text-dzignex-white">
+                <p className="md:col-span-2 text-xl md:text-2xl uppercase font-bold text-dzignex-white">
                   {item.id} <span className="text-dzignex-blue">/</span>
                 </p>
-                <div className="col-span-4 flex justify-between items-center gap-4">
-                  <p className="text-dzignex-white text-2xl uppercase font-bold group-hover:text-dzignex-blue transition-colors duration-300">
+                <div className="md:col-span-4 flex justify-between items-center gap-4">
+                  <p className="text-dzignex-white text-lg md:text-2xl uppercase font-bold group-hover:text-dzignex-blue transition-colors duration-300 leading-tight">
                     {item.question}
                   </p>
                   <motion.button 
-                    className="text-dzignex-white uppercase text-4xl flex items-center justify-center pointer-events-none"
+                    className="text-dzignex-white uppercase text-2xl md:text-4xl flex items-center justify-center pointer-events-none shrink-0"
                     animate={{ rotate: activeIndex === index ? 45 : 0, color: activeIndex === index ? "var(--dzignex-blue)" : "rgba(255, 255, 255, 1)" }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                   >
@@ -94,10 +94,10 @@ const Faq = () => {
                     transition={{ duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="grid grid-cols-6 px-8 pb-8">
-                      <div className="col-span-2"></div>
-                      <div className="col-span-4">
-                        <p className="text-dzignex-white/70 tracking-[0.005em] font-medium text-lg max-w-xl leading-relaxed">
+                    <div className="flex flex-col md:grid md:grid-cols-6 px-6 md:px-8 pb-6 md:pb-8">
+                      <div className="hidden md:block md:col-span-2"></div>
+                      <div className="md:col-span-4">
+                        <p className="text-dzignex-white/70 tracking-[0.005em] font-medium text-base md:text-lg max-w-xl leading-relaxed">
                           {item.answer}
                         </p>
                       </div>

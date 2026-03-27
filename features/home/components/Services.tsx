@@ -81,16 +81,16 @@ const Services = () => {
 
   return (
     <div className="border-b-2 border-dzignex-white/15">
-      <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 py-32 px-16">
-        <div className="grid grid-cols-6">
+      <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 py-16 px-6 md:py-32 md:px-16">
+        <div className="flex flex-col md:grid md:grid-cols-6 gap-8 md:gap-0">
           {/* Section Title */}
-          <p className="col-span-2 text-dzignex-blue font-bold text-2xl tracking-tight uppercase">
+          <p className="md:col-span-2 text-dzignex-blue font-bold text-xl md:text-2xl tracking-tight uppercase">
             [Our Services]
           </p>
 
           {/* Content */}
-          <div className="col-span-4 flex flex-col gap-8">
-            <p className="text-dzignex-white tracking-tighter text-4xl font-medium">
+          <div className="md:col-span-4 flex flex-col gap-8">
+            <p className="text-dzignex-white tracking-tighter text-3xl md:text-4xl font-medium leading-tight">
               Creative Solutions for Brands That Want to Stand Out
             </p>
           </div>
@@ -104,17 +104,17 @@ const Services = () => {
               className={`bg-dzignex-white/3 border border-dzignex-white/15 transition-all duration-300 ${activeIndex === index ? 'bg-dzignex-white/7' : ''}`}
             >
               <div 
-                className="grid grid-cols-6 p-8 cursor-pointer group"
+                className="flex flex-col md:grid md:grid-cols-6 p-6 md:p-8 cursor-pointer group gap-4 md:gap-0"
                 onClick={() => toggleAccordion(index)}
               >
-                <p className="col-span-2 text-4xl uppercase font-bold text-dzignex-white">
+                <p className="md:col-span-2 text-2xl md:text-4xl uppercase font-bold text-dzignex-white">
                   {service.id} <span className="text-dzignex-blue">/</span>
                 </p>
-                <div className="col-span-4 flex justify-between items-center gap-4">
-                  <p className="text-dzignex-white text-2xl uppercase font-bold group-hover:text-dzignex-blue transition-colors duration-300">
+                <div className="md:col-span-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <p className="text-dzignex-white text-xl md:text-2xl uppercase font-bold group-hover:text-dzignex-blue transition-colors duration-300">
                     {service.title}
                   </p>
-                  <button className={`${activeIndex === index ? 'text-dzignex-blue' : 'text-dzignex-white'} uppercase font-bold tracking-widest text-sm hover:underline transition-all`}>
+                  <button className={`${activeIndex === index ? 'text-dzignex-blue' : 'text-dzignex-white'} uppercase font-bold tracking-widest text-xs md:text-sm hover:underline transition-all`}>
                     {activeIndex === index ? 'Close details' : 'View details'}
                   </button>
                 </div>
@@ -129,16 +129,16 @@ const Services = () => {
                     transition={{ duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="grid grid-cols-6 px-8 pb-8">
-                      <div className="col-span-2"></div>
-                      <div className="col-span-4 border-t-1 border-t-dzignex-white/15 pt-8">
-                        <p className="text-dzignex-white font-bold tracking-tighter text-lg mb-4">
+                    <div className="flex flex-col md:grid md:grid-cols-6 px-6 md:px-8 pb-6 md:pb-8 gap-4 md:gap-0">
+                      <div className="hidden md:block md:col-span-2"></div>
+                      <div className="md:col-span-4 border-t-1 border-t-dzignex-white/15 pt-6 md:pt-8">
+                        <p className="text-dzignex-white font-bold tracking-tighter text-base md:text-lg mb-4">
                           {service.tagline}
                         </p>
-                        <ul className="grid grid-cols-2 gap-y-2">
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-2">
                           {service.details.map((detail, dIdx) => (
-                            <li key={dIdx} className="text-dzignex-white/70 text-lg flex items-center gap-2">
-                              <span className="text-dzignex-blue font-bold text-xs">●</span> {detail}
+                            <li key={dIdx} className="text-dzignex-white/70 text-base md:text-lg flex items-center gap-2">
+                              <span className="text-dzignex-blue font-bold text-[10px] md:text-xs">●</span> {detail}
                             </li>
                           ))}
                         </ul>
