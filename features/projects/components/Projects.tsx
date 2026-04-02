@@ -6,9 +6,11 @@ const projects = [
   { id: "project-02", label: "/Project 02", title: "/Project02" },
   { id: "project-03", label: "/Project 03", title: "/Project03" },
   { id: "project-04", label: "/Project 04", title: "/Project04" },
+  { id: "project-05", label: "/Project 05", title: "/Project05" },
+  { id: "project-06", label: "/Project 06", title: "/Project06" },
 ];
 
-const Values = () => {
+const Projects = () => {
   const [activeProject, setActiveProject] = useState("project-01");
   const projectRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -120,4 +122,4 @@ const Values = () => {
   );
 };
 
-export default Values;
+export default Projects;

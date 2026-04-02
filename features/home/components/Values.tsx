@@ -17,15 +17,15 @@ const Values = () => {
     <div className="border-b-2 border-dzignex-white/15">
       <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 py-16 px-5 sm:px-8 md:px-10 lg:px-16 md:py-24 lg:py-32">
 
-        <div className="flex flex-col md:flex-row justify-between gap-8">
+        <div className="flex flex-col md:grid md:grid-cols-6 gap-8">
 
           {/* Section Title */}
-          <p className="text-dzignex-blue font-bold text-base md:text-xl lg:text-2xl tracking-tight uppercase shrink-0">
+          <p className="md:col-span-2 text-dzignex-blue font-bold text-base md:text-xl lg:text-2xl tracking-tight uppercase shrink-0">
             [Our Values]
           </p>
 
           {/* Content */}
-          <div className="flex flex-col gap-6 md:gap-8 w-full">
+          <div className="md:col-span-4 flex flex-col gap-6 md:gap-8 w-full">
             <p className="text-dzignex-white tracking-tighter text-2xl sm:text-3xl lg:text-4xl font-medium leading-tight">
               A proven process that delivers results, not surprises.
             </p>
@@ -54,38 +54,29 @@ const Values = () => {
             </div>
 
             {/* Desktop: horizontal accordion cards */}
-            <div className="hidden md:flex gap-2 mt-16">
-              {values.map((value, i) => (
+          <div className="hidden md:flex gap-2 mt-16 items-stretch">
+              {[0, 1, 2, 3, 4].map((i) => (
                 <div
                   key={i}
                   onMouseEnter={() => setHovered(i)}
                   onMouseLeave={() => setHovered(null)}
                   className={`
-                    h-96 flex flex-col justify-between
-                    transition-all duration-500 ease-in-out
-                    border-2 border-dzignex-white/15 px-2 py-4
-                    hover:bg-dzignex-blue/10 overflow-hidden cursor-default
+                    h-96 text-5xl flex 
+                    transition-all duration-500 ease-in-out border-2 border-dzignex-white/15 px-2 py-4
+                    hover:bg-dzignex-blue/10 
                     ${
                       hovered === null
-                        ? i === 0 ? "w-94" : "w-24"
-                        : hovered === i ? "w-94" : "w-24"
+                      ? i === 0
+                          ? "w-40 md:w-56 lg:w-64" // first card wide by default
+                          : "w-20 md:w-24 lg:w-28"
+                        : hovered === i
+                          ? "w-40 md:w-56 lg:w-64" // hovered card expands
+                          : "w-20 md:w-24 lg:w-28" // others shrink
                     }
                   `}
                 >
-                  {/* Number always visible */}
-                  <span className={`text-5xl font-bold transition-colors duration-300 ${hovered === i ? "text-dzignex-white" : "text-dzignex-white"}`}>
-                    {value.number}<span className="text-dzignex-blue">/</span>
-                  </span>
+                  {`0${i + 1}`}<span className="text-dzignex-blue">/</span>
 
-                  {/* Title + description — only visible when expanded */}
-                  <div className={`flex flex-col gap-3 transition-all duration-300 ${hovered === i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}>
-                    <p className="text-dzignex-white font-bold text-xl uppercase tracking-tight whitespace-nowrap">
-                      {value.title}
-                    </p>
-                    <p className="text-dzignex-white/60 text-sm leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
                 </div>
               ))}
             </div>
