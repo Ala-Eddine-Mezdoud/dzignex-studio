@@ -3,10 +3,10 @@ const Stats = () => {
     <div className="border-b-2 border-dzignex-white/15">
       <div className="container mx-auto border-x-2 border-dzignex-white/15 py-12 px-4 sm:px-6 md:py-16 md:px-10">
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:justify-between">
+        <div className="flex flex-col sm:grid sm:grid-cols-2 md:flex md:flex-row md:justify-between w-full">
           
           {/* Item */}
-          <div className="py-8 sm:py-10 md:py-0 md:pr-10 border-b sm:border-b-0 md:border-r border-dzignex-white/15">
+          <div className="flex-1 py-8 sm:py-10 md:py-0 md:pr-10 border-b sm:border-b-0 md:border-r border-dzignex-white/15">
             <p className="text-4xl sm:text-5xl md:text-7xl tracking-tight">
               5<span className="text-dzignex-blue">+</span>
             </p>
@@ -15,7 +15,7 @@ const Stats = () => {
             </p>
           </div>
 
-          <div className="py-8 sm:py-10 md:py-0 md:pr-10 border-b sm:border-b-0 md:border-r border-dzignex-white/15">
+          <div className="flex-1 py-8 sm:py-10 md:py-0 md:px-10 border-b sm:border-b-0 md:border-r border-dzignex-white/15">
             <p className="text-4xl sm:text-5xl md:text-7xl tracking-tight">
               100<span className="text-dzignex-blue">+</span>
             </p>
@@ -24,7 +24,7 @@ const Stats = () => {
             </p>
           </div>
 
-          <div className="py-8 sm:py-10 md:py-0 md:pr-10 border-b sm:border-b-0 md:border-r border-dzignex-white/15">
+          <div className="flex-1 py-8 sm:py-10 md:py-0 md:px-10 border-b sm:border-b-0 md:border-r border-dzignex-white/15">
             <p className="text-4xl sm:text-5xl md:text-7xl tracking-tight">
               50<span className="text-dzignex-blue">+</span>
             </p>
@@ -33,7 +33,7 @@ const Stats = () => {
             </p>
           </div>
 
-          <div className="py-8 sm:py-10 md:py-0">
+          <div className="flex-1 py-8 sm:py-10 md:py-0 md:pl-10">
             <p className="text-4xl sm:text-5xl md:text-7xl tracking-tight">
               97<span className="text-dzignex-blue">%</span>
             </p>

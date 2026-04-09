@@ -6,9 +6,6 @@ const projects = [
   { id: "project-01", label: "/Project 01", title: "/Project01" },
   { id: "project-02", label: "/Project 02", title: "/Project02" },
   { id: "project-03", label: "/Project 03", title: "/Project03" },
-  { id: "project-04", label: "/Project 04", title: "/Project04" },
-  { id: "project-05", label: "/Project 05", title: "/Project05" },
-  { id: "project-06", label: "/Project 06", title: "/Project06" },
 ];
 
 const Projects = () => {
@@ -49,11 +46,11 @@ const Projects = () => {
         {/* Section Header */}
         <div className="flex flex-col gap-3 md:grid md:grid-cols-6">
           <p className="md:col-span-2 text-dzignex-blue font-bold text-base md:text-xl lg:text-2xl tracking-tight uppercase">
-            [Our Projects]
+            [Latest Projects]
           </p>
           <div className="md:col-span-4">
             <p className="text-dzignex-white tracking-tighter text-2xl sm:text-3xl lg:text-4xl font-medium">
-              Work we've built with real clients, real constraints, and real results.
+              Discover our latest work and see how we help brands stand out.
             </p>
           </div>
         </div>

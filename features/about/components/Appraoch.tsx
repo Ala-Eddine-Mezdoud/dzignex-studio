@@ -73,7 +73,7 @@ const Approach = () => {
             </ul>
           </div>
 
-          {/* Project Cards */}
+          {/* Cards */}
           <div className="md:col-span-4 flex flex-col gap-8 md:gap-0">
             {projects.map(({ id, title, description }) => (
               <div

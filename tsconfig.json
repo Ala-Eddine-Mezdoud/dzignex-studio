@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/projects",
+    "app/(site)/projects",
     "src/components/MagicBento.jsx",
     ".next/dev/types/**/*.ts"
   ],

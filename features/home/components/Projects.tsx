@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 const projects = [
   { id: "project-01", label: "/Project 01", title: "/Project01" },
@@ -8,7 +9,7 @@ const projects = [
   { id: "project-04", label: "/Project 04", title: "/Project04" },
 ];
 
-const Values = () => {
+const Projects = () => {
   const [activeProject, setActiveProject] = useState("project-01");
   const projectRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -78,33 +79,34 @@ const Values = () => {
           {/* Project Cards */}
           <div className="md:col-span-4 flex flex-col gap-8 md:gap-0">
             {projects.map(({ id, title }) => (
-              <div
-                key={id}
-                id={id}
-                ref={(el) => { projectRefs.current[id] = el; }}
+              <Link key={id} href={`/projects/${id}`} className="block w-full">
+                <div
+                  id={id}
+                  ref={(el) => { projectRefs.current[id] = el; }}
                 className="w-full border border-dzignex-white/15"
-              >
-                {/* Card Image */}
-                <div className="bg-dzignex-blue/15 h-52 sm:h-72 md:h-80 lg:h-96 w-full" />
+                >
+                  {/* Card Image */}
+                  <div className="bg-dzignex-blue/15 h-52 sm:h-72 md:h-80 lg:h-96 w-full" />
 
-                {/* Card Info */}
-                <div className="p-4 md:p-5 flex flex-col sm:flex-row justify-between gap-4 md:gap-16">
-                  <p className="text-dzignex-blue text-lg sm:text-xl md:text-2xl uppercase font-bold tracking-tighter shrink-0">
-                    {title}
-                  </p>
-                  <div className="flex flex-col justify-between gap-4">
-                    <p className="text-dzignex-white/80 text-sm md:text-base leading-relaxed">
-                      A complete brand identity designed for a product-focused lab, built to
-                      communicate clarity, credibility, and consistency across digital and
-                      physical touchpoints.
+                  {/* Card Info */}
+                  <div className="p-4 md:p-5 flex flex-col sm:flex-row justify-between gap-4 md:gap-16">
+                    <p className="text-dzignex-blue text-lg sm:text-xl md:text-2xl uppercase font-bold tracking-tighter shrink-0">
+                      {title}
                     </p>
-                    <div className="border-t border-dzignex-white/70 pt-4 mt-1">
-                      <p className="text-dzignex-white font-bold text-lg">Service:</p>
-                      <p className="text-dzignex-white text-sm">Project Category</p>
+                    <div className="flex flex-col justify-between gap-4">
+                      <p className="text-dzignex-white/80 text-sm md:text-base leading-relaxed">
+                        A complete brand identity designed for a product-focused lab, built to
+                        communicate clarity, credibility, and consistency across digital and
+                        physical touchpoints.
+                      </p>
+                      <div className="border-t border-dzignex-white/70 pt-4 mt-1">
+                        <p className="text-dzignex-white font-bold text-lg">Service:</p>
+                        <p className="text-dzignex-white text-sm">Project Category</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
 
             <div className="flex justify-end mt-4 md:mt-8">
@@ -120,4 +122,4 @@ const Values = () => {
   );
 };
 
-export default Values;
+export default Projects;

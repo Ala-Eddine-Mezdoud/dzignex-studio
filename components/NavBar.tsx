@@ -17,7 +17,7 @@ const NavBar = () => {
   const pathname = usePathname();
 
   const linkIsActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname === href;
+    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
 
   const linkClass = (href: string) =>
     cn(
