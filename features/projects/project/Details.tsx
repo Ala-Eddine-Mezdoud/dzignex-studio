@@ -2,7 +2,9 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-const projects = [
+
+{/* the label is dynamic and it changes depending on the project */}
+const details = [
   { id: "1", label: "design process" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
   { id: "2", label: "Logo Proposals" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
   { id: "3", label: "logo design" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
@@ -21,7 +23,7 @@ const Projects = () => {
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
-    projects.forEach(({ id }) => {
+    details.forEach(({ id }) => {
       const el = projectRefs.current[id];
       if (!el) return;
 
@@ -66,7 +68,7 @@ const Projects = () => {
           {/* Sticky Sidebar — md and up only */}
           <div className="hidden md:block md:col-span-2 sticky top-10 self-start">
             <ul className="flex flex-col gap-2">
-              {projects.map(({ id, label }) => (
+              {details.map(({ id, label }) => (
                 <li
                   key={id}
                   className={`uppercase font-bold transition-all duration-300 ${
@@ -83,7 +85,7 @@ const Projects = () => {
 
           {/* Project Cards */}
           <div className="md:col-span-4 flex flex-col gap-8 md:gap-0">
-            {projects.map(({ id, label, description }) => (
+            {details.map(({ id, label, description }) => (
               <Link key={id} href={`/projects/${id}`} className="block w-full">
                 <div
                   id={id}

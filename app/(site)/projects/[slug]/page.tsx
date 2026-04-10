@@ -15,6 +15,7 @@ export default async function ProjectPage({
     <div className="">
         <Landing />
         <About />
+        {/* TODO: dynamic data , it depends on the project */}
         <Details />
         <ClientFeedback />
         <Latest />

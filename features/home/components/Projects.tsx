@@ -86,7 +86,7 @@ const Projects = () => {
                 className="w-full border border-dzignex-white/15"
                 >
                   {/* Card Image */}
-                  <div className="bg-dzignex-blue/15 h-52 sm:h-72 md:h-80 lg:h-96 w-full" />
+                  <div className="bg-dzignex-blue/15 w-full aspect-video" />
 
                   {/* Card Info */}
                   <div className="p-4 md:p-5 flex flex-col sm:flex-row justify-between gap-4 md:gap-16">
