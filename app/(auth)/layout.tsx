@@ -8,8 +8,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "HOSTX",
-  description: "we host x",
+  title: "Dzignex Studio",
+  description: "we design x",
 };
 
 export default function RootLayout({

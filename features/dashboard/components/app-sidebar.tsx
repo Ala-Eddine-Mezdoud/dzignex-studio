@@ -70,7 +70,7 @@ const data = {
     {
       title: "Media Library",
       url: "/dashboard/media-library",
-      icon: IconSettings,
+      icon: IconCamera,
     },
     {
       title: "Settings",
@@ -82,7 +82,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
