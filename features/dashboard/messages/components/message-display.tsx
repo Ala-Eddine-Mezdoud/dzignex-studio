@@ -1,6 +1,7 @@
 "use client"
 
 import { format } from "date-fns"
+import { cn } from "../../../../lib/utils"
 import {
   Archive,
   ArchiveX,
@@ -80,60 +81,15 @@ export function MessageDisplay({ message }: MessageDisplayProps) {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" disabled={!message}>
-                <ArchiveX className="h-4 w-4" />
-                <span className="sr-only">Move to junk</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Move to junk</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" disabled={!message}>
                 <Trash2 className="h-4 w-4" />
                 <span className="sr-only">Move to trash</span>
               </Button>
             </TooltipTrigger>
             <TooltipContent>Move to trash</TooltipContent>
           </Tooltip>
-          <Separator orientation="vertical" className="mx-1 h-6" />
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" disabled={!message}>
-                <Clock className="h-4 w-4" />
-                <span className="sr-only">Snooze</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Snooze</TooltipContent>
-          </Tooltip>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" disabled={!message}>
-                <Reply className="h-4 w-4" />
-                <span className="sr-only">Reply</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Reply</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" disabled={!message}>
-                <ReplyAll className="h-4 w-4" />
-                <span className="sr-only">Reply all</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Reply all</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" disabled={!message}>
-                <Forward className="h-4 w-4" />
-                <span className="sr-only">Forward</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Forward</TooltipContent>
-          </Tooltip>
+
         </div>
         <Separator orientation="vertical" className="mx-2 h-6" />
         <DropdownMenu>
@@ -145,37 +101,47 @@ export function MessageDisplay({ message }: MessageDisplayProps) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>Mark as unread</DropdownMenuItem>
-            <DropdownMenuItem>Star thread</DropdownMenuItem>
             <DropdownMenuItem>Add label</DropdownMenuItem>
-            <DropdownMenuItem>Mute thread</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
       <Separator />
       
       <div className="flex flex-1 flex-col overflow-y-auto">
-        <div className="flex items-start p-4">
-          <div className="flex items-start gap-4 text-sm">
+        <div className="flex items-start justify-between p-4">
+          <div className="flex items-start gap-4">
+            <div className="rounded-full bg-dzignex-blue/10 h-12 w-12 flex items-center justify-center border border-dzignex-blue/20">
+              <User className="h-6 w-6 text-dzignex-blue" />
+            </div>
             <div className="grid gap-1">
-              <div className="font-semibold text-lg flex items-center gap-2">
-                <User className="h-4 w-4 text-dzignex-blue" />
+              <div className="font-bold text-xl uppercase tracking-tighter">
                 {message.fullName}
               </div>
-              <div className="text-xs flex items-center gap-2 text-muted-foreground">
-                <Mail className="h-3 w-3" />
-                {message.email}
-              </div>
-              <div className="text-xs flex items-center gap-2 text-muted-foreground">
-                <Phone className="h-3 w-3" />
-                {message.whatsappNumber}
+              <div className="flex flex-wrap gap-x-4 gap-y-1">
+                <div className="text-xs flex items-center gap-1.5 text-muted-foreground font-medium">
+                  <Mail className="h-3.5 w-3.5 text-dzignex-blue" />
+                  {message.email}
+                </div>
+                <div className="text-xs flex items-center gap-1.5 text-muted-foreground font-medium">
+                  <Phone className="h-3.5 w-3.5 text-dzignex-blue" />
+                  {message.whatsappNumber}
+                </div>
               </div>
             </div>
           </div>
-          {message.createdAt && (
-            <div className="ml-auto text-xs text-muted-foreground">
-              {format(new Date(message.createdAt), "PPpp")}
+          <div className="flex flex-col items-end gap-2">
+            <div className={cn(
+              "px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded",
+              message.status === "UNREAD" ? "bg-dzignex-blue text-white" : "bg-muted text-muted-foreground"
+            )}>
+              {message.status === "UNREAD" ? "New Message" : message.status}
             </div>
-          )}
+            {message.createdAt && (
+              <div className="text-[10px] uppercase font-bold text-muted-foreground tracking-tight">
+                {format(new Date(message.createdAt), "PPpp")}
+              </div>
+            )}
+          </div>
         </div>
         
         <Separator />
@@ -220,11 +186,12 @@ export function MessageDisplay({ message }: MessageDisplayProps) {
             )}
           </div>
           
-          <div className="rounded-lg border bg-card p-4 shadow-sm h-full">
+          <div className="rounded-lg border bg-dzignex-blue/5 border-dzignex-blue/10 p-5 shadow-sm h-full flex flex-col">
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Project Details</span>
+              <MessageSquare className="h-4 w-4 text-dzignex-blue" />
+              <span className="text-xs font-bold uppercase tracking-[0.1em] text-dzignex-blue">Full Inquiry</span>
             </div>
-            <div className="text-sm leading-relaxed whitespace-pre-wrap">
+            <div className="text-base text-dzignex-white/90 leading-relaxed whitespace-pre-wrap font-medium flex-1">
               {message.message || "No project details provided."}
             </div>
           </div>

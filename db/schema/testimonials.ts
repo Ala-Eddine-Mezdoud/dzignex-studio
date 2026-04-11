@@ -1,4 +1,5 @@
 import { pgEnum, pgTable, text, integer, timestamp, boolean } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { projects } from "./projects";
 
 export const testimonials = pgTable("testimonials", {
@@ -15,3 +16,10 @@ export const testimonials = pgTable("testimonials", {
   statLabel: text("stat_label"), // e.g., "Months Partnership"
   rating: integer("rating"),
 });
+
+export const testimonialRelations = relations(testimonials, ({ one }) => ({
+  project: one(projects, {
+    fields: [testimonials.projectId],
+    references: [projects.id],
+  }),
+}));

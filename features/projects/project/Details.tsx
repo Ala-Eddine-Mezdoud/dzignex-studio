@@ -1,23 +1,23 @@
 'use client'
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 
+interface ProjectDetail {
+  id: string;
+  label: string;
+  description: string | null;
+  images: {
+    id: string;
+    imageUrl: string;
+    altText: string | null;
+  }[];
+}
 
-{/* the label is dynamic and it changes depending on the project */}
-const details = [
-  { id: "1", label: "design process" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
-  { id: "2", label: "Logo Proposals" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
-  { id: "3", label: "logo design" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
-  { id: "4", label: "Colors System" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
-  { id: "5", label: "Typography System" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
-  { id: "6", label: "Brand Guidelines" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
-  { id: "7", label: "brand applications" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
-  { id: "8", label: "brand website" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
-  { id: "9", label: "social media design" , description:"We started by understanding the challenges entrepreneurs face in Algeria’s wellness market, then translated those insights into a clear visual identity. From research to sketches, refinements, and final applications."},
-];
+interface DetailsProps {
+  details: ProjectDetail[];
+}
 
-const Projects = () => {
-  const [activeProject, setActiveProject] = useState("project-01");
+const Details = ({ details }: DetailsProps) => {
+  const [activeProject, setActiveProject] = useState(details[0]?.id || "");
   const projectRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
@@ -45,7 +45,9 @@ const Projects = () => {
     });
 
     return () => observers.forEach((obs) => obs.disconnect());
-  }, []);
+  }, [details]);
+
+  if (!details || details.length === 0) return null;
 
   return (
     <div className="border-b-2 border-dzignex-white/15">
@@ -58,7 +60,7 @@ const Projects = () => {
           </p>
           <div className="md:col-span-4">
             <p className="text-dzignex-white tracking-tighter text-2xl sm:text-3xl lg:text-4xl font-medium">
-              Work we've built with real clients, real constraints, and real results.
+              A deep dive into our process, from initial concepts to the final outcome.
             </p>
           </div>
         </div>
@@ -84,32 +86,43 @@ const Projects = () => {
           </div>
 
           {/* Project Cards */}
-          <div className="md:col-span-4 flex flex-col gap-8 md:gap-0">
-            {details.map(({ id, label, description }) => (
-              <Link key={id} href={`/projects/${id}`} className="block w-full">
-                <div
-                  id={id}
-                  ref={(el) => { projectRefs.current[id] = el; }}
+          <div className="md:col-span-4 flex flex-col gap-12 md:gap-0">
+            {details.map(({ id, label, description, images }) => (
+              <div
+                key={id}
+                id={id}
+                ref={(el) => { projectRefs.current[id] = el; }}
                 className="w-full border border-dzignex-white/15"
-                >
-
-
-                  {/* Card Info */}
-                  <div className="p-4 md:p-5 flex flex-col sm:flex-row justify-between gap-4 md:gap-16">
-                    <p className="text-dzignex-white text-lg sm:text-xl md:text-2xl uppercase font-bold tracking-tighter shrink-0 w-44 leading-tight">
-                      {label}
+              >
+                {/* Card Info */}
+                <div className="p-6 md:p-8 flex flex-col sm:flex-row justify-between gap-4 md:gap-16 bg-dzignex-white/[0.02]">
+                  <p className="text-dzignex-white text-lg sm:text-xl md:text-2xl uppercase font-bold tracking-tighter shrink-0 w-44 leading-tight">
+                    {label}
+                  </p>
+                  <div className="flex flex-col justify-between gap-4">
+                    <p className="text-sm md:text-base leading-relaxed text-dzignex-white/70 whitespace-pre-wrap">
+                      {description}
                     </p>
-                    <div className="flex flex-col justify-between gap-4">
-                      <p className="text-sm md:text-base leading-relaxed">
-                        {description}
-                      </p>
-                    </div>
                   </div>
-
-                  {/* Card Image */}
-                  <div className="bg-dzignex-blue/15 aspect-video w-full" />
                 </div>
-              </Link>
+
+                {/* Card Images */}
+                <div className="flex flex-col gap-4 p-4 md:p-6 border-t border-dzignex-white/15">
+                  {images && images.length > 0 ? (
+                    images.map((img) => (
+                      <div key={img.id} className="w-full relative overflow-hidden bg-dzignex-blue/5 border border-dzignex-white/10">
+                        <img 
+                          src={img.imageUrl} 
+                          alt={img.altText || label}
+                          className="w-full h-auto object-cover"
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <div className="bg-dzignex-blue/15 aspect-video w-full" />
+                  )}
+                </div>
+              </div>
             ))}
           </div>
 
@@ -119,4 +132,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Details;

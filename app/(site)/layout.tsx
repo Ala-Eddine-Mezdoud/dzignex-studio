@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import NavBar from "../../components/NavBar";
 import NextStep from "../../components/NextStep";
 import Footer from "../../components/Footer";
+import Chatbot from "../../components/Chatbot";
 import "../globals.css";
 import { ThemeProvider } from "../../components/theme-provider";
 import { Toaster } from "../../components/ui/sonner";
@@ -36,6 +37,7 @@ export default function RootLayout({
           <NextStep />
           <Footer />
           <Toaster />
+          <Chatbot />
         </ThemeProvider>
       </body>
     </html>

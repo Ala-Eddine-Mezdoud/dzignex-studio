@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal, Eye, Edit, Trash } from "lucide-react"
+import { useState } from "react"
 
 import { Button } from "../../../../components/ui/button"
 import {
@@ -14,6 +15,7 @@ import {
 } from "../../../../components/ui/dropdown-menu"
 import { Checkbox } from "../../components/ui/checkbox"
 import { Badge } from "../../components/ui/badge"
+import { ProjectDetailsSheet } from "./ProjectDetailsSheet"
 
 export type Project = {
   id: string
@@ -24,8 +26,8 @@ export type Project = {
   category: string | null
   services: string[] | null
   thumbnailUrl: string | null
+  clientName: string | null
   isPublished: boolean
-  completionDate: string | null
 }
 
 export const columns: ColumnDef<Project>[] = [
@@ -66,6 +68,11 @@ export const columns: ColumnDef<Project>[] = [
     },
   },
   {
+    accessorKey: "clientName",
+    header: "Client",
+    cell: ({ row }) => row.getValue("clientName") || "N/A",
+  },
+  {
     accessorKey: "category",
     header: "Category",
     cell: ({ row }) => {
@@ -102,50 +109,50 @@ export const columns: ColumnDef<Project>[] = [
     },
   },
   {
-    accessorKey: "completionDate",
-    header: "Completion Date",
-    cell: ({ row }) => {
-      const date = row.getValue("completionDate") as string
-      if (!date) return "N/A"
-      return new Date(date).toLocaleDateString()
-    },
-  },
-  {
     id: "actions",
     cell: ({ row }) => {
       const project = row.original
+      const [showDetails, setShowDetails] = useState(false)
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(project.id)}
-            >
-              Copy project ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Eye className="mr-2 h-4 w-4" />
-              View Details
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Edit className="mr-2 h-4 w-4" />
-              Edit Project
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">
-              <Trash className="mr-2 h-4 w-4" />
-              Delete Project
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => navigator.clipboard.writeText(project.id)}
+              >
+                Copy project ID
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => setShowDetails(true)}>
+                <Eye className="mr-2 h-4 w-4" />
+                View Details
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Edit className="mr-2 h-4 w-4" />
+                Edit Project
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-destructive">
+                <Trash className="mr-2 h-4 w-4" />
+                Delete Project
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <ProjectDetailsSheet
+            slug={project.slug}
+            isOpen={showDetails}
+            onOpenChange={setShowDetails}
+          />
+        </>
       )
     },
   },

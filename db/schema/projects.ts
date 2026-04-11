@@ -1,4 +1,6 @@
 import { pgEnum, pgTable, text, integer, timestamp, boolean } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+import { testimonials } from "./testimonials";
 
 export const projects = pgTable("projects", {
   id: text("id")
@@ -39,3 +41,26 @@ export const projectDetailImages = pgTable("project_detail_images", {
   altText: text("alt_text"),
   orderIndex: integer("order_index").notNull().default(0),
 });
+
+export const projectRelations = relations(projects, ({ many, one }) => ({
+  details: many(projectDetails),
+  testimonial: one(testimonials, {
+    fields: [projects.id],
+    references: [testimonials.projectId],
+  }),
+}));
+
+export const projectDetailRelations = relations(projectDetails, ({ one, many }) => ({
+  project: one(projects, {
+    fields: [projectDetails.projectId],
+    references: [projects.id],
+  }),
+  images: many(projectDetailImages),
+}));
+
+export const projectDetailImageRelations = relations(projectDetailImages, ({ one }) => ({
+  detail: one(projectDetails, {
+    fields: [projectDetailImages.detailId],
+    references: [projectDetails.id],
+  }),
+}));

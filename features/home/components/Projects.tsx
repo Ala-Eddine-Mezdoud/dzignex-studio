@@ -2,21 +2,27 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-const projects = [
-  { id: "project-01", label: "/Project 01", title: "/Project01" },
-  { id: "project-02", label: "/Project 02", title: "/Project02" },
-  { id: "project-03", label: "/Project 03", title: "/Project03" },
-  { id: "project-04", label: "/Project 04", title: "/Project04" },
-];
+interface Project {
+  id: string;
+  title: string;
+  slug: string;
+  summary: string | null;
+  category: string | null;
+  thumbnailUrl: string | null;
+}
 
-const Projects = () => {
-  const [activeProject, setActiveProject] = useState("project-01");
+interface ProjectsProps {
+  initialProjects: Project[];
+}
+
+const Projects = ({ initialProjects }: ProjectsProps) => {
+  const [activeProject, setActiveProject] = useState(initialProjects[0]?.id || "");
   const projectRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
-    projects.forEach(({ id }) => {
+    initialProjects.forEach(({ id }) => {
       const el = projectRefs.current[id];
       if (!el) return;
 
@@ -38,7 +44,9 @@ const Projects = () => {
     });
 
     return () => observers.forEach((obs) => obs.disconnect());
-  }, []);
+  }, [initialProjects]);
+
+  if (initialProjects.length === 0) return null;
 
   return (
     <div className="border-b-2 border-dzignex-white/15">
@@ -61,16 +69,16 @@ const Projects = () => {
           {/* Sticky Sidebar — md and up only */}
           <div className="hidden md:block md:col-span-2 sticky top-10 self-start">
             <ul className="flex flex-col gap-2">
-              {projects.map(({ id, label }) => (
+              {initialProjects.map((project, index) => (
                 <li
-                  key={id}
+                  key={project.id}
                   className={`uppercase font-bold transition-all duration-300 ${
-                    activeProject === id
+                    activeProject === project.id
                       ? "text-dzignex-blue text-xl lg:text-2xl"
                       : "text-dzignex-white/70 text-lg lg:text-xl"
                   }`}
                 >
-                  {label}
+                  /{project.title}
                 </li>
               ))}
             </ul>
@@ -78,30 +86,38 @@ const Projects = () => {
 
           {/* Project Cards */}
           <div className="md:col-span-4 flex flex-col gap-8 md:gap-0">
-            {projects.map(({ id, title }) => (
-              <Link key={id} href={`/projects/${id}`} className="block w-full">
+            {initialProjects.map((project) => (
+              <Link key={project.id} href={`/projects/${project.slug}`} className="block w-full">
                 <div
-                  id={id}
-                  ref={(el) => { projectRefs.current[id] = el; }}
+                  id={project.id}
+                  ref={(el) => { projectRefs.current[project.id] = el; }}
                 className="w-full border border-dzignex-white/15"
                 >
                   {/* Card Image */}
-                  <div className="bg-dzignex-blue/15 w-full aspect-video" />
+                  <div className="w-full aspect-video relative overflow-hidden bg-dzignex-blue/5">
+                    {project.thumbnailUrl ? (
+                      <img 
+                        src={project.thumbnailUrl} 
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-all duration-700"
+                      />
+                    ) : (
+                      <div className="bg-dzignex-blue/15 w-full h-full" />
+                    )}
+                  </div>
 
                   {/* Card Info */}
-                  <div className="p-4 md:p-5 flex flex-col sm:flex-row justify-between gap-4 md:gap-16">
-                    <p className="text-dzignex-blue text-lg sm:text-xl md:text-2xl uppercase font-bold tracking-tighter shrink-0">
-                      {title}
+                  <div className="p-4 md:p-5 grid grid-cols-3 justify-between gap-4 md:gap-16">
+                    <p className="text-dzignex-blue text-lg sm:text-xl md:text-2xl uppercase font-bold tracking-tighter shrink-0 col-span-1">
+                      {project.title}
                     </p>
-                    <div className="flex flex-col justify-between gap-4">
+                    <div className="flex flex-col justify-between gap-4 col-span-2">
                       <p className="text-dzignex-white/80 text-sm md:text-base leading-relaxed">
-                        A complete brand identity designed for a product-focused lab, built to
-                        communicate clarity, credibility, and consistency across digital and
-                        physical touchpoints.
+                        {project.summary || "Case study detailing our process and visual identity solutions."}
                       </p>
                       <div className="border-t border-dzignex-white/70 pt-4 mt-1">
                         <p className="text-dzignex-white font-bold text-lg">Service:</p>
-                        <p className="text-dzignex-white text-sm">Project Category</p>
+                        <p className="text-dzignex-white text-sm uppercase tracking-widest">{project.category || "Multidisciplinary Design"}</p>
                       </div>
                     </div>
                   </div>
@@ -110,9 +126,9 @@ const Projects = () => {
             ))}
 
             <div className="flex justify-end mt-4 md:mt-8">
-              <button className="bg-dzignex-white text-dzignex-black px-4 py-2 text-sm md:text-base lg:text-xl font-semibold tracking-tight uppercase w-full md:w-fit">
+              <Link href="/projects" className="bg-dzignex-white text-dzignex-black px-6 py-3 text-sm md:text-base lg:text-xl font-bold tracking-tight uppercase w-full md:w-fit text-center hover:bg-dzignex-blue hover:text-white transition-all">
                 View All Projects
-              </button>
+              </Link>
             </div>
           </div>
 

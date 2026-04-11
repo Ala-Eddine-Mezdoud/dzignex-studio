@@ -7,9 +7,16 @@ import Projects from "../../features/home/components/Projects"
 import Services from "../../features/home/components/Services"
 import Faq from "../../features/home/components/Faq"
 import Testimonials from "../../features/home/components/Testimonials"
-import NextStep from "../../components/NextStep"
+import { getProjects } from "../../db-actions/projects"
 
-const page = () => {
+export default async function HomePage() {
+  const allProjects = await getProjects()
+  
+  // Show first 4 published projects on the home page
+  const featuredProjects = allProjects
+    .filter(p => p.isPublished)
+    .slice(0, 4)
+
   return (
     <div>
       <Landing />
@@ -17,12 +24,10 @@ const page = () => {
       <About />
       <Stats />
       <Values />
-      <Projects />
+      <Projects initialProjects={featuredProjects} />
       <Services />
       <Testimonials />
       <Faq />
     </div>
   )
 }
-
-export default page
