@@ -4,6 +4,8 @@ import NavBar from "../../components/NavBar";
 import NextStep from "../../components/NextStep";
 import Footer from "../../components/Footer";
 import "../globals.css";
+import { ThemeProvider } from "../../components/theme-provider";
+import { Toaster } from "../../components/ui/sonner";
 
 
 const dmSans = DM_Sans({
@@ -21,13 +23,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={` ${dmSans.className} antialiased bg-dzignex-black text-white`} >
-        <NavBar />
-        {children}
-        <NextStep />
-        <Footer />
-
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+          <NavBar />
+          {children}
+          <NextStep />
+          <Footer />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
