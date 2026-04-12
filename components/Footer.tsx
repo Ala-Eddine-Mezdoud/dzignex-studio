@@ -31,8 +31,8 @@ const Footer = () => {
               <div className="flex flex-col gap-4 lg:gap-0 lg:justify-between">
                 <div className="font-bold text-lg lg:text-2xl tracking-tighter underline underline-offset-8">dzignex.studio@gmail.com</div>
                 <div className="flex gap-4 lg:gap-0 lg:justify-between font-medium underline underline-offset-8">
-                  <p>Terms of Services</p>
-                  <p>Privacy Policy</p>
+                  <Link href={'/terms-of-services'}><p>Terms of Services</p></Link> 
+                  <Link href={'/privacy-policy'}><p>Privacy Policy</p></Link> 
                 </div>
               </div>
               <div>
