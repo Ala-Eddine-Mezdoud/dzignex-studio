@@ -1,14 +1,14 @@
-import { signIn } from "../auth"
+import { signIn } from "../../../../auth"
 import { AuthError } from "next-auth"
 import { redirect } from "next/navigation"
-import { cn } from "../lib/utils"
-import { Button } from "../components/ui/button"
+import { cn } from "../../../../lib/utils"
+import { Button } from "../../../../components/ui/button"
 import {
   Field,
   FieldGroup,
   FieldLabel,
-} from "../components/ui/field"
-import { Input } from "../components/ui/input"
+} from "../../../../components/ui/field"
+import { Input } from "../../../../components/ui/input"
 import Link from "next/link"
 
 interface LoginFormProps extends React.ComponentProps<"form"> {

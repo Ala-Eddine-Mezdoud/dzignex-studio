@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { GalleryVerticalEnd } from "lucide-react"
-import { ForgetPasswordForm } from "../../../components/forget-password-form"
+import { ForgetPasswordForm } from "../../../features/auth/forget-password/components/forget-password-form"
 import Link from "next/link"
 
 interface ForgetPasswordPageProps {

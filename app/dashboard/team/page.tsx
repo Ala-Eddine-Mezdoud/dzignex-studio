@@ -3,7 +3,7 @@ import { User } from "../../../features/dashboard/team/components/columns"
 import { getUsers } from "../../../db-actions/user"
 import { InviteUserSheet } from "../../../features/dashboard/team/components/InviteUserSheet"
 import { auth } from "../../../auth"
-import TeamManagementClient from "./TeamManagementClient"
+import TeamManagementClient from "../../../features/dashboard/team/components/TeamManagementClient"
 
 export default async function TeamPage() {
   const users = await getUsers()

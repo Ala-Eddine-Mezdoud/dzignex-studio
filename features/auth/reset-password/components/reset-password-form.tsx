@@ -1,15 +1,15 @@
 "use client"
 
-import { cn } from "../lib/utils"
-import { Button } from "./ui/button"
+import { cn } from "../../../../lib/utils"
+import { Button } from "../../../../components/ui/button"
 import {
   Field,
   FieldGroup,
   FieldLabel,
-} from "./ui/field"
-import { Input } from "./ui/input"
+} from "../../../../components/ui/field"
+import { Input } from "../../../../components/ui/input"
 import Link from "next/link"
-import { resetPasswordAction } from "../db-actions/reset-password"
+import { resetPasswordAction } from "../../../../db-actions/reset-password"
 import { useFormStatus } from "react-dom"
 
 interface ResetPasswordFormProps extends React.ComponentProps<"form"> {

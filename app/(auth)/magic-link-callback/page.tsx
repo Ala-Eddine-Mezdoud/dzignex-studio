@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import { GalleryVerticalEnd } from "lucide-react"
 import Link from "next/link"
 import { Loader2 } from "lucide-react"
-import MagicLinkCallbackContent from "./MagicLinkCallbackContent"
+import MagicLinkCallbackContent from "../../../features/auth/magic-link/components/MagicLinkCallbackContent"
 
 export default function MagicLinkCallbackPage() {
   return (

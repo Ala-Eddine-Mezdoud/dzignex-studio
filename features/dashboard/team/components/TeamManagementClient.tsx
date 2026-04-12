@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { DataTable } from "../../../features/dashboard/team/components/data-table"
-import { User } from "../../../features/dashboard/team/components/columns"
-import { InviteUserSheet } from "../../../features/dashboard/team/components/InviteUserSheet"
+import { DataTable } from "./data-table"
+import { User } from "./columns"
+import { InviteUserSheet } from "./InviteUserSheet"
 
 interface TeamManagementClientProps {
   users: User[]

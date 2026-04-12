@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { GalleryVerticalEnd } from "lucide-react"
-import { ResetPasswordForm } from "../../../components/reset-password-form"
+import { ResetPasswordForm } from "../../../features/auth/reset-password/components/reset-password-form"
 import Link from "next/link"
 import { db } from "../../../db/drizzle"
 import { verificationTokens } from "../../../db/schema/user"

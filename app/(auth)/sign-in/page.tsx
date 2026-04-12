@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { GalleryVerticalEnd } from "lucide-react"
-import { LoginForm } from "../../../components/login-form"
+import { LoginForm } from "../../../features/auth/sign-in/components/login-form"
 import Link from "next/link"
 
 interface LoginPageProps {

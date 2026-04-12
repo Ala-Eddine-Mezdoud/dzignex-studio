@@ -2,7 +2,7 @@ import Image from "next/image"
 import { GalleryVerticalEnd } from "lucide-react"
 import Link from "next/link"
 import { validateInviteToken } from "../../../db-actions/invites"
-import { InviteSetupForm } from "../../../features/auth/components/InviteSetupForm"
+import { InviteSetupForm } from "../../../features/auth/invite/components/InviteSetupForm"
 
 interface InvitePageProps {
   params: Promise<{
