@@ -1,22 +1,37 @@
-import { ChartAreaInteractive } from "../../features/dashboard/components/chart-area-interactive"
-import { SectionCards } from "../../features/dashboard/components/section-cards"
-import { getDashboardKPIs } from "../../db-actions/dashboard"
+"use client"
 
-export default async function Page() {
-  const kpis = await getDashboardKPIs()
+import { StatsCards } from "../../features/dashboard/analytics/components/StatsCards"
+import { AnalyticsChart } from "../../features/dashboard/analytics/components/AnalyticsChart"
+import { TopPages } from "../../features/dashboard/analytics/components/TopPages"
+import { Referrers } from "../../features/dashboard/analytics/components/Referrers"
+import { BrowserStats } from "../../features/dashboard/analytics/components/BrowserStats"
+import { LocationStats } from "../../features/dashboard/analytics/components/LocationStats"
 
+export default function AnalyticsPage() {
   return (
+    <div className="space-y-6 container mx-auto py-10">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight uppercase">Dashboard</h1>
+        <p className="text-muted-foreground">Overview of your website performance</p>
+      </div>
 
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards kpis={kpis} />
-              <div className="px-4 lg:px-6">
-                <ChartAreaInteractive />
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Stat Cards */}
+      <StatsCards />
 
+      {/* Chart */}
+      <AnalyticsChart />
+
+      {/* Top Pages and Referrers */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <TopPages />
+        <Referrers />
+      </div>
+
+      {/* Browser and Location */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <BrowserStats />
+        <LocationStats />
+      </div>
+    </div>
   )
 }
