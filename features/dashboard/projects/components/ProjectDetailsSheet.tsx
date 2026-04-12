@@ -157,8 +157,8 @@ export function ProjectDetailsSheet({ slug, isOpen, onOpenChange }: ProjectDetai
                   {isLoading ? (
                     <Skeleton className="h-6 w-24 rounded-full" />
                   ) : (
-                    project?.services?.map((service: string) => (
-                      <Badge key={service} variant="secondary" className="px-3 py-1 rounded-full font-medium">
+                    project?.services?.map((service: string, index: number) => (
+                      <Badge key={`${service}-${index}`} variant="secondary" className="px-3 py-1 rounded-full font-medium">
                         {service}
                       </Badge>
                     ))
