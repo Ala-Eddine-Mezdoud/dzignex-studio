@@ -10,10 +10,49 @@ import {
 } from "../components/ui/field"
 import { Input } from "../components/ui/input"
 import Link from "next/link"
+
+interface LoginFormProps extends React.ComponentProps<"form"> {
+  error?: string
+  message?: string
+}
+
+const getErrorMessage = (errorCode: string | undefined) => {
+  switch (errorCode) {
+    case "InvalidCredentials":
+      return "Invalid email or password"
+    case "BannedUser":
+      return "Your account is restricted. Contact support for more information."
+    case "InvalidMagicLink":
+      return "Magic link is invalid or has expired"
+    case "InvalidOrExpiredToken":
+      return "Password reset link is invalid or has already been used"
+    case "UserNotFound":
+      return "User not found"
+    default:
+      return null
+  }
+}
+
+const getSuccessMessage = (messageCode: string | undefined) => {
+  switch (messageCode) {
+    case "PasswordResetSuccess":
+      return "Password reset successfully. Please sign in with your new password."
+    case "CheckEmailInbox":
+      return "Check your email inbox for the reset link."
+    default:
+      return null
+  }
+}
+
 export function LoginForm({
   className,
+  error,
+  message,
   ...props
-}: React.ComponentProps<"form">) {
+}: LoginFormProps) {
+  const errorMessage = getErrorMessage(error)
+  const successMessage = getSuccessMessage(message)
+
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}
               action={async (formData) => {
@@ -23,6 +62,10 @@ export function LoginForm({
               await signIn("credentials", { ...submitData, redirectTo: "/dashboard" })
             } catch (error) {
               if (error instanceof AuthError) {
+                // Check for banned user error code
+                if ((error as any).code === "BannedUser") {
+                  redirect("/sign-in?error=BannedUser")
+                }
                 if (error.type === "CredentialsSignin") {
                    redirect("/sign-in?error=InvalidCredentials")
                 }
@@ -39,6 +82,18 @@ export function LoginForm({
             Enter your email below to login to your account
           </p>
         </div>
+
+        {errorMessage && (
+          <div className="p-3 text-sm text-red-500 bg-red-500/10 rounded-md text-center">
+            {errorMessage}
+          </div>
+        )}
+
+        {successMessage && (
+          <div className="p-3 text-sm text-green-500 bg-green-500/10 rounded-md text-center">
+            {successMessage}
+          </div>
+        )}
 
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>

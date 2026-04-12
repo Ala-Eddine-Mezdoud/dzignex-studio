@@ -37,7 +37,7 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user?: {
     name: string
     email: string
-    avatar: string
+    image: string
   }
 }
 
@@ -75,11 +75,6 @@ const data = {
       url: "/dashboard/media-library",
       icon: IconCamera,
     },
-    {
-      title: "Settings",
-      url: "/dashboard/settings",
-      icon: IconSettings,
-    },
   ],
 }
 
@@ -87,7 +82,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
   const defaultUser = {
     name: "User",
     email: "",
-    avatar: "",
+    image: "",
   }
   
   const currentUser = user ?? defaultUser

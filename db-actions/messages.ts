@@ -4,6 +4,8 @@ import { db } from "../db/drizzle";
 import { messages } from "../db/schema/messages";
 import { eq, desc, sql } from "drizzle-orm";
 
+export type MessageLabel = "important" | "normal" | "scam";
+
 /**
  * Get all messages ordered by creation date (newest first)
  */
@@ -77,5 +79,20 @@ export async function getMessagesCount(status?: "UNREAD" | "READ" | "REPLIED") {
   } catch (error) {
     console.error("Error counting messages:", error);
     throw new Error("Failed to get messages count");
+  }
+}
+
+/**
+ * Update message label (important, normal, scam)
+ */
+export async function updateMessageLabel(id: string, label: MessageLabel) {
+  try {
+    await db.update(messages)
+      .set({ label })
+      .where(eq(messages.id, id));
+    return { success: true };
+  } catch (error) {
+    console.error(`Error updating label for message ${id}:`, error);
+    throw new Error("Failed to update message label");
   }
 }

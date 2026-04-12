@@ -15,6 +15,20 @@
       "when": 1775958416514,
       "tag": "0001_flaky_bloodstorm",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1775992830626,
+      "tag": "0002_nasty_silverclaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1775994550178,
+      "tag": "0003_petite_nighthawk",
+      "breakpoints": true
     }
   ]
 }

@@ -8,6 +8,7 @@ import {
 } from "../../features/dashboard/components/ui/sidebar"
 import { auth } from "../../auth"
 import { redirect } from "next/navigation"
+import { Toaster } from "../../components/ui/sonner"
 
 import "../globals.css";
 
@@ -37,7 +38,7 @@ export default async function RootLayout({
   const user = {
     name: session.user.name ?? "",
     email: session.user.email ?? "",
-    avatar: "", // Add avatar support later if available in user model
+    image: session.user.image ?? "",
   }
 
   return (
@@ -64,6 +65,7 @@ export default async function RootLayout({
                 {children}
               </SidebarInset>
           </SidebarProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

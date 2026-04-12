@@ -18,7 +18,12 @@ import {
   User,
   Mail,
   Phone,
-  Briefcase
+  Briefcase,
+  Check,
+  MailOpen,
+  Tag,
+  AlertTriangle,
+  Flag
 } from "lucide-react"
 
 import {
@@ -26,6 +31,10 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuSeparator,
 } from "../../components/ui/dropdown-menu"
 import { Button } from "../../components/ui/button"
 import { Separator } from "../../components/ui/separator"
@@ -37,6 +46,7 @@ import {
 } from "../../components/ui/tooltip"
 import { Textarea } from "../../../../components/ui/textarea"
 import { Switch } from "../../../../components/ui/switch"
+import { MessageLabel } from "../../../../db-actions/messages"
 
 interface Message {
   id: string
@@ -49,14 +59,24 @@ interface Message {
   websiteOrInstagram: string | null
   message: string | null
   status: "UNREAD" | "READ" | "REPLIED"
+  label: "important" | "normal" | "scam" | null
   createdAt: Date
 }
 
 interface MessageDisplayProps {
   message: Message | null
+  onDelete: (id: string) => void
+  onMarkAsUnread: (id: string) => void
+  onUpdateLabel: (id: string, label: MessageLabel) => void
 }
 
-export function MessageDisplay({ message }: MessageDisplayProps) {
+const labelConfig: Record<MessageLabel, { color: string; icon: React.ReactNode; text: string }> = {
+  important: { color: "bg-red-500", icon: <Flag className="h-3 w-3" />, text: "Important" },
+  normal: { color: "bg-blue-500", icon: <Tag className="h-3 w-3" />, text: "Normal" },
+  scam: { color: "bg-yellow-500", icon: <AlertTriangle className="h-3 w-3" />, text: "Scam" },
+}
+
+export function MessageDisplay({ message, onDelete, onMarkAsUnread, onUpdateLabel }: MessageDisplayProps) {
   if (!message) {
     return (
       <div className="flex h-full items-center justify-center p-8 text-center text-muted-foreground">
@@ -65,22 +85,20 @@ export function MessageDisplay({ message }: MessageDisplayProps) {
     )
   }
 
+  const currentLabel = message.label || "normal"
+
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-[calc(100vh-50px)] flex-col justify-between">
       <div className="flex items-center p-2">
         <div className="flex items-center gap-2">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" disabled={!message}>
-                <Archive className="h-4 w-4" />
-                <span className="sr-only">Archive</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Archive</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" disabled={!message}>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                disabled={!message}
+                onClick={() => onDelete(message.id)}
+              >
                 <Trash2 className="h-4 w-4" />
                 <span className="sr-only">Move to trash</span>
               </Button>
@@ -88,9 +106,7 @@ export function MessageDisplay({ message }: MessageDisplayProps) {
             <TooltipContent>Move to trash</TooltipContent>
           </Tooltip>
         </div>
-        <div className="ml-auto flex items-center gap-2">
-
-        </div>
+        <div className="ml-auto" />
         <Separator orientation="vertical" className="mx-2 h-6" />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -100,8 +116,37 @@ export function MessageDisplay({ message }: MessageDisplayProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>Mark as unread</DropdownMenuItem>
-            <DropdownMenuItem>Add label</DropdownMenuItem>
+            <DropdownMenuItem 
+              onClick={() => onMarkAsUnread(message.id)}
+              disabled={message.status === "UNREAD"}
+            >
+              <MailOpen className="h-4 w-4 mr-2" />
+              Mark as unread
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>
+                <Tag className="h-4 w-4 mr-2" />
+                Add label
+              </DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem onClick={() => onUpdateLabel(message.id, "important")}>
+                  <Flag className="h-4 w-4 mr-2 text-red-500" />
+                  Important
+                  {currentLabel === "important" && <Check className="h-4 w-4 ml-2" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onUpdateLabel(message.id, "normal")}>
+                  <Tag className="h-4 w-4 mr-2 text-blue-500" />
+                  Normal
+                  {currentLabel === "normal" && <Check className="h-4 w-4 ml-2" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onUpdateLabel(message.id, "scam")}>
+                  <AlertTriangle className="h-4 w-4 mr-2 text-yellow-500" />
+                  Scam
+                  {currentLabel === "scam" && <Check className="h-4 w-4 ml-2" />}
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -130,11 +175,23 @@ export function MessageDisplay({ message }: MessageDisplayProps) {
             </div>
           </div>
           <div className="flex flex-col items-end gap-2">
-            <div className={cn(
-              "px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded",
-              message.status === "UNREAD" ? "bg-dzignex-blue text-white" : "bg-muted text-muted-foreground"
-            )}>
-              {message.status === "UNREAD" ? "New Message" : message.status}
+            <div className="flex items-center gap-2">
+              {message.label && (
+                <div className={cn(
+                  "px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded flex items-center gap-1",
+                  labelConfig[message.label].color,
+                  "text-white"
+                )}>
+                  {labelConfig[message.label].icon}
+                  {labelConfig[message.label].text}
+                </div>
+              )}
+              <div className={cn(
+                "px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded",
+                message.status === "UNREAD" ? "bg-dzignex-blue text-white" : "bg-muted text-muted-foreground"
+              )}>
+                {message.status === "UNREAD" ? "New Message" : message.status}
+              </div>
             </div>
             {message.createdAt && (
               <div className="text-[10px] uppercase font-bold text-muted-foreground tracking-tight">
@@ -202,17 +259,7 @@ export function MessageDisplay({ message }: MessageDisplayProps) {
       <div className="p-4">
         <form>
           <div className="grid gap-4">
-            <Textarea
-              className="p-4 rounded-none border-dzignex-white/10"
-              placeholder={`Reply ${message.fullName}...`}
-            />
-            <div className="flex items-center">
-              <Label
-                htmlFor="mute"
-                className="flex items-center gap-2 text-xs font-normal"
-              >
-                <Switch id="mute" aria-label="Mute thread" /> Mute this thread
-              </Label>
+
               <Button
                 onClick={(e) => e.preventDefault()}
                 size="sm"
@@ -220,7 +267,10 @@ export function MessageDisplay({ message }: MessageDisplayProps) {
               >
                 Send
               </Button>
-            </div>
+            <Textarea
+              className="p-4 rounded-none border-dzignex-white/10"
+              placeholder={`Reply ${message.fullName}...`}
+            />
           </div>
         </form>
       </div>

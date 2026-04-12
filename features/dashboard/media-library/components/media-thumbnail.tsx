@@ -36,7 +36,7 @@ function resolveIconType(item: MediaItem): MediaIconType {
 export function MediaThumbnail({ item }: MediaThumbnailProps) {
   if (item.type === "folder") {
     return (
-      <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] bg-amber-500/10 text-amber-600">
+      <div className="flex h-full w-full items-center justify-center bg-amber-500/10 text-amber-600">
         <Folder className="size-8" />
       </div>
     )
@@ -47,7 +47,7 @@ export function MediaThumbnail({ item }: MediaThumbnailProps) {
       <img
         src={item.url}
         alt={item.name}
-        className="h-40 w-full rounded-[1.5rem] object-cover"
+        className="h-full w-full object-cover"
         loading="lazy"
       />
     )
@@ -56,7 +56,7 @@ export function MediaThumbnail({ item }: MediaThumbnailProps) {
   if (item.type === "video") {
     const Icon = getMediaIcon("video")
     return (
-      <div className="flex h-40 w-full items-center justify-center rounded-[1.5rem] bg-violet-500/10 text-violet-600">
+      <div className="flex h-full w-full items-center justify-center bg-violet-500/10 text-violet-600">
         <Icon className="size-8" />
       </div>
     )
@@ -66,7 +66,7 @@ export function MediaThumbnail({ item }: MediaThumbnailProps) {
   const Icon = getMediaIcon(iconType)
 
   return (
-    <div className="flex h-40 w-full items-center justify-center rounded-[1.5rem] bg-muted/60 text-muted-foreground">
+    <div className="flex h-full w-full items-center justify-center bg-muted/40 text-muted-foreground">
       <Icon className="size-8" />
     </div>
   )

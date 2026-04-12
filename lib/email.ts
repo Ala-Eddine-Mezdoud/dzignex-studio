@@ -96,37 +96,87 @@ export async function sendPasswordResetEmail(
   resetLink: string,
   senderEmail?: string,
 ): Promise<SendEmailResult> {
-  const html = `
-    <body style="margin:0; padding:0; background:#050505; font-family:Arial, sans-serif;">
-      <div style="max-width:600px; margin:auto; background:#050505; color:#ffffff; padding:40px 30px;">
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
 
+  const html = `
+    <body style="margin:0; padding:0; background:#010110; font-family:'DM Sans', Arial, sans-serif;">
+      <div style="max-width:600px; margin:auto; background:#010110; color:#ffffff; padding:40px 30px;">
+
+        <!-- LOGO -->
+        <div style="text-align:center; margin-bottom:40px;">
+          <img src="${baseUrl}/dzignex_logo.svg" alt="Dzignex Studio" style="width:120px; height:auto;" />
+        </div>
+
+        <!-- TITLE -->
+        <h1 style="text-align:center; color:#ffffff; font-size:36px; font-weight:700; margin:0 0 30px;">
+          PASSWORD <span style="color:#0C3EFF;">RESET</span> REQUEST
+        </h1>
+
+        <!-- CONTENT -->
+        <p style="font-size:16px; line-height:1.6; color:#ffffff; margin-bottom:25px; text-align:center;">
+          We received a request to reset the password for your Dzignex Studio account. To proceed with the password reset, please click the secure link below.
+        </p>
+
+        <!-- CTA BUTTON -->
+        <div style="text-align:center; margin:40px 0;">
           <a
             href="${resetLink}"
+            style="
+              display:inline-block;
+              padding:16px 32px;
+              background:#0C3EFF;
+              color:#ffffff;
+              text-decoration:none;
+              font-weight:700;
+              font-size:16px;
+              border-radius:8px;
+            "
           >
-            Reset Password
+            Reset My Password
           </a>
-        
+        </div>
+
+        <!-- EXPIRY NOTICE -->
+        <p style="text-align:center; font-size:14px; line-height:1.6; color:#cccccc; margin-bottom:20px;">
+          For security purposes, this link will expire in <strong>30 minutes</strong>. If you need a new reset link, please initiate another request.
+        </p>
+
+        <!-- SECURITY NOTICE -->
+        <p style="text-align:center; font-size:14px; line-height:1.6; color:#cccccc; margin-bottom:50px;">
+          If you did not initiate this password reset request, please disregard this email. Your account remains secure, and no action is required on your part.
+        </p>
+
+        <!-- FOOTER -->
+        <div style="border-top: 1px solid #333; padding-top: 20px; text-align: center;">
+          <p style="font-size:12px; color:#888888; margin:0;">
+            © ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
+          </p>
+        </div>
+
       </div>
     </body>
   `;
 
   const text = `
-Reset Your Password
+Password Reset Request
 
-You requested to reset your password. Click the link below to continue:
+We received a request to reset the password for your Dzignex Studio account. To proceed with the password reset, please click the secure link below:
 
 ${resetLink}
 
-This link will expire in 30 minutes.
+For security purposes, this link will expire in 30 minutes. If you need a new reset link, please initiate another request.
 
-If you didn't request this, you can safely ignore this email.
+If you did not initiate this password reset request, please disregard this email. Your account remains secure, and no action is required on your part.
 
-© ${new Date().getFullYear()} Dzignex . All rights reserved.
+© ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
   `;
 
   return sendEmail({
     to: email,
-    subject: "Reset Your Password - Dzignex ",
+    subject: "Password Reset Request - Dzignex Studio",
     html,
     text,
     category: "password_reset",
@@ -142,18 +192,28 @@ export async function sendMagicLinkEmail(
   magicLink: string,
   senderEmail?: string,
 ): Promise<SendEmailResult> {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
   const html = `
-    <body style="margin:0; padding:0; background:#050505; font-family:Arial, sans-serif;">
-      <div style="max-width:600px; margin:auto; background:#050505; color:#ffffff; padding:40px 30px;">
+    <body style="margin:0; padding:0; background:#010110; font-family:'DM Sans', Arial, sans-serif;">
+      <div style="max-width:600px; margin:auto; background:#010110; color:#ffffff; padding:40px 30px;">
+
+        <!-- LOGO -->
+        <div style="text-align:center; margin-bottom:40px;">
+          <img src="${baseUrl}/dzignex_logo.svg" alt="Dzignex Studio" style="width:120px; height:auto;" />
+        </div>
 
         <!-- TITLE -->
         <h1 style="text-align:center; color:#ffffff; font-size:42px; font-weight:700; margin:0 0 30px;">
-          SIGN IN TO <span style="color:#D6F224;">Dzignex </span>
+          SECURE SIGN-IN <span style="color:#0C3EFF;">LINK</span>
         </h1>
 
         <!-- CONTENT -->
         <p style="font-size:16px; line-height:1.6; color:#ffffff; margin-bottom:25px; text-align:center;">
-          Click the button below to securely sign in to your Dzignex  account. No password required!
+          We have received a sign-in request for your Dzignex Studio account. Please use the secure magic link below to access your account without entering a password.
         </p>
 
         <!-- CTA BUTTON -->
@@ -163,32 +223,32 @@ export async function sendMagicLinkEmail(
             style="
               display:inline-block;
               padding:16px 32px;
-              background:#D6F224;
-              color:#050505;
+              background:#0C3EFF;
+              color:#ffffff;
               text-decoration:none;
               font-weight:700;
               font-size:16px;
               border-radius:8px;
             "
           >
-            Sign In to Dzignex 
+            Sign In Securely
           </a>
         </div>
 
         <!-- EXPIRY NOTICE -->
         <p style="text-align:center; font-size:14px; line-height:1.6; color:#cccccc; margin-bottom:20px;">
-          This link will expire in <strong>24 hours</strong> and can only be used once.
+          For your security, this link will expire in <strong>24 hours</strong> and can only be used once. After use, you will remain signed in until you explicitly sign out.
         </p>
 
         <!-- SECURITY NOTICE -->
         <p style="text-align:center; font-size:14px; line-height:1.6; color:#cccccc; margin-bottom:50px;">
-          If you didn't request this link, you can safely ignore this email.
+          If you did not initiate this sign-in request, please disregard this email. Your account security has not been compromised.
         </p>
 
         <!-- FOOTER -->
         <div style="border-top: 1px solid #333; padding-top: 20px; text-align: center;">
           <p style="font-size:12px; color:#888888; margin:0;">
-            © ${new Date().getFullYear()} Dzignex . All rights reserved.
+            © ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
           </p>
         </div>
 
@@ -197,22 +257,22 @@ export async function sendMagicLinkEmail(
   `;
 
   const text = `
-Sign In to Dzignex 
+Secure Sign-In Link
 
-Click the link below to securely sign in to your Dzignex  account:
+We have received a sign-in request for your Dzignex Studio account. Please use the secure magic link below to access your account without entering a password:
 
 ${magicLink}
 
-This link will expire in 24 hours and can only be used once.
+For your security, this link will expire in 24 hours and can only be used once. After use, you will remain signed in until you explicitly sign out.
 
-If you didn't request this link, you can safely ignore this email.
+If you did not initiate this sign-in request, please disregard this email. Your account security has not been compromised.
 
-© ${new Date().getFullYear()} Dzignex . All rights reserved.
+© ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
   `;
 
   return sendEmail({
     to: email,
-    subject: "Sign In to Dzignex  - Magic Link",
+    subject: "Secure Sign-In Link - Dzignex Studio",
     html,
     text,
     category: "magic_link",
@@ -234,25 +294,25 @@ export async function sendInviteEmail(
       : "http://localhost:3000";
 
   const html = `
-    <body style="margin: 0; padding: 0; background: #050505; font-family: Arial, sans-serif; padding-right: 40px; padding-left: 40px">
-      <div style="max-width: 600px; margin: auto; background: #050505; color: #fff; padding: 40px 30px;">
-        <!-- HEADER IMAGE -->
-        <div style="margin-bottom: 40px; text-align: center;">
-          <img 
-            src="${baseUrl}/footerBg.png" 
-            alt="Dzignex Studio" 
-            style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto;" 
-          />
+    <body style="margin: 0; padding: 0; background: #010110; font-family: 'DM Sans', Arial, sans-serif; padding-right: 40px; padding-left: 40px">
+      <div style="max-width: 600px; margin: auto; background: #010110; color: #fff; padding: 40px 30px;">
+        <!-- LOGO -->
+        <div style="text-align:center; margin-bottom:40px;">
+          <img src="${baseUrl}/dzignex_logo.svg" alt="Dzignex Studio" style="width:120px; height:auto;" />
         </div>
 
         <!-- INVITE TITLE -->
         <h1 style="text-align: center; color: #fff; font-size: 48px; font-weight: 700; margin: 0; margin-bottom: 40px;">
-          YOU'RE <span style="color: #D6F224;">INVITED</span>
+          TEAM <span style="color: #0C3EFF;">INVITATION</span>
         </h1>
 
         <!-- INTRO TEXT -->
         <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px; text-align: center;">
-          You've been invited to join the Dzignex Studio team. Click the button below to accept your invitation and set up your account.
+          You have been extended an invitation to join the Dzignex Studio team. We are excited about the prospect of collaborating with you.
+        </p>
+
+        <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px; text-align: center;">
+          Please accept your invitation by clicking the secure link below, where you will be guided through the account setup process.
         </p>
 
         <!-- CTA BUTTON -->
@@ -262,8 +322,8 @@ export async function sendInviteEmail(
             style="
               display: inline-block;
               padding: 16px 32px;
-              background: #D6F224;
-              color: #050505;
+              background: #0C3EFF;
+              color: #ffffff;
               text-decoration: none;
               font-weight: 700;
               font-size: 16px;
@@ -276,12 +336,12 @@ export async function sendInviteEmail(
 
         <!-- EXPIRY NOTICE -->
         <p style="text-align: center; font-size: 14px; line-height: 1.6; color: #cccccc; margin-bottom: 20px;">
-          This invitation will expire in <strong>7 days</strong> and can only be used once.
+          This invitation is valid for <strong>7 days</strong> and may only be used once. Please complete your registration within this timeframe.
         </p>
 
         <!-- SECURITY NOTICE -->
         <p style="text-align: center; font-size: 14px; line-height: 1.6; color: #cccccc; margin-bottom: 50px;">
-          If you weren't expecting this invitation, you can safely ignore this email.
+          If you were not expecting this invitation, please disregard this email. No further action is required.
         </p>
 
         <!-- FOOTER -->
@@ -295,22 +355,24 @@ export async function sendInviteEmail(
   `;
 
   const text = `
-You're Invited to Join Dzignex Studio
+Team Invitation - Dzignex Studio
 
-You've been invited to join the Dzignex Studio team. Click the link below to accept your invitation and set up your account.
+You have been extended an invitation to join the Dzignex Studio team. We are excited about the prospect of collaborating with you.
+
+Please accept your invitation by clicking the secure link below, where you will be guided through the account setup process:
 
 ${inviteLink}
 
-This invitation will expire in 7 days and can only be used once.
+This invitation is valid for 7 days and may only be used once. Please complete your registration within this timeframe.
 
-If you weren't expecting this invitation, you can safely ignore this email.
+If you were not expecting this invitation, please disregard this email. No further action is required.
 
 © ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
   `;
 
   return sendEmail({
     to: email,
-    subject: "You're Invited to Join Dzignex Studio",
+    subject: "Team Invitation - Dzignex Studio",
     html,
     text,
     category: "invite",
@@ -335,119 +397,86 @@ export async function sendWelcomeEmail(
   const html =
     role === "ENABLER"
       ? `
-      <body style="margin: 0; padding: 0; background: #050505; font-family: Arial, sans-serif; padding-right: 40px;padding-left: 40px">
-        <div style="max-width: 600px; margin: auto; background: #050505; color: #fff; padding: 40px 30px;">
-          <!-- HEADER IMAGE -->
-          <div style="margin-bottom: 40px; text-align: center;">
-            <img 
-              src="${baseUrl}/images/email-header.png" 
-              alt="Dzignex " 
-              style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto;" 
-            />
+      <body style="margin: 0; padding: 0; background: #010110; font-family: 'DM Sans', Arial, sans-serif; padding-right: 40px;padding-left: 40px">
+        <div style="max-width: 600px; margin: auto; background: #010110; color: #fff; padding: 40px 30px;">
+          <!-- LOGO -->
+          <div style="text-align:center; margin-bottom:40px;">
+            <img src="${baseUrl}/dzignex_logo.svg" alt="Dzignex Studio" style="width:120px; height:auto;" />
           </div>
 
           <!-- DEAR NAME -->
           <h1 style="text-align: center; color: #fff; font-size: 48px; font-weight: 700; margin: 0; margin-bottom: 40px;">
-            DEAR <span style="color: #D6F224;">${fullName.toUpperCase()},</span>
+            WELCOME TO <span style="color: #0C3EFF;">DZIGNEX STUDIO</span>
           </h1>
 
           <!-- INTRO TEXT -->
-          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px;">
-            Thank you for registering with Dzignex  as an Enabler. We appreciate your interest in collaborating with us and contributing to the creator ecosystem.
+          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px; text-align: center;">
+            Thank you for registering with Dzignex Studio as an Enabler. We value your interest in partnering with us to empower the creative community.
           </p>
 
-          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px;">
-            Your registration has been successfully received. Our team will review the details and get in touch with you within 2–3 business days to discuss alignment and possible next steps.
+          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px; text-align: center;">
+            Your application has been submitted successfully. Our team is reviewing your profile and will reach out within 2–3 business days to discuss how we can work together.
           </p>
 
-          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 40px;">
-            If you wish to share any additional information such as proposals, portfolios, or collaboration outlines, please feel free to reply directly to this email.
+          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 40px; text-align: center;">
+            If you have any questions or would like to share additional materials, please reply to this email at your convenience.
           </p>
 
-          <p style="font-size: 16px; color: #fff; margin-bottom: 60px;">
-            Kind regards,<br />
-            <strong>Dzignex  Team</strong>
+          <p style="font-size: 16px; color: #fff; margin-bottom: 60px; text-align: center;">
+            Best regards,<br />
+            <strong>The Dzignex Studio Team</strong>
           </p>
 
-          <!-- FOOTER IMAGE -->
-          <div style="margin-top: 60px; text-align: center;">
-            <img 
-              src="${baseUrl}/images/email-footer.png" 
-              alt="Dzignex  Footer" 
-              style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto;" 
-            />
+          <!-- FOOTER -->
+          <div style="border-top: 1px solid #333; padding-top: 20px; text-align: center;">
+            <p style="font-size: 12px; color: #888888; margin: 0;">
+              © ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
+            </p>
           </div>
         </div>
       </body>
     `
       : `
-      <body style="margin: 0; padding: 0; background: #050505; font-family: Arial, sans-serif; padding-right: 40px;padding-left: 40px">
-        <div style="max-width: 600px; margin: auto; background: #050505; color: #fff; padding: 40px 30px;">
-          <!-- HEADER IMAGE -->
-          <div style="margin-bottom: 40px; text-align: center;">
-            <img 
-              src="${baseUrl}/images/email-header.png" 
-              alt="Dzignex  Creator Hub" 
-              style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto;" 
-            />
+      <body style="margin: 0; padding: 0; background: #010110; font-family: 'DM Sans', Arial, sans-serif; padding-right: 40px;padding-left: 40px">
+        <div style="max-width: 600px; margin: auto; background: #010110; color: #fff; padding: 40px 30px;">
+          <!-- LOGO -->
+          <div style="text-align:center; margin-bottom:40px;">
+            <img src="${baseUrl}/dzignex_logo.svg" alt="Dzignex Studio" style="width:120px; height:auto;" />
           </div>
 
           <!-- HELLO NAME -->
           <h1 style="text-align: center; color: #fff; font-size: 48px; font-weight: 700; margin: 0; margin-bottom: 40px;">
-            HELLO <span style="color: #D6F224;">${fullName.toUpperCase()},</span>
+            WELCOME TO <span style="color: #0C3EFF;">DZIGNEX STUDIO</span>
           </h1>
 
           <!-- INTRO TEXT -->
-          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px;">
-            Welcome to your creator journey. You're now part of a community designed to support your growth, your voice, and your craft.
+          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px; text-align: center;">
+            Welcome to Dzignex Studio. We're thrilled to have you join our community of creators and innovators.
           </p>
 
-          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px;">
-            Your experience inside Dzignex  begins with three pillars Connect, Create, Learn:
+          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px; text-align: center;">
+            Your account is now active and ready to use. Explore our platform to discover projects, connect with fellow creators, and bring your creative vision to life.
           </p>
 
-          <!-- PILLARS -->
-          <div style="display: flex; align-items: center; justify-items: center; margin-bottom: 20px; gap: 10px;">
-            <p style="font-size: 16px; margin: 0; font-weight: 700;">
-              <span style="color: #D6F224;">X</span> <span style="color: #ffffff;">COLLAB | </span>
-            </p>
-            <div style="width: 20px;"></div>
-            <p style="font-size: 16px; color: #fff; margin: 0;">Connect with the community.</p>
-          </div>
-
-          <div style="display: flex; align-items: center; justify-items: center; margin-bottom: 20px; gap: 10px;">
-            <p style="font-size: 16px; margin: 0; font-weight: 700;">
-              <span style="color: #D6F224;">X</span> <span style="color: #ffffff;">CREATE | </span>
-            </p>
-            <div style="width: 20px;"></div>
-            <p style="font-size: 16px; color: #fff; margin: 0;">Bring your ideas to life in our studios and labs.</p>
-          </div>
-
-          <div style="display: flex; align-items: center; justify-items: center; margin-bottom: 30px; gap: 10px;">
-            <p style="font-size: 16px; margin: 0; font-weight: 700;">
-              <span style="color: #D6F224;">X</span> <span style="color: #ffffff;">SKOOL | </span>
-            </p>
-            <div style="width: 20px;"></div>
-            <p style="font-size: 16px; color: #fff; margin: 0;">Connect with the community.</p>
-          </div>
+          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px; text-align: center;">
+            Whether you're here to collaborate on exciting projects or showcase your work, Dzignex Studio provides the tools and community you need to succeed.
+          </p>
 
           <!-- OUTRO -->
-          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 40px;">
-            We're excited to see how your creativity evolves and how you'll shape the Dzignex  community along the way.
+          <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 40px; text-align: center;">
+            If you have any questions or need assistance getting started, our team is here to help. We look forward to seeing what you'll create.
           </p>
 
-          <p style="font-size: 16px; color: #fff; margin-bottom: 60px;">
-            Kind regards,<br />
-            <strong>Dzignex  Team</strong>
+          <p style="font-size: 16px; color: #fff; margin-bottom: 60px; text-align: center;">
+            Best regards,<br />
+            <strong>The Dzignex Studio Team</strong>
           </p>
 
-          <!-- FOOTER IMAGE -->
-          <div style="margin-top: 60px; text-align: center;">
-            <img 
-              src="${baseUrl}/images/email-footer.png" 
-              alt="Dzignex  Footer" 
-              style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto;" 
-            />
+          <!-- FOOTER -->
+          <div style="border-top: 1px solid #333; padding-top: 20px; text-align: center;">
+            <p style="font-size: 12px; color: #888888; margin: 0;">
+              © ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
+            </p>
           </div>
         </div>
       </body>
@@ -455,34 +484,32 @@ export async function sendWelcomeEmail(
 
   const text =
     role === "ENABLER"
-      ? `Dear ${fullName},
+      ? `Welcome to Dzignex Studio
 
-Thank you for registering with Dzignex  as an Enabler. We appreciate your interest in collaborating with us and contributing to the creator ecosystem.
+Thank you for registering with Dzignex Studio as an Enabler. We value your interest in partnering with us to empower the creative community.
 
-Your registration has been successfully received. Our team will review the details and get in touch with you within 2–3 business days to discuss alignment and possible next steps.
+Your application has been submitted successfully. Our team is reviewing your profile and will reach out within 2–3 business days to discuss how we can work together.
 
-If you wish to share any additional information such as proposals, portfolios, or collaboration outlines, please feel free to reply directly to this email.
+If you have any questions or would like to share additional materials, please reply to this email at your convenience.
 
-Kind regards,
-Dzignex  Team`
-      : `Hello ${fullName},
+Best regards,
+The Dzignex Studio Team`
+      : `Welcome to Dzignex Studio
 
-Welcome to your creator journey. You're now part of a community designed to support your growth, your voice, and your craft.
+Welcome to Dzignex Studio. We're thrilled to have you join our community of creators and innovators.
 
-Your experience inside Dzignex  begins with three pillars Connect, Create, Learn:
+Your account is now active and ready to use. Explore our platform to discover projects, connect with fellow creators, and bring your creative vision to life.
 
-X COLLAB | Connect with the community.
-X CREATE | Bring your ideas to life in our studios and labs.
-X SKOOL | Connect with the community.
+Whether you're here to collaborate on exciting projects or showcase your work, Dzignex Studio provides the tools and community you need to succeed.
 
-We're excited to see how your creativity evolves and how you'll shape the Dzignex  community along the way.
+If you have any questions or need assistance getting started, our team is here to help. We look forward to seeing what you'll create.
 
-Kind regards,
-Dzignex  Team`;
+Best regards,
+The Dzignex Studio Team`;
 
   return sendEmail({
     to: email,
-    subject: "Welcome to Dzignex  🎉",
+    subject: "Welcome to Dzignex Studio",
     html,
     text,
     category: "welcome",

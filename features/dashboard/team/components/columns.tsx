@@ -21,7 +21,6 @@ export type User = {
   id: string
   name: string | null
   email: string | null
-  phone: string | null
   role: "ADMIN" | "USER"
   acknowledged: boolean | null
   banned: boolean
@@ -111,11 +110,6 @@ export const columns: ColumnDef<User>[] = [
         </Badge>
       )
     },
-  },
-  {
-      accessorKey: "phone",
-      header: "Phone",
-      cell: ({ row }) => row.getValue("phone") || "N/A",
   },
   {
     accessorKey: "createdAt",

@@ -1,4 +1,4 @@
-import { FilePlus, LayoutGrid, LayoutList, Search, Trash2, FolderPlus, UploadCloud } from "lucide-react"
+import { LayoutGrid, LayoutList, Search, Trash2, FolderPlus, UploadCloud, MoreHorizontal } from "lucide-react"
 import { Button } from "../../components/ui/button"
 import { Input } from "../../components/ui/input"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../../components/ui/breadcrumb"
@@ -40,94 +40,94 @@ export function MediaToolbar({
 }: MediaToolbarProps) {
 
   return (
-    <div className="grid gap-4 sm:grid-cols-[1fr_auto]">
-      <div className="grid gap-4">
-        <div className="rounded-2xl border bg-secondary/5 p-4">
-          <Breadcrumb aria-label="Breadcrumb" className="text-sm">
-            <BreadcrumbList>
-              {breadcrumbs.map((segment, index) => {
-                const isLast = index === breadcrumbs.length - 1
-                return (
-                  <BreadcrumbItem key={segment.path + index}>
-                    {isLast ? (
-                      <BreadcrumbPage>{segment.label}</BreadcrumbPage>
-                    ) : (
-                      <BreadcrumbLink
-                        onClick={(event) => {
-                          event.preventDefault()
-                          onSearchChange("")
-                          onNavigatePath(segment.path)
-                        }}
-                        href="#"
-                      >
-                        {segment.label}
-                      </BreadcrumbLink>
-                    )}
-                    {!isLast && <BreadcrumbSeparator />}
-                  </BreadcrumbItem>
-                )
-              })}
-            </BreadcrumbList>
-          </Breadcrumb>
+    <div className="flex items-center gap-3 border-b border-border/50 bg-muted/30 px-6 py-3">
+      <Breadcrumb aria-label="Breadcrumb" className="flex-1 text-sm">
+        <BreadcrumbList>
+          {breadcrumbs.map((segment, index) => {
+            const isLast = index === breadcrumbs.length - 1
+            return (
+              <BreadcrumbItem key={segment.path + index}>
+                {isLast ? (
+                  <BreadcrumbPage className="text-foreground">{segment.label}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink
+                    onClick={(event) => {
+                      event.preventDefault()
+                      onSearchChange("")
+                      onNavigatePath(segment.path)
+                    }}
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    {segment.label}
+                  </BreadcrumbLink>
+                )}
+                {!isLast && <BreadcrumbSeparator className="text-muted-foreground" />}
+              </BreadcrumbItem>
+            )
+          })}
+        </BreadcrumbList>
+      </Breadcrumb>
+
+      <div className="flex items-center gap-2">
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={searchQuery}
+            onChange={(event) => onSearchChange(event.target.value)}
+            placeholder="Search"
+            className="h-9 w-64 bg-background pl-10"
+          />
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
-          <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              value={searchQuery}
-              onChange={(event) => onSearchChange(event.target.value)}
-              placeholder="Search media"
-              className="pl-10"
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <Button
-              variant={viewMode === "grid" ? "secondary" : "outline"}
-              onClick={() => onViewModeChange("grid")}
-            >
-              <LayoutGrid className="size-4" />
-            </Button>
-            <Button
-              variant={viewMode === "list" ? "secondary" : "outline"}
-              onClick={() => onViewModeChange("list")}
-            >
-              <LayoutList className="size-4" />
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid gap-3 sm:grid-cols-[auto_auto_auto]">
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={onSelectAll}>
-            <FilePlus className="size-4" />
-            Select all
+        <div className="flex items-center gap-0.5 rounded-lg border border-border/50 bg-background p-0.5">
+          <Button
+            variant={viewMode === "grid" ? "secondary" : "ghost"}
+            size="sm"
+            className="h-8 w-8 p-0"
+            onClick={() => onViewModeChange("grid")}
+          >
+            <LayoutGrid className="size-4" />
           </Button>
-          <span className="rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground">{selectedCount}</span>
+          <Button
+            variant={viewMode === "list" ? "secondary" : "ghost"}
+            size="sm"
+            className="h-8 w-8 p-0"
+            onClick={() => onViewModeChange("list")}
+          >
+            <LayoutList className="size-4" />
+          </Button>
         </div>
 
-        <Button variant="outline" size="sm" onClick={onUploadClick}>
-          <UploadCloud className="size-4" />
-          Upload
-        </Button>
+        <div className="h-6 w-px bg-border/50" />
 
-        <Button variant="default" size="sm" onClick={onNewFolder}>
+        <Button variant="ghost" size="sm" className="h-9 gap-2" onClick={onNewFolder}>
           <FolderPlus className="size-4" />
-          New folder
+          <span className="hidden sm:inline">New Folder</span>
         </Button>
 
-        <Button
-          variant="destructive"
-          size="sm"
-          onClick={onDeleteSelected}
-          disabled={selectedCount === 0 || isPending}
-        >
-          <Trash2 className="size-4" />
-          Delete
+        <Button variant="ghost" size="sm" className="h-9 gap-2" onClick={onUploadClick}>
+          <UploadCloud className="size-4" />
+          <span className="hidden sm:inline">Upload</span>
         </Button>
+
+        {selectedCount > 0 && (
+          <>
+            <div className="h-6 w-px bg-border/50" />
+            <span className="text-xs text-muted-foreground">{selectedCount} selected</span>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-9 gap-2 text-destructive hover:text-destructive hover:bg-destructive/10"
+              onClick={onDeleteSelected}
+              disabled={isPending}
+            >
+              <Trash2 className="size-4" />
+              <span className="hidden sm:inline">Delete</span>
+            </Button>
+          </>
+        )}
       </div>
-
     </div>
   )
 }

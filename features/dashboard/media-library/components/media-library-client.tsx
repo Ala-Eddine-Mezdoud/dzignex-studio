@@ -3,9 +3,8 @@
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 import { toast } from "sonner"
 
-import { listMedia, getUploadPresignedUrl, createFolder, deleteMultipleMedia, deleteMedia } from "../actions"
-import { hasAllowedFileType, MAX_FILE_SIZE, MediaFile, MediaFolder, MediaItem, UploadingFile, ViewMode } from "../types"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
+import { listMedia, getUploadPresignedUrl, createFolder, deleteMultipleMedia, deleteMedia, getStorageUsage } from "../actions"
+import { hasAllowedFileType, MAX_FILE_SIZE, MediaFile, MediaFolder, MediaItem, UploadingFile, ViewMode, formatFileSize } from "../types"
 import { MediaToolbar } from "./media-toolbar"
 import { MediaGrid } from "./media-grid"
 import { MediaList } from "./media-list"
@@ -16,6 +15,7 @@ import { CreateFolderDialog } from "./create-folder-dialog"
 import { UploadDialog } from "./upload-dialog"
 import { DeleteDialog } from "./delete-dialog"
 import { PreviewDialog } from "./preview-dialog"
+import { MediaSidebar } from "./media-sidebar"
 
 interface MediaLibraryClientProps {
   initialItems: MediaItem[]
@@ -35,10 +35,25 @@ export function MediaLibraryClient({ initialItems, initialPath = "" }: MediaLibr
   const [deleteTargets, setDeleteTargets] = useState<MediaItem[]>([])
   const [previewItem, setPreviewItem] = useState<MediaFile | null>(null)
   const [isPending, startTransition] = useTransition()
+  const [currentSection, setCurrentSection] = useState("all")
+  const [storageUsed, setStorageUsed] = useState("0 B")
+  const [storagePercentage, setStoragePercentage] = useState(0)
+
+  const refreshStorageUsage = useCallback(async () => {
+    const response = await getStorageUsage()
+    if (response.success && response.data) {
+      setStorageUsed(formatFileSize(response.data.totalSize))
+      setStoragePercentage(response.data.percentage)
+    }
+  }, [])
 
   useEffect(() => {
     setItems(initialItems)
   }, [initialItems])
+
+  useEffect(() => {
+    refreshStorageUsage()
+  }, [refreshStorageUsage])
 
   useEffect(() => {
     if (uploadingFiles.length > 0) {
@@ -47,9 +62,23 @@ export function MediaLibraryClient({ initialItems, initialPath = "" }: MediaLibr
   }, [uploadingFiles.length])
 
   const filteredItems = useMemo(() => {
-    if (!searchQuery.trim()) return items
-    return items.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
-  }, [items, searchQuery])
+    let filtered = items
+
+    // Filter by section
+    if (currentSection !== "all") {
+      filtered = filtered.filter((item) => {
+        if (item.type === "folder") return false
+        if (currentSection === "images") return item.type === "image"
+        if (currentSection === "videos") return item.type === "video"
+        if (currentSection === "documents") return item.type === "file"
+        return true
+      })
+    }
+
+    // Filter by search query
+    if (!searchQuery.trim()) return filtered
+    return filtered.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  }, [items, searchQuery, currentSection])
 
   const allVisibleSelected = useMemo(
     () => filteredItems.length > 0 && filteredItems.every((item) => selectedItems.has(item.key)),
@@ -200,8 +229,9 @@ export function MediaLibraryClient({ initialItems, initialPath = "" }: MediaLibr
       }
 
       await loadMedia(currentPath)
+      await refreshStorageUsage()
     },
-    [currentPath, loadMedia, simulateProgress, updateUploadingFile]
+    [currentPath, loadMedia, simulateProgress, updateUploadingFile, refreshStorageUsage]
   )
 
   const handleDrop = useCallback(
@@ -257,8 +287,9 @@ export function MediaLibraryClient({ initialItems, initialPath = "" }: MediaLibr
       setSelectedItems(new Set())
       setDeleteTargets([])
       await loadMedia(currentPath)
+      await refreshStorageUsage()
     },
-    [currentPath, loadMedia]
+    [currentPath, loadMedia, refreshStorageUsage]
   )
 
   const handlePreview = useCallback((item: MediaItem) => {
@@ -286,7 +317,7 @@ export function MediaLibraryClient({ initialItems, initialPath = "" }: MediaLibr
 
   return (
     <div
-      className="relative min-h-[calc(100vh-6rem)]"
+      className="relative flex h-[calc(100vh-6rem)] overflow-hidden"
       onDragOver={(event) => {
         event.preventDefault()
         setIsDragging(true)
@@ -299,55 +330,58 @@ export function MediaLibraryClient({ initialItems, initialPath = "" }: MediaLibr
     >
       {isDragging && <DropZoneOverlay />}
 
-      <div className="space-y-6 pb-10 pt-4">
+      <MediaSidebar 
+        currentSection={currentSection}
+        onSectionChange={setCurrentSection}
+        storageUsed={storageUsed}
+        storagePercentage={storagePercentage}
+      />
 
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <MediaToolbar
+          breadcrumbs={breadcrumbs}
+          viewMode={viewMode}
+          searchQuery={searchQuery}
+          selectedCount={selectedItems.size}
+          isPending={isPending}
+          onSearchChange={(value: string) => setSearchQuery(value)}
+          onViewModeChange={(mode: ViewMode) => setViewMode(mode)}
+          onNewFolder={() => setIsCreatingFolder(true)}
+          onUploadClick={() => document.getElementById("media-file-input")?.click()}
+          onDeleteSelected={() => openDeleteDialog(items.filter((item) => selectedItems.has(item.key)))}
+          onSelectAll={handleSelectAll}
+          onNavigatePath={(path: string) => loadMedia(path)}
+        />
 
-        <Card className="overflow-hidden">
-          <CardContent className="space-y-4 px-4 py-4 md:px-6 md:py-5">
-            <MediaToolbar
-              breadcrumbs={breadcrumbs}
-              viewMode={viewMode}
+        <div className="flex-1 overflow-y-auto px-6 py-4">
+          {isPending ? (
+            <MediaSkeleton viewMode={viewMode} />
+          ) : filteredItems.length === 0 ? (
+            <MediaEmptyState
               searchQuery={searchQuery}
-              selectedCount={selectedItems.size}
-              isPending={isPending}
-              onSearchChange={(value: string) => setSearchQuery(value)}
-              onViewModeChange={(mode: ViewMode) => setViewMode(mode)}
-              onNewFolder={() => setIsCreatingFolder(true)}
-              onUploadClick={() => document.getElementById("media-file-input")?.click()}
-              onDeleteSelected={() => openDeleteDialog(items.filter((item) => selectedItems.has(item.key)))}
-              onSelectAll={handleSelectAll}
-              onNavigatePath={(path: string) => loadMedia(path)}
+              onClearSearch={() => setSearchQuery("")}
+              onUpload={() => document.getElementById("media-file-input")?.click()}
             />
-
-            {isPending ? (
-              <MediaSkeleton viewMode={viewMode} />
-            ) : filteredItems.length === 0 ? (
-              <MediaEmptyState
-                searchQuery={searchQuery}
-                onClearSearch={() => setSearchQuery("")}
-                onUpload={() => document.getElementById("media-file-input")?.click()}
-              />
-            ) : viewMode === "grid" ? (
-              <MediaGrid
-                items={filteredItems}
-                selectedItems={selectedItems}
-                onSelect={handleToggleSelect}
-                onPreview={handlePreview}
-                onDelete={openDeleteDialog}
-                onNavigate={handleNavigate}
-              />
-            ) : (
-              <MediaList
-                items={filteredItems}
-                selectedItems={selectedItems}
-                onSelect={handleToggleSelect}
-                onPreview={handlePreview}
-                onDelete={openDeleteDialog}
-                onNavigate={handleNavigate}
-              />
-            )}
-          </CardContent>
-        </Card>
+          ) : viewMode === "grid" ? (
+            <MediaGrid
+              items={filteredItems}
+              selectedItems={selectedItems}
+              onSelect={handleToggleSelect}
+              onPreview={handlePreview}
+              onDelete={openDeleteDialog}
+              onNavigate={handleNavigate}
+            />
+          ) : (
+            <MediaList
+              items={filteredItems}
+              selectedItems={selectedItems}
+              onSelect={handleToggleSelect}
+              onPreview={handlePreview}
+              onDelete={openDeleteDialog}
+              onNavigate={handleNavigate}
+            />
+          )}
+        </div>
       </div>
 
       <CreateFolderDialog

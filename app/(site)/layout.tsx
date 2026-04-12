@@ -7,6 +7,7 @@ import Chatbot from "../../components/Chatbot";
 import "../globals.css";
 import { ThemeProvider } from "../../components/theme-provider";
 import { Toaster } from "../../components/ui/sonner";
+import Script from "next/script";
 
 
 const dmSans = DM_Sans({
@@ -25,6 +26,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="88862ea3-0787-4a41-b529-d603e616a87b"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className={[dmSans.className, "antialiased bg-dzignex-black text-white"].join(" ")}>
         <ThemeProvider
             attribute="class"

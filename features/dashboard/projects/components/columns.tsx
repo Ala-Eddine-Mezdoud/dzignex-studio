@@ -122,8 +122,8 @@ export const columns: ColumnDef<Project>[] = [
       const services = row.getValue("services") as string[]
       return (
         <div className="flex flex-wrap gap-1">
-          {services?.map((service) => (
-            <Badge key={service} variant="secondary" className="px-1 py-0 text-[10px]">
+          {services?.map((service, index) => (
+            <Badge key={`${service}-${index}`} variant="secondary" className="px-1 py-0 text-[10px]">
               {service}
             </Badge>
           ))}

@@ -1,10 +1,11 @@
 "use server"
 
 import { db } from "../db/drizzle"
-import { users } from "../db/schema/user"
+import { users, verificationTokens } from "../db/schema/user"
 import { eq } from "drizzle-orm"
 import bcrypt from "bcryptjs"
 import { revalidatePath } from "next/cache"
+import { sendPasswordResetEmail, sendMagicLinkEmail } from "../lib/email"
 
 /**
  * Get all users (Team members)
@@ -118,5 +119,94 @@ export async function verifyPassword(password: string, hashedPassword: string): 
   } catch (error) {
     console.error("Error verifying password:", error)
     return false
+  }
+}
+
+/**
+ * Generate a secure random token
+ */
+function generateToken(): string {
+  const array = new Uint8Array(32)
+  crypto.getRandomValues(array)
+  return Array.from(array, (byte) => byte.toString(16).padStart(2, "0")).join("")
+}
+
+/**
+ * Send password reset email to user
+ */
+export async function sendPasswordReset(userId: string) {
+  try {
+    const user = await getUserById(userId)
+    if (!user || !user.email) {
+      return { success: false, error: "User not found or has no email" }
+    }
+
+    // Generate token and set expiration (30 minutes)
+    const token = generateToken()
+    const expires = new Date(Date.now() + 30 * 60 * 1000)
+
+    // Store token in database
+    await db.insert(verificationTokens).values({
+      identifier: user.email,
+      token,
+      expires,
+    })
+
+    // Generate reset link
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
+    const resetLink = `${baseUrl}/reset-password?token=${token}&email=${encodeURIComponent(user.email)}`
+
+    // Send email
+    const result = await sendPasswordResetEmail(user.email, resetLink)
+
+    if (!result.success) {
+      return { success: false, error: result.error || "Failed to send email" }
+    }
+
+    return { success: true }
+  } catch (error) {
+    console.error("Error sending password reset:", error)
+    return { success: false, error: error instanceof Error ? error.message : "Failed to send password reset" }
+  }
+}
+
+/**
+ * Send magic link email to user for passwordless login
+ */
+export async function sendMagicLink(userId: string) {
+  try {
+    const user = await getUserById(userId)
+    if (!user || !user.email) {
+      return { success: false, error: "User not found or has no email" }
+    }
+
+    // Generate token and set expiration (24 hours)
+    const token = generateToken()
+    const expires = new Date(Date.now() + 24 * 60 * 60 * 1000)
+
+    // Store token in database
+    await db.insert(verificationTokens).values({
+      identifier: user.email,
+      token,
+      expires,
+    })
+
+    // Generate magic link
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
+    const magicLink = `${baseUrl}/api/auth/magic-link?token=${token}&email=${encodeURIComponent(user.email)}`
+
+    // Send email
+    const result = await sendMagicLinkEmail(user.email, magicLink)
+
+    if (!result.success) {
+      return { success: false, error: result.error || "Failed to send email" }
+    }
+
+    return { success: true }
+  } catch (error) {
+    console.error("Error sending magic link:", error)
+    return { success: false, error: error instanceof Error ? error.message : "Failed to send magic link" }
   }
 }

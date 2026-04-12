@@ -1,6 +1,7 @@
 import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 export const messageStatusEnum = pgEnum('message_status', ['UNREAD', 'READ', 'REPLIED']);
+export const messageLabelEnum = pgEnum('message_label', ['important', 'normal', 'scam']);
 
 export const messages = pgTable("messages", {
   id: text("id")
@@ -15,5 +16,6 @@ export const messages = pgTable("messages", {
   websiteOrInstagram: text("website_or_instagram"),
   message: text("message"),
   status: messageStatusEnum("status").notNull().default('UNREAD'),
+  label: messageLabelEnum("label").default('normal'),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });

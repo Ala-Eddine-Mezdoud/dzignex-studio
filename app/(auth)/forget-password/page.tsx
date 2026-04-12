@@ -1,22 +1,32 @@
 import Image from "next/image"
 import { GalleryVerticalEnd } from "lucide-react"
 import { ForgetPasswordForm } from "../../../components/forget-password-form"
+import Link from "next/link"
 
-export default function ForgetPasswordPage() {
+interface ForgetPasswordPageProps {
+  searchParams: Promise<{
+    error?: string
+  }>
+}
+
+export default async function ForgetPasswordPage({ searchParams }: ForgetPasswordPageProps) {
+  const params = await searchParams
+  const { error } = params
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2 bg-dzignex-black text-dzignex-white">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
-          <a href="#" className="flex items-center gap-2 font-medium">
+          <Link href="/" className="flex items-center gap-2 font-medium">
             <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
               <GalleryVerticalEnd className="size-4" />
             </div>
             Dzignex Studio.
-          </a>
+          </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <ForgetPasswordForm />
+            <ForgetPasswordForm error={error} />
           </div>
         </div>
       </div>

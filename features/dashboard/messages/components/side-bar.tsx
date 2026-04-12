@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { formatDistanceToNow } from "date-fns"
-import { ArchiveX, File, Inbox, Send, Trash2 } from "lucide-react"
+import { ArchiveX, File, Inbox, Send, Trash2, Tag, Flag, AlertTriangle } from "lucide-react"
 
 import { Label } from "../../components/ui/label"
 import {
@@ -27,6 +27,7 @@ interface Message {
   websiteOrInstagram: string | null
   message: string | null
   status: "UNREAD" | "READ" | "REPLIED"
+  label: "important" | "normal" | "scam" | null
   createdAt: Date
 }
 
@@ -98,7 +99,20 @@ export function AppSidebar({ messages, selectedId, onSelectMessage, className, .
                       {formatDistanceToNow(new Date(msg.createdAt), { addSuffix: true })}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {msg.label && (
+                      <span className={cn(
+                        "text-[10px] px-1.5 py-0.5 rounded text-white uppercase font-bold tracking-tighter flex items-center gap-1",
+                        msg.label === "important" && "bg-red-500",
+                        msg.label === "normal" && "bg-blue-500",
+                        msg.label === "scam" && "bg-yellow-500"
+                      )}>
+                        {msg.label === "important" && <Flag className="h-3 w-3" />}
+                        {msg.label === "normal" && <Tag className="h-3 w-3" />}
+                        {msg.label === "scam" && <AlertTriangle className="h-3 w-3" />}
+                        {msg.label}
+                      </span>
+                    )}
                     <span className="text-[10px] bg-dzignex-white/5 px-1.5 py-0.5 rounded text-muted-foreground uppercase font-bold tracking-tighter">
                       {msg.companyName}
                     </span>

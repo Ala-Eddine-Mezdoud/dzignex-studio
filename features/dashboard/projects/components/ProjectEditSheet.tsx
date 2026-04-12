@@ -21,11 +21,12 @@ import {
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
 } from "../../components/ui/sheet"
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "../../../../components/ui/form"
-import { Plus, Trash2, ImagePlus, Upload } from "lucide-react"
+import { Plus, Trash2, ImagePlus, Upload, Quote } from "lucide-react"
 import ReactCrop, { type Crop, type PixelCrop } from "react-image-crop"
 import { toast } from "sonner"
 import { getProjectUploadPresignedUrl, getProjectBySlug, updateProject } from "../../../../db-actions/projects"
@@ -448,12 +449,15 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
   if (isLoading) {
     return (
       <Sheet open={open} onOpenChange={onOpenChange}>
-        <SheetContent className="sm:max-w-4xl overflow-y-auto p-0 gap-0">
+        <SheetContent className="sm:max-w-5xl overflow-y-auto p-0" showCloseButton={true}>
           <SheetTitle className="sr-only">Edit Project</SheetTitle>
-          <div className="flex h-full min-h-[calc(100vh-4rem)] flex-col items-center justify-center">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-              <p className="text-muted-foreground">Loading project...</p>
+          <div className="h-full flex flex-col items-center justify-center">
+            <div className="text-center space-y-4">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+              <div>
+                <h3 className="text-lg font-semibold">Loading Project</h3>
+                <p className="text-muted-foreground">Please wait while we fetch the project details...</p>
+              </div>
             </div>
           </div>
         </SheetContent>
@@ -463,21 +467,31 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="sm:max-w-4xl overflow-y-auto p-0 gap-0">
+      <SheetContent className="sm:max-w-5xl overflow-y-auto p-0" showCloseButton={true}>
         <SheetTitle className="sr-only">Edit Project</SheetTitle>
-        <div className="flex h-full min-h-[calc(100vh-4rem)] flex-col">
-          <div className="p-6 space-y-2">
-            <SheetHeader className="space-y-2">
-              <div className="text-2xl font-semibold">Edit Project</div>
-              <p className="text-sm text-muted-foreground">
-                Update project details, images, and testimonials.
-              </p>
-            </SheetHeader>
+        <div className="h-full flex flex-col">
+          {/* Sticky Header */}
+          <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm border-b">
+            <div className="p-6 space-y-2">
+              <SheetHeader className="space-y-2">
+                <SheetTitle className="text-2xl font-bold tracking-tight">Edit Project</SheetTitle>
+                <SheetDescription className="text-base">
+                  Update project details, images, and testimonials.
+                </SheetDescription>
+              </SheetHeader>
+            </div>
           </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 px-6 pb-6">
-              <div className="grid gap-6 md:grid-cols-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-8 p-6">
+              {/* Basic Information Section */}
+              <div className="bg-card rounded-xl p-6 border shadow-sm">
+                <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                  <div className="w-1 h-6 bg-primary rounded-full"></div>
+                  Basic Information
+                </h3>
+                
+                <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-4">
                   <FormField
                     control={form.control}
@@ -626,52 +640,62 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                     )}
                   />
                 </div>
+                </div>
               </div>
 
-              <FormField
-                control={form.control}
-                name="summary"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Summary</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Short project summary"
-                        className="min-h-[140px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {/* Content Section */}
+              <div className="bg-card rounded-xl p-6 border shadow-sm">
+                <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                  <div className="w-1 h-6 bg-primary rounded-full"></div>
+                  Content
+                </h3>
+                
+                <div className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="summary"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Summary</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Short project summary"
+                            className="min-h-[140px] resize-none"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Description</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Full project description"
-                        className="min-h-[140px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Description</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Full project description"
+                            className="min-h-[140px] resize-none"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <h2 className="text-lg font-semibold">Details</h2>
-                    <p className="text-sm text-muted-foreground">
-                      Add dynamic detail blocks with image uploads.
-                    </p>
-                  </div>
+              {/* Details Section */}
+              <div className="bg-card rounded-xl p-6 border shadow-sm">
+                <div className="flex items-center justify-between gap-4 mb-6">
+                  <h3 className="text-lg font-bold flex items-center gap-2">
+                    <div className="w-1 h-6 bg-primary rounded-full"></div>
+                    Project Details
+                  </h3>
                   <Button type="button" variant="outline" size="sm" onClick={handleAddDetail}>
                     <Plus className="mr-2 h-4 w-4" /> Add detail
                   </Button>
@@ -679,7 +703,7 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
 
                 <div className="space-y-4">
                   {detailFields.map((field: any, index: number) => (
-                    <div key={field.id} className="space-y-4 rounded-2xl border p-4">
+                    <div key={field.id} className="bg-background rounded-xl border p-4">
                       <div className="flex items-start justify-between gap-4">
                         <div className="space-y-2 flex-1">
                           <FormField
@@ -687,9 +711,9 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                             name={`details.${index}.label`}
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Detail label</FormLabel>
+                                <FormLabel className="font-medium">Section Title</FormLabel>
                                 <FormControl>
-                                  <Input placeholder="Section title" {...field} />
+                                  <Input placeholder="e.g. Challenge, Solution, Results" {...field} />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -699,7 +723,8 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                         <Button
                           type="button"
                           variant="ghost"
-                          className="text-destructive"
+                          size="icon"
+                          className="text-destructive hover:bg-destructive/10"
                           onClick={() => handleRemoveDetail(index)}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -711,11 +736,11 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                         name={`details.${index}.description`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Detail description</FormLabel>
+                            <FormLabel className="font-medium">Description</FormLabel>
                             <FormControl>
                               <Textarea
-                                placeholder="Add detail description"
-                                className="min-h-[120px]"
+                                placeholder="Add details about this section"
+                                className="min-h-[120px] resize-none"
                                 {...field}
                               />
                             </FormControl>
@@ -727,10 +752,10 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                       <div className="space-y-3">
                         <div className="flex items-center justify-between gap-3">
                           <div>
-                            <Label>Images</Label>
-                            <p className="text-xs text-muted-foreground">Crop uploads to a locked 16:9 ratio.</p>
+                            <Label className="font-medium">Images</Label>
+                            <p className="text-xs text-muted-foreground">Upload images with 16:9 aspect ratio.</p>
                           </div>
-                          <label className="inline-flex cursor-pointer items-center rounded-md border border-input bg-background px-3 py-2 text-sm transition hover:bg-accent/50">
+                          <label className="inline-flex cursor-pointer items-center rounded-md border border-input bg-background px-3 py-2 text-sm font-medium transition hover:bg-accent/50">
                             <ImagePlus className="mr-2 h-4 w-4" />
                             <span>Add images</span>
                             <input
@@ -755,7 +780,7 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                                   type="button"
                                   variant="ghost"
                                   size="icon"
-                                  className="absolute right-2 top-2 rounded-full bg-background/90 opacity-0 transition group-hover/relative:opacity-100"
+                                  className="absolute right-2 top-2 rounded-full bg-background/90 opacity-0 transition group-hover/relative:opacity-100 hover:bg-destructive hover:text-destructive-foreground"
                                   onClick={() => {
                                     const currentImages = form.getValues(`details.${index}.images`)
                                     const updatedImages = currentImages.filter((_, i) => i !== imageIndex)
@@ -774,12 +799,13 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <h2 className="text-lg font-semibold">Testimonials</h2>
-                    <p className="text-sm text-muted-foreground">Add quotes from clients and project highlights.</p>
-                  </div>
+              {/* Testimonials Section */}
+              <div className="bg-card rounded-xl p-6 border shadow-sm">
+                <div className="flex items-center justify-between gap-4 mb-6">
+                  <h3 className="text-lg font-bold flex items-center gap-2">
+                    <Quote className="h-5 w-5 text-primary" />
+                    Client Testimonials
+                  </h3>
                   <Button type="button" variant="outline" size="sm" onClick={handleAddTestimonial}>
                     <Plus className="mr-2 h-4 w-4" /> Add testimonial
                   </Button>
@@ -787,16 +813,16 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
 
                 <div className="space-y-4">
                   {testimonialFields.map((field: any, index: number) => (
-                    <div key={field.id} className="space-y-4 rounded-2xl border p-4">
+                    <div key={field.id} className="bg-background rounded-xl border p-4">
                       <div className="flex items-start justify-between gap-4">
                         <FormField
                           control={form.control}
                           name={`testimonials.${index}.authorName`}
                           render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Author name</FormLabel>
+                            <FormItem className="flex-1">
+                              <FormLabel className="font-medium">Client Name</FormLabel>
                               <FormControl>
-                                <Input placeholder="Client name" {...field} />
+                                <Input placeholder="John Doe" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -805,7 +831,8 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                         <Button
                           type="button"
                           variant="ghost"
-                          className="text-destructive"
+                          size="icon"
+                          className="text-destructive hover:bg-destructive/10"
                           onClick={() => handleRemoveTestimonial(index)}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -818,9 +845,9 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                           name={`testimonials.${index}.authorRole`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Role</FormLabel>
+                              <FormLabel className="font-medium">Role</FormLabel>
                               <FormControl>
-                                <Input placeholder="Author role" {...field} />
+                                <Input placeholder="CEO, Manager, etc." {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -831,9 +858,9 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                           name={`testimonials.${index}.authorCompany`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Company</FormLabel>
+                              <FormLabel className="font-medium">Company</FormLabel>
                               <FormControl>
-                                <Input placeholder="Company" {...field} />
+                                <Input placeholder="Company name" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -846,11 +873,11 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                         name={`testimonials.${index}.feedbackText`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Quote</FormLabel>
+                            <FormLabel className="font-medium">Testimonial</FormLabel>
                             <FormControl>
                               <Textarea
-                                placeholder="Client quote"
-                                className="min-h-[120px]"
+                                placeholder="What did the client say about the project?"
+                                className="min-h-[120px] resize-none"
                                 {...field}
                               />
                             </FormControl>
@@ -865,9 +892,9 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                           name={`testimonials.${index}.statValue`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Stat value</FormLabel>
+                              <FormLabel className="font-medium">Stat Value</FormLabel>
                               <FormControl>
-                                <Input placeholder="e.g. +12" {...field} />
+                                <Input placeholder="e.g. +150%" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -878,9 +905,9 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                           name={`testimonials.${index}.statLabel`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Stat label</FormLabel>
+                              <FormLabel className="font-medium">Stat Label</FormLabel>
                               <FormControl>
-                                <Input placeholder="e.g. Months Partnership" {...field} />
+                                <Input placeholder="e.g. Revenue Growth" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -891,7 +918,7 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                           name={`testimonials.${index}.rating`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Rating</FormLabel>
+                              <FormLabel className="font-medium">Rating</FormLabel>
                               <FormControl>
                                 <Input type="number" min={0} max={5} placeholder="0-5" {...field} />
                               </FormControl>
@@ -905,19 +932,22 @@ export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEdi
                 </div>
               </div>
 
-              <SheetTitle className="sr-only">Submit project</SheetTitle>
-              <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:items-center sm:justify-end">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => onOpenChange(false)}
-                  disabled={isSubmitting}
-                >
-                  Cancel
-                </Button>
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "Updating..." : "Update project"}
-                </Button>
+              {/* Footer Actions */}
+              <div className="sticky bottom-0 bg-background/95 backdrop-blur-sm border-t p-6">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => onOpenChange(false)}
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto"
+                  >
+                    Cancel
+                  </Button>
+                  <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
+                    {isSubmitting ? "Updating..." : "Update Project"}
+                  </Button>
+                </div>
               </div>
             </form>
           </Form>

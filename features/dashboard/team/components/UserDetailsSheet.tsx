@@ -13,11 +13,19 @@ import { Separator } from "../../components/ui/separator"
 import { Switch } from "../../../../components/ui/switch"
 import { Label } from "../../components/ui/label"
 import { Button } from "../../components/ui/button"
-import { getUserById, updateUser, deleteUser } from "../../../../db-actions/user"
+import { getUserById, updateUser, deleteUser, sendPasswordReset, sendMagicLink } from "../../../../db-actions/user"
 import { Skeleton } from "../../components/ui/skeleton"
 import { toast } from "sonner"
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
-import { Mail, Phone, Calendar, Shield, Ban, ShieldAlert, CheckCircle } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "../../../../components/ui/dialog"
+import { Mail, Calendar, Shield, Ban, ShieldAlert, CheckCircle } from "lucide-react"
 
 interface UserDetailsSheetProps {
   userId: string | null
@@ -29,6 +37,9 @@ export function UserDetailsSheet({ userId, isOpen, onOpenChange }: UserDetailsSh
   const [user, setUser] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
+  const [isSendingReset, setIsSendingReset] = useState(false)
+  const [isSendingMagicLink, setIsSendingMagicLink] = useState(false)
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
 
   useEffect(() => {
     if (isOpen && userId) {
@@ -82,9 +93,15 @@ export function UserDetailsSheet({ userId, isOpen, onOpenChange }: UserDetailsSh
     }
   }
 
-  const handleDeleteUser = async () => {
-    if (!user || !confirm("Are you sure you want to delete this user? This action is irreversible.")) return
+  const handleDeleteUser = () => {
+    if (!user) return
+    setShowDeleteDialog(true)
+  }
+
+  const confirmDeleteUser = async () => {
+    if (!user) return
     setIsUpdating(true)
+    setShowDeleteDialog(false)
     try {
       const result = await deleteUser(user.id)
       if (result.success) {
@@ -98,8 +115,28 @@ export function UserDetailsSheet({ userId, isOpen, onOpenChange }: UserDetailsSh
     }
   }
 
-  const handleAction = (action: string) => {
-    toast.info(`${action} feature coming soon`)
+  const handleSendResetPassword = async () => {
+    if (!user) return
+    setIsSendingReset(true)
+    const result = await sendPasswordReset(user.id)
+    if (result.success) {
+      toast.success("Password reset email sent successfully")
+    } else {
+      toast.error(result.error || "Failed to send password reset email")
+    }
+    setIsSendingReset(false)
+  }
+
+  const handleSendMagicLink = async () => {
+    if (!user) return
+    setIsSendingMagicLink(true)
+    const result = await sendMagicLink(user.id)
+    if (result.success) {
+      toast.success("Magic link email sent successfully")
+    } else {
+      toast.error(result.error || "Failed to send magic link email")
+    }
+    setIsSendingMagicLink(false)
   }
 
   return (
@@ -118,23 +155,23 @@ export function UserDetailsSheet({ userId, isOpen, onOpenChange }: UserDetailsSh
           </SheetHeader>
 
           <div className="grid grid-cols-2 gap-3">
-             <Button 
-                variant="outline" 
-                className="w-full justify-start h-11" 
-                onClick={() => handleAction("Reset Password")}
-                disabled={isLoading}
+             <Button
+                variant="outline"
+                className="w-full justify-start h-11"
+                onClick={handleSendResetPassword}
+                disabled={isLoading || isSendingReset || !user}
              >
                 <Shield className="mr-2 h-4 w-4 text-primary" />
-                Send Reset Password
+                {isSendingReset ? "Sending..." : "Send Reset Password"}
              </Button>
-             <Button 
-                variant="outline" 
-                className="w-full justify-start h-11" 
-                onClick={() => handleAction("Magic Link")}
-                disabled={isLoading}
+             <Button
+                variant="outline"
+                className="w-full justify-start h-11"
+                onClick={handleSendMagicLink}
+                disabled={isLoading || isSendingMagicLink || !user}
              >
                 <Mail className="mr-2 h-4 w-4 text-primary" />
-                Send Magic Link
+                {isSendingMagicLink ? "Sending..." : "Send Magic Link"}
              </Button>
           </div>
 
@@ -144,11 +181,6 @@ export function UserDetailsSheet({ userId, isOpen, onOpenChange }: UserDetailsSh
                <div className="flex justify-between items-center">
                  <span className="text-sm text-muted-foreground">Name</span>
                  <span className="text-sm font-medium">{isLoading ? <Skeleton className="h-4 w-32" /> : user?.name || "N/A"}</span>
-               </div>
-               <Separator className="opacity-50" />
-               <div className="flex justify-between items-center">
-                 <span className="text-sm text-muted-foreground">Phone</span>
-                 <span className="text-sm font-medium">{isLoading ? <Skeleton className="h-4 w-32" /> : user?.phone || "N/A"}</span>
                </div>
                <Separator className="opacity-50" />
                <div className="flex justify-between items-center">
@@ -242,6 +274,25 @@ export function UserDetailsSheet({ userId, isOpen, onOpenChange }: UserDetailsSh
           </div>
         </div>
       </SheetContent>
+
+      <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete User</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this user? This action is irreversible.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowDeleteDialog(false)}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={confirmDeleteUser} disabled={isUpdating}>
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </Sheet>
   )
 }
