@@ -2,6 +2,7 @@
 
 import { X } from "lucide-react"
 import { Table } from "@tanstack/react-table"
+import { User } from "lucide-react"
 
 import { Button } from "../../components/ui/button"
 import { Input } from "../../components/ui/input"
@@ -9,10 +10,12 @@ import { DataTableViewOptions } from "./data-table-view-options"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
+  onInviteClick?: () => void
 }
 
 export function DataTableToolbar<TData>({
   table,
+  onInviteClick,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
@@ -38,6 +41,15 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
+      <Button
+          variant="default"
+          size="sm"
+          className="ml-auto hidden h-8 lg:flex mr-4"
+          onClick={onInviteClick}
+        >
+          <User className="mr-2 h-4 w-4" />
+          Invite Team Member
+        </Button>
       <DataTableViewOptions table={table} />
     </div>
   )

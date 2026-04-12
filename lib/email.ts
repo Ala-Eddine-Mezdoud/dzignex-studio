@@ -221,6 +221,104 @@ If you didn't request this link, you can safely ignore this email.
 }
 
 /**
+ * Send an invitation email
+ */
+export async function sendInviteEmail(
+  email: string,
+  inviteLink: string,
+  senderEmail?: string,
+): Promise<SendEmailResult> {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+  const html = `
+    <body style="margin: 0; padding: 0; background: #050505; font-family: Arial, sans-serif; padding-right: 40px; padding-left: 40px">
+      <div style="max-width: 600px; margin: auto; background: #050505; color: #fff; padding: 40px 30px;">
+        <!-- HEADER IMAGE -->
+        <div style="margin-bottom: 40px; text-align: center;">
+          <img 
+            src="${baseUrl}/footerBg.png" 
+            alt="Dzignex Studio" 
+            style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto;" 
+          />
+        </div>
+
+        <!-- INVITE TITLE -->
+        <h1 style="text-align: center; color: #fff; font-size: 48px; font-weight: 700; margin: 0; margin-bottom: 40px;">
+          YOU'RE <span style="color: #D6F224;">INVITED</span>
+        </h1>
+
+        <!-- INTRO TEXT -->
+        <p style="font-size: 16px; line-height: 1.6; color: #fff; margin-bottom: 25px; text-align: center;">
+          You've been invited to join the Dzignex Studio team. Click the button below to accept your invitation and set up your account.
+        </p>
+
+        <!-- CTA BUTTON -->
+        <div style="text-align: center; margin: 40px 0;">
+          <a
+            href="${inviteLink}"
+            style="
+              display: inline-block;
+              padding: 16px 32px;
+              background: #D6F224;
+              color: #050505;
+              text-decoration: none;
+              font-weight: 700;
+              font-size: 16px;
+              border-radius: 8px;
+            "
+          >
+            Accept Invitation
+          </a>
+        </div>
+
+        <!-- EXPIRY NOTICE -->
+        <p style="text-align: center; font-size: 14px; line-height: 1.6; color: #cccccc; margin-bottom: 20px;">
+          This invitation will expire in <strong>7 days</strong> and can only be used once.
+        </p>
+
+        <!-- SECURITY NOTICE -->
+        <p style="text-align: center; font-size: 14px; line-height: 1.6; color: #cccccc; margin-bottom: 50px;">
+          If you weren't expecting this invitation, you can safely ignore this email.
+        </p>
+
+        <!-- FOOTER -->
+        <div style="border-top: 1px solid #333; padding-top: 20px; text-align: center;">
+          <p style="font-size: 12px; color: #888888; margin: 0;">
+            © ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </body>
+  `;
+
+  const text = `
+You're Invited to Join Dzignex Studio
+
+You've been invited to join the Dzignex Studio team. Click the link below to accept your invitation and set up your account.
+
+${inviteLink}
+
+This invitation will expire in 7 days and can only be used once.
+
+If you weren't expecting this invitation, you can safely ignore this email.
+
+© ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
+  `;
+
+  return sendEmail({
+    to: email,
+    subject: "You're Invited to Join Dzignex Studio",
+    html,
+    text,
+    category: "invite",
+    senderEmail,
+  });
+}
+
+/**
  * Send a welcome email to a new user
  */
 export async function sendWelcomeEmail(

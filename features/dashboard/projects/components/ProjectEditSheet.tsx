@@ -28,11 +28,12 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "
 import { Plus, Trash2, ImagePlus, Upload } from "lucide-react"
 import ReactCrop, { type Crop, type PixelCrop } from "react-image-crop"
 import { toast } from "sonner"
-import { getProjectUploadPresignedUrl, createProject } from "../../../../db-actions/projects"
+import { getProjectUploadPresignedUrl, getProjectBySlug, updateProject } from "../../../../db-actions/projects"
 
-interface ProjectCreateSheetProps {
+interface ProjectEditSheetProps {
   open: boolean
   onOpenChange: (open: boolean) => void
+  projectSlug: string
 }
 
 type CroppedImage = {
@@ -167,8 +168,9 @@ async function getCroppedDataUrl(
   return canvas.toDataURL("image/jpeg", 0.9)
 }
 
-export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetProps) {
+export function ProjectEditSheet({ open, onOpenChange, projectSlug }: ProjectEditSheetProps) {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(true)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -200,8 +202,7 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
     control: form.control,
     name: "services",
   })
-
-    const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [cropQueue, setCropQueue] = useState<CropQueueItem[]>([])
   const [cropSrc, setCropSrc] = useState("")
   const [crop, setCrop] = useState<Crop>({ unit: "%", x: 0, y: 0, width: 80, height: 45 })
@@ -239,6 +240,55 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
       setCropSrc("")
     }
   }, [currentCropItem])
+
+  useEffect(() => {
+    const loadProject = async () => {
+      if (open && projectSlug) {
+        setIsLoading(true)
+        try {
+          const project = await getProjectBySlug(projectSlug)
+          if (project) {
+            form.reset({
+              title: project.title || "",
+              slug: project.slug || "",
+              summary: project.summary || "",
+              description: project.description || "",
+              category: project.category || "",
+              clientName: project.clientName || "",
+              thumbnailUrl: project.thumbnailUrl || "",
+              services: project.services?.map(service => ({ value: service })) || [],
+              isPublished: project.isPublished || false,
+              details: project.details?.map(detail => ({
+                label: detail.label || "",
+                description: detail.description || "",
+                images: detail.images?.map(image => ({
+                  id: crypto.randomUUID(),
+                  url: image.imageUrl || "",
+                  filename: image.altText || "",
+                })) || [],
+              })) || [],
+              testimonials: project.testimonial ? [{
+                authorName: project.testimonial.authorName || "",
+                authorRole: project.testimonial.authorRole || "",
+                authorCompany: project.testimonial.authorCompany || "",
+                feedbackText: project.testimonial.feedbackText || "",
+                statValue: project.testimonial.statValue || "",
+                statLabel: project.testimonial.statLabel || "",
+                rating: project.testimonial.rating?.toString() || "",
+              }] : [],
+            })
+          }
+        } catch (error) {
+          console.error("Error loading project:", error)
+          toast.error("Failed to load project")
+        } finally {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    loadProject()
+  }, [open, projectSlug, form])
 
   const handleAddDetail = () => {
     appendDetail({
@@ -376,18 +426,18 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
     }
 
     try {
-      const result = await createProject(payload)
+      const result = await updateProject(projectSlug, payload)
 
       if (!result.success) {
-        throw new Error(result?.error || "Failed to create project")
+        throw new Error(result?.error || "Failed to update project")
       }
 
-      toast.success("Project created successfully")
+      toast.success("Project updated successfully")
       onOpenChange(false)
       router.refresh()
     } catch (error) {
-      console.error("Project creation error:", error)
-      toast.error(error instanceof Error ? error.message : "There was a problem creating the project.")
+      console.error("Project update error:", error)
+      toast.error(error instanceof Error ? error.message : "There was a problem updating the project.")
     } finally {
       setIsSubmitting(false)
     }
@@ -395,15 +445,32 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
 
   const cropLabels = currentCropItem ? `${currentCropItem.file.name}` : ""
 
+  if (isLoading) {
+    return (
+      <Sheet open={open} onOpenChange={onOpenChange}>
+        <SheetContent className="sm:max-w-4xl overflow-y-auto p-0 gap-0">
+          <SheetTitle className="sr-only">Edit Project</SheetTitle>
+          <div className="flex h-full min-h-[calc(100vh-4rem)] flex-col items-center justify-center">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+              <p className="text-muted-foreground">Loading project...</p>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+    )
+  }
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="sm:max-w-4xl overflow-y-auto p-0 gap-0">
+        <SheetTitle className="sr-only">Edit Project</SheetTitle>
         <div className="flex h-full min-h-[calc(100vh-4rem)] flex-col">
           <div className="p-6 space-y-2">
             <SheetHeader className="space-y-2">
-              <SheetTitle className="text-2xl">Add Project</SheetTitle>
+              <div className="text-2xl font-semibold">Edit Project</div>
               <p className="text-sm text-muted-foreground">
-                Create a portfolio entry with details, images, and testimonials.
+                Update project details, images, and testimonials.
               </p>
             </SheetHeader>
           </div>
@@ -507,9 +574,7 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
                       <p className="text-sm text-muted-foreground">No services added. Click "Add service" to add services.</p>
                     )}
                   </div>
-                </div>
 
-                <div className="space-y-4">
                   <div className="space-y-2">
                     <Label>Thumbnail</Label>
                     <div className="space-y-3">
@@ -851,7 +916,7 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
                   Cancel
                 </Button>
                 <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "Creating..." : "Create project"}
+                  {isSubmitting ? "Updating..." : "Update project"}
                 </Button>
               </div>
             </form>

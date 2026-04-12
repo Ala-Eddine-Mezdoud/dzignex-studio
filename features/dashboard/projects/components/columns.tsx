@@ -16,6 +16,8 @@ import {
 import { Checkbox } from "../../components/ui/checkbox"
 import { Badge } from "../../components/ui/badge"
 import { ProjectDetailsSheet } from "./ProjectDetailsSheet"
+import { ProjectEditSheet } from "./ProjectEditSheet"
+import { ProjectDeleteDialog } from "./ProjectDeleteDialog"
 
 export type Project = {
   id: string
@@ -52,6 +54,39 @@ export const columns: ColumnDef<Project>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    accessorKey: "thumbnailUrl",
+    header: "Thumbnail",
+    cell: ({ row }) => {
+      const thumbnailUrl = row.getValue("thumbnailUrl") as string
+      const title = row.getValue("title") as string
+      
+      if (!thumbnailUrl) {
+        return (
+          <div className="w-16 h-12 rounded-lg bg-muted flex items-center justify-center">
+            <span className="text-xs text-muted-foreground">No image</span>
+          </div>
+        )
+      }
+      
+      return (
+        <div className="w-16 h-12 rounded-lg overflow-hidden bg-muted">
+          <img 
+            src={thumbnailUrl} 
+            alt={title || "Project thumbnail"} 
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none'
+              const parent = e.currentTarget.parentElement
+              if (parent) {
+                parent.innerHTML = '<span class="text-xs text-muted-foreground">Error</span>'
+              }
+            }}
+          />
+        </div>
+      )
+    },
   },
   {
     accessorKey: "title",
@@ -113,6 +148,8 @@ export const columns: ColumnDef<Project>[] = [
     cell: ({ row }) => {
       const project = row.original
       const [showDetails, setShowDetails] = useState(false)
+      const [showEdit, setShowEdit] = useState(false)
+      const [showDelete, setShowDelete] = useState(false)
 
       return (
         <>
@@ -135,12 +172,12 @@ export const columns: ColumnDef<Project>[] = [
                 <Eye className="mr-2 h-4 w-4" />
                 View Details
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setShowEdit(true)}>
                 <Edit className="mr-2 h-4 w-4" />
                 Edit Project
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive">
+              <DropdownMenuItem onClick={() => setShowDelete(true)} className="text-destructive">
                 <Trash className="mr-2 h-4 w-4" />
                 Delete Project
               </DropdownMenuItem>
@@ -151,6 +188,19 @@ export const columns: ColumnDef<Project>[] = [
             slug={project.slug}
             isOpen={showDetails}
             onOpenChange={setShowDetails}
+          />
+
+          <ProjectEditSheet
+            open={showEdit}
+            onOpenChange={setShowEdit}
+            projectSlug={project.slug}
+          />
+
+          <ProjectDeleteDialog
+            open={showDelete}
+            onOpenChange={setShowDelete}
+            projectId={project.id}
+            projectTitle={project.title}
           />
         </>
       )

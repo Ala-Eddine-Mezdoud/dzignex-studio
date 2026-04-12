@@ -33,12 +33,15 @@ import {
   SidebarMenuItem,
 } from "./ui/sidebar"
 
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  user?: {
+    name: string
+    email: string
+    avatar: string
+  }
+}
+
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "Dashboard",
@@ -80,7 +83,15 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ user, ...props }: AppSidebarProps) {
+  const defaultUser = {
+    name: "User",
+    email: "",
+    avatar: "",
+  }
+  
+  const currentUser = user ?? defaultUser
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -103,7 +114,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={currentUser} />
       </SidebarFooter>
     </Sidebar>
   )

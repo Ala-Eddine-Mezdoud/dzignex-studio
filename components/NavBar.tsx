@@ -29,16 +29,16 @@ const NavBar = () => {
 
   return (
     <div className="bg-dzignex-blue/10 h-20 font-semibold relative">
-      <div className="container mx-auto flex justify-between items-center h-full ">
+      <div className="container mx-auto flex justify-between items-center h-full px-8 sm:p-0">
         {/* Logo */}
         <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
-          <div className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 relative">
+          <div className="h-24 w-24 sm:h-28 sm:w-28 lg:h-32 lg:w-32 relative">
             <Image src={"/dzignex_logo.svg"} fill alt="Dzignex Studio home" />
           </div>
         </Link>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-6">
+        <nav className="hidden lg:flex gap-6">
           {navItems.map(({ href, label }) => (
             <Link key={href} href={href} className={linkClass(href)}>
               {label}
@@ -49,7 +49,7 @@ const NavBar = () => {
         {/* CTA */}
         <Link
           href="/contact"
-          className="hidden md:block bg-dzignex-blue text-white px-4 py-2 uppercase hover:opacity-90 transition-opacity"
+          className="hidden lg:block bg-dzignex-blue text-white px-4 py-2 uppercase hover:opacity-90 transition-opacity"
         >
           CONTACT US
         </Link>
@@ -60,7 +60,7 @@ const NavBar = () => {
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen(!open)}
-          className="md:hidden flex flex-col gap-1"
+          className="lg:hidden flex flex-col gap-1"
         >
           <span
             className={`block h-0.5 w-6 bg-white transition ${
@@ -82,7 +82,7 @@ const NavBar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`absolute top-16 left-0 w-full bg-black/95 backdrop-blur-md transition-all duration-300 overflow-hidden ${
+        className={`absolute top-16 left-0 w-full bg-black/95 backdrop-blur-lg transition-all duration-300 overflow-hidden ${
           open ? "max-h-[300px] py-6" : "max-h-0"
         }`}
       >

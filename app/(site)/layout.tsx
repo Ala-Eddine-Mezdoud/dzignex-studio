@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={` ${dmSans.className} antialiased bg-dzignex-black text-white`} >
+      <body className={[dmSans.className, "antialiased bg-dzignex-black text-white"].join(" ")}>
         <ThemeProvider
             attribute="class"
             defaultTheme="dark"

@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
+import { getUserByEmail, verifyPassword } from "./db-actions/user"
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
@@ -10,16 +11,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials) {
-                // Replace this with your actual database logic
-                const user = { id: "1", name: "Admin", email: "ala@gmail.com", password: "alaeddine" };
-
-                if (
-                    credentials?.email === user.email &&
-                    credentials?.password === user.password
-                ) {
-                    return user;
+                if (!credentials?.email || !credentials?.password) {
+                    return null;
                 }
-                return null;
+
+                const email = credentials.email as string;
+                const password = credentials.password as string;
+
+                try {
+                    const user = await getUserByEmail(email);
+                    
+                    if (!user || !user.password) {
+                        return null;
+                    }
+
+                    const isPasswordValid = await verifyPassword(password, user.password);
+                    
+                    if (!isPasswordValid) {
+                        return null;
+                    }
+
+                    return {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        role: user.role,
+                    };
+                } catch (error) {
+                    console.error("Authentication error:", error);
+                    return null;
+                }
             }
         })
     ],

@@ -6,6 +6,8 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "../../features/dashboard/components/ui/sidebar"
+import { auth } from "../../auth"
+import { redirect } from "next/navigation"
 
 import "../globals.css";
 
@@ -21,11 +23,23 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "../../components/theme-provider";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth()
+  
+  if (!session?.user) {
+    redirect("/sign-in")
+  }
+
+  const user = {
+    name: session.user.name ?? "",
+    email: session.user.email ?? "",
+    avatar: "", // Add avatar support later if available in user model
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={` ${dmSans.className} antialiased`} >
@@ -44,7 +58,7 @@ export default function RootLayout({
               } as React.CSSProperties
             }
           >
-              <AppSidebar variant="inset" />
+              <AppSidebar variant="inset" user={user} />
               <SidebarInset>
                 <SiteHeader />
                 {children}

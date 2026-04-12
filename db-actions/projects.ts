@@ -53,7 +53,7 @@ export async function getProjectBySlug(slug: string) {
 /**
  * Update a project's main information
  */
-export async function updateProject(id: string, data: Partial<typeof projects.$inferInsert>) {
+export async function updateProjectBasic(id: string, data: Partial<typeof projects.$inferInsert>) {
   try {
     await db.update(projects)
       .set(data)
@@ -65,6 +65,93 @@ export async function updateProject(id: string, data: Partial<typeof projects.$i
   } catch (error) {
     console.error(`Error updating project ${id}:`, error);
     throw new Error("Failed to update project");
+  }
+}
+
+/**
+ * Update a project with full data including details and testimonials
+ */
+export type UpdateProjectData = CreateProjectData
+
+export async function updateProject(slug: string, data: UpdateProjectData) {
+  try {
+    console.log("Updating project with data:", JSON.stringify(data, null, 2))
+    const { details, testimonials: testimonialEntries, ...projectData } = data
+
+    // First, get the existing project by slug
+    const existingProject = await getProjectBySlug(slug)
+    if (!existingProject) {
+      return { success: false, error: "Project not found" }
+    }
+
+    console.log("Project data to update:", JSON.stringify(projectData, null, 2))
+    await db.update(projects)
+      .set(projectData)
+      .where(eq(projects.id, existingProject.id))
+
+    // Handle details - delete existing and recreate
+    const existingDetailIds = existingProject.details?.map(d => d.id) || []
+    if (existingDetailIds.length > 0) {
+      await db.delete(projectDetails)
+        .where(eq(projectDetails.projectId, existingProject.id))
+    }
+
+    if (details?.length) {
+      for (const [detailIndex, detail] of details.entries()) {
+        const [createdDetail] = await db.insert(projectDetails)
+          .values({
+            projectId: existingProject.id,
+            label: detail.label,
+            description: detail.description ?? null,
+            orderIndex: detail.orderIndex ?? detailIndex,
+          })
+          .returning()
+
+        if (detail.images?.length) {
+          await db.insert(projectDetailImages).values(
+            detail.images.map((imageUrl, imageIndex) => ({
+              detailId: createdDetail.id,
+              imageUrl,
+              altText: null,
+              orderIndex: imageIndex,
+            }))
+          )
+        }
+      }
+    }
+
+    // Handle testimonials - delete existing and recreate
+    if (existingProject.testimonial) {
+      await db.delete(testimonials)
+        .where(eq(testimonials.projectId, existingProject.id))
+    }
+
+    if (testimonialEntries?.length) {
+      await db.insert(testimonials).values(
+        testimonialEntries.map((testimonial) => ({
+          projectId: existingProject.id,
+          authorName: testimonial.authorName,
+          authorRole: testimonial.authorRole ?? null,
+          authorCompany: testimonial.authorCompany ?? null,
+          feedbackText: testimonial.feedbackText,
+          statValue: testimonial.statValue ?? null,
+          statLabel: testimonial.statLabel ?? null,
+          rating: testimonial.rating ?? null,
+        }))
+      )
+    }
+
+    revalidatePath("/dashboard/projects");
+    revalidatePath("/projects");
+    return { success: true, project: existingProject }
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    console.error("Error updating project:", errorMessage)
+    console.error("Full error:", error)
+    return { 
+      success: false, 
+      error: errorMessage
+    }
   }
 }
 

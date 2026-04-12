@@ -41,22 +41,22 @@ const Approach = () => {
 
   return (
     <div className="border-b-2 border-dzignex-white/15">
-      <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 py-16 md:py-24 lg:py-32 px-5 sm:px-8 md:px-10 lg:px-16">
+      <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 py-16 lg:py-24 lg:py-32 px-5 sm:px-8 lg:px-10 lg:px-16">
 
         {/* Section Header */}
-        <div className="flex flex-col gap-3 md:grid md:grid-cols-6">
-          <p className="md:col-span-2 text-dzignex-blue font-bold text-base md:text-xl lg:text-2xl tracking-tight uppercase">
+        <div className="flex flex-col gap-3 lg:grid lg:grid-cols-6">
+          <p className="lg:col-span-2 text-dzignex-blue font-bold text-base lg:text-xl lg:text-2xl tracking-tight uppercase">
             [Our Approach]
           </p>
-          <div className="md:col-span-4">
+          <div className="lg:col-span-4">
 
           </div>
         </div>
 
-        <div className="mt-10 md:mt-16 relative md:grid md:grid-cols-6">
+        <div className="mt-10 lg:mt-16 relative lg:grid lg:grid-cols-6">
 
-          {/* Sticky Sidebar — md and up only */}
-          <div className="hidden md:block md:col-span-2 sticky top-10 self-start mt-16">
+          {/* Sticky Sidebar — lg and up only */}
+          <div className="hidden lg:block lg:col-span-2 sticky top-10 self-start mt-16">
             <ul className="flex flex-col gap-2">
               {projects.map(({ id, number }) => (
                 <li
@@ -74,7 +74,7 @@ const Approach = () => {
           </div>
 
           {/* Cards */}
-          <div className="md:col-span-4 flex flex-col gap-8 md:gap-0">
+          <div className="lg:col-span-4 flex flex-col gap-8 lg:gap-0">
             {projects.map(({ id, title, description }) => (
               <div
                 key={id}
@@ -86,11 +86,11 @@ const Approach = () => {
 
                 {/* Card Info */}
                 <div className="">
-                  <p className="text-dzignex-white text-lg sm:text-xl md:text-2xl uppercase font-bold tracking-tighter shrink-0">
+                  <p className="text-dzignex-white text-lg sm:text-xl lg:text-2xl uppercase font-bold tracking-tighter shrink-0">
                     {title}
                   </p>
                   <div className="mt-4">
-                    <p className="text-dzignex-white/80 text-sm md:text-base leading-relaxed">{description}</p>
+                    <p className="text-dzignex-white/80 text-sm lg:text-base leading-relaxed">{description}</p>
                   </div>
                 </div>
               </div>

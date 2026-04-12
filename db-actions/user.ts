@@ -94,3 +94,29 @@ export async function deleteUser(id: string) {
     throw new Error("Failed to delete user")
   }
 }
+
+/**
+ * Get user by email for authentication
+ */
+export async function getUserByEmail(email: string) {
+  try {
+    return await db.query.users.findFirst({
+      where: eq(users.email, email),
+    })
+  } catch (error) {
+    console.error(`Error fetching user by email ${email}:`, error)
+    throw new Error("Failed to fetch user")
+  }
+}
+
+/**
+ * Verify password against hash
+ */
+export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
+  try {
+    return await bcrypt.compare(password, hashedPassword)
+  } catch (error) {
+    console.error("Error verifying password:", error)
+    return false
+  }
+}

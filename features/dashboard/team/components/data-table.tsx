@@ -28,9 +28,10 @@ import { DataTableToolbar } from "./data-table-toolbar"
 
 interface DataTableProps {
   data: User[]
+  onInviteClick?: () => void
 }
 
-export function DataTable({ data }: DataTableProps) {
+export function DataTable({ data, onInviteClick }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -60,7 +61,7 @@ export function DataTable({ data }: DataTableProps) {
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} onInviteClick={onInviteClick} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
