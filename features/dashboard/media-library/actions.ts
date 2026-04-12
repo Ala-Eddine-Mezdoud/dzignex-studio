@@ -1,4 +1,4 @@
-w"use server"
+"use server"
 
 import { DeleteObjectsCommand, DeleteObjectCommand, ListObjectsV2Command, PutObjectCommand, type ListObjectsV2CommandOutput } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
