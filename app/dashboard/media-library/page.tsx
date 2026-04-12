@@ -1,6 +1,6 @@
 
 
-import { listMedia } from "../../../features/dashboard/media-library/actions"
+import { listMedia } from "../../../features/dashboard/media-library/actions/list-media"
 import { MediaLibraryClient } from "../../../features/dashboard/media-library/components"
 
 

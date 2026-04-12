@@ -1,8 +1,6 @@
-import { signIn } from "../../../../auth"
-import { AuthError } from "next-auth"
-import { redirect } from "next/navigation"
 import { cn } from "../../../../lib/utils"
 import { Button } from "../../../../components/ui/button"
+import { loginWithCredentials } from "../actions"
 import {
   Field,
   FieldGroup,
@@ -54,27 +52,7 @@ export function LoginForm({
   const successMessage = getSuccessMessage(message)
 
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}
-              action={async (formData) => {
-            "use server"
-            try {
-              const submitData = Object.fromEntries(formData);
-              await signIn("credentials", { ...submitData, redirectTo: "/dashboard" })
-            } catch (error) {
-              if (error instanceof AuthError) {
-                // Check for banned user error code
-                if ((error as any).code === "BannedUser") {
-                  redirect("/sign-in?error=BannedUser")
-                }
-                if (error.type === "CredentialsSignin") {
-                   redirect("/sign-in?error=InvalidCredentials")
-                }
-              }
-              // Always rethrow so Next.js successful redirects (NEXT_REDIRECT) are handled
-              throw error
-            }
-        }}
-    >
+    <form className={cn("flex flex-col gap-6", className)} {...props} action={loginWithCredentials}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Login to your account</h1>

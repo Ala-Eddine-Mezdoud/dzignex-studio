@@ -29,7 +29,8 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "
 import { Plus, Trash2, ImagePlus, Upload, Quote } from "lucide-react"
 import ReactCrop, { type Crop, type PixelCrop } from "react-image-crop"
 import { toast } from "sonner"
-import { getProjectUploadPresignedUrl, createProject } from "../../../../db-actions/projects"
+import { createProject } from "../actions/create-project"
+import { getProjectUploadPresignedUrl } from "../actions/get-project-upload-presigned-url"
 
 interface ProjectCreateSheetProps {
   open: boolean

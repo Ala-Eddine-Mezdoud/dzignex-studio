@@ -16,7 +16,7 @@ import { Textarea } from "../../../components/ui/textarea"
 import { Label } from "../../../components/ui/label"
 import { useState } from "react"
 import { toast } from "sonner"
-import { submitContactForm } from "../actions"
+import { submitContactForm } from "../actions/submit-contact-form"
 
 const contactFormSchema = z.object({
   fullName: z.string().min(2, {

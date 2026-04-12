@@ -3,7 +3,12 @@
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react"
 import { toast } from "sonner"
 
-import { listMedia, getUploadPresignedUrl, createFolder, deleteMultipleMedia, deleteMedia, getStorageUsage } from "../actions"
+import { listMedia } from "../actions/list-media"
+import { getUploadPresignedUrl } from "../actions/get-upload-presigned-url"
+import { createFolder } from "../actions/create-folder"
+import { deleteMultipleMedia } from "../actions/delete-multiple-media"
+import { deleteMedia } from "../actions/delete-media"
+import { getStorageUsage } from "../actions/get-storage-usage"
 import { hasAllowedFileType, MAX_FILE_SIZE, MediaFile, MediaFolder, MediaItem, UploadingFile, ViewMode, formatFileSize } from "../types"
 import { MediaToolbar } from "./media-toolbar"
 import { MediaGrid } from "./media-grid"

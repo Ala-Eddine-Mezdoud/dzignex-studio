@@ -16,7 +16,9 @@ import { Camera, Loader2, User } from "lucide-react"
 import { toast } from "sonner"
 import ReactCrop, { type Crop, type PixelCrop } from "react-image-crop"
 import "react-image-crop/dist/ReactCrop.css"
-import { updateCurrentUser, updateUserAvatar, getAvatarUploadUrl } from "../actions"
+import { updateCurrentUser } from "../actions/update-current-user"
+import { updateUserAvatar } from "../actions/update-user-avatar"
+import { getAvatarUploadUrl } from "../actions/get-avatar-upload-url"
 
 const profileSchema = z.object({
   name: z.string().min(1, "Name is required"),

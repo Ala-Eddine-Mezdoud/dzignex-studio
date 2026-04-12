@@ -1,6 +1,6 @@
 import { auth, signOut } from "../../../auth"
 import { redirect } from "next/navigation"
-import { getCurrentUser } from "../../../features/dashboard/account/actions"
+import { getCurrentUser } from "../../../features/dashboard/account/actions/get-current-user"
 import { AccountForm } from "../../../features/dashboard/account/components/account-form"
 import { Metadata } from "next"
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState, type FormEvent } from "react"
+import { useEffect, useRef,useState } from "react"
 import { useRouter } from "next/navigation"
 import { useForm, useFieldArray } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -29,7 +29,9 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "
 import { Plus, Trash2, ImagePlus, Upload, Quote } from "lucide-react"
 import ReactCrop, { type Crop, type PixelCrop } from "react-image-crop"
 import { toast } from "sonner"
-import { getProjectUploadPresignedUrl, getProjectBySlug, updateProject } from "../../../../db-actions/projects"
+import { getProjectUploadPresignedUrl } from "../actions/get-project-upload-presigned-url"
+import { getProjectBySlug } from "../actions/get-project-by-slug"
+import { updateProject } from "../actions/update-project"
 
 interface ProjectEditSheetProps {
   open: boolean

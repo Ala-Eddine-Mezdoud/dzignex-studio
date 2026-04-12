@@ -13,7 +13,7 @@ import {
 } from "../../../../components/ui/dialog"
 import { AlertTriangle } from "lucide-react"
 import { toast } from "sonner"
-import { deleteProject } from "../../../../db-actions/projects"
+import { deleteProject } from "../actions/delete-project"
 
 interface ProjectDeleteDialogProps {
   open: boolean
