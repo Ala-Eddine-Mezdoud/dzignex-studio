@@ -3,6 +3,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from 'lucide-react';
+
 
 const servicesData = [
   {
@@ -114,8 +116,8 @@ const Services = () => {
                   <p className="text-dzignex-white text-xl lg:text-2xl uppercase font-bold group-hover:text-dzignex-blue transition-colors duration-300">
                     {service.title}
                   </p>
-                  <button className={`${activeIndex === index ? 'text-dzignex-blue' : 'text-dzignex-white'} uppercase font-bold tracking-widest text-xs lg:text-sm hover:underline transition-all`}>
-                    {activeIndex === index ? 'Close details' : 'View details'}
+                  <button className={`${activeIndex === index ? 'text-dzignex-blue' : 'text-dzignex-white'} flex items-end gap-1 uppercase font-bold tracking-widest text-xs lg:text-sm hover:underline transition-all`}>
+                     {activeIndex === index ? <ArrowUpRight className="transition-transform duration-300 rotate-90 group-hover:translate-x-1 group-hover:-translate-y-[2px]" size={30}/> : <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]" size={30} />} 
                   </button>
                 </div>
               </div>

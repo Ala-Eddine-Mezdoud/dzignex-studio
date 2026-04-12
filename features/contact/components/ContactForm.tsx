@@ -1,5 +1,5 @@
 "use client"
-
+import { ArrowUpRight } from 'lucide-react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -233,13 +233,13 @@ const ContactForm = () => {
         />
       </div>
 
-      <Button
+      <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full md:w-auto bg-dzignex-white text-dzignex-black hover:bg-dzignex-blue hover:text-white px-12 py-6 rounded-none uppercase font-bold text-lg transition-all"
+        className="w-full group md:w-auto flex gap-1 bg-dzignex-white text-dzignex-black hover:bg-dzignex-blue hover:text-white px-4 py-2 rounded-none uppercase font-bold text-lg transition-all"
       >
-        {isSubmitting ? "Sending..." : "Send Message"}
-      </Button>
+        {isSubmitting ? "Sending..." : "Send Message"} <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"  size={30} />
+      </button>
     </form>
   )
 }

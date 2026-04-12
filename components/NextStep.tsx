@@ -1,3 +1,5 @@
+import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 
 
 const NextStep = () => {
@@ -19,7 +21,9 @@ const NextStep = () => {
             <p className="text-dzignex-white/80 tracking-[0.005em] font-medium text-base md:text-lg max-w-xl">Your brand deserves more than just a logo, it needs a story, a look, and a strategy. We’ll guide you every step of the way.</p>
           </div>
 
-          <button className="bg-dzignex-white text-dzignex-black px-6 py-3 md:px-4 md:py-2 text-lg md:text-xl font-semibold tracking-tight uppercase mt-6 md:mt-8 w-full md:w-auto">Book Free Consultation</button>
+          <Link href={"/contact"} >
+          <button className="bg-dzignex-white text-dzignex-black px-6 py-3 md:px-4 md:py-2 text-lg md:text-xl font-semibold tracking-tight uppercase mt-6 md:mt-8 w-full md:w-auto flex gap-1 items-end group">Book Free Consultation <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]" size={30} /> </button>
+          </Link>
         </div>
 
 

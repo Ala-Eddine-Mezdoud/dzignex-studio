@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from "react";
+import { ArrowUpRight } from 'lucide-react';
 import Link from "next/link";
 
 interface Project {
@@ -85,13 +86,13 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
           </div>
 
           {/* Project Cards */}
-          <div className="lg:col-span-4 flex flex-col gap-8 lg:gap-0">
+          <div className=" lg:col-span-4 flex flex-col gap-8 lg:gap-0">
             {initialProjects.map((project) => (
               <Link key={project.id} href={`/projects/${project.slug}`} className="block w-full">
                 <div
                   id={project.id}
                   ref={(el) => { projectRefs.current[project.id] = el; }}
-                className="w-full border border-dzignex-white/15"
+                className="w-full border border-dzignex-white/15 group"
                 >
                   {/* Card Image */}
                   <div className="w-full aspect-video relative overflow-hidden bg-dzignex-blue/5">
@@ -115,9 +116,14 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
                       <p className="text-dzignex-white/80 text-sm lg:text-base leading-relaxed">
                         {project.summary || "Case study detailing our process and visual identity solutions."}
                       </p>
-                      <div className="border-t border-dzignex-white/70 pt-4 mt-1">
+                      <div className="border-t border-dzignex-white/70 pt-4 mt-1 flex justify-between items-end">
+                      <div>
                         <p className="text-dzignex-white font-bold text-lg">Service:</p>
                         <p className="text-dzignex-white text-sm uppercase tracking-widest">{project.category || "Multidisciplinary Design"}</p>
+                      </div>
+                      <ArrowUpRight size={30}
+      className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"
+                       />
                       </div>
                     </div>
                   </div>
@@ -125,9 +131,12 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
               </Link>
             ))}
 
-            <div className="flex justify-end mt-4 lg:mt-8">
-              <Link href="/projects" className="bg-dzignex-white text-dzignex-black px-6 py-3 text-sm lg:text-base lg:text-xl font-bold tracking-tight uppercase w-full lg:w-fit text-center hover:bg-dzignex-blue hover:text-white transition-all">
-                View All Projects
+            <div className="flex justify-end mt-4 lg:mt-8 group">
+              <Link href="/projects" className="bg-dzignex-white text-dzignex-black flex gap-1 items-end px-6 py-3 text-sm lg:text-base lg:text-xl font-bold tracking-tight uppercase w-full lg:w-fit text-center hover:bg-dzignex-blue hover:text-white transition-all">
+                View All Projects <ArrowUpRight size={30} 
+      className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"
+
+/>
               </Link>
             </div>
           </div>

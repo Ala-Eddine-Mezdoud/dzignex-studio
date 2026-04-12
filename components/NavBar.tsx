@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cn } from "../lib/utils";
+import { ArrowUpRight } from 'lucide-react';
+
 
 const navItems = [
   { href: "/", label: "HOME" },
@@ -49,9 +51,11 @@ const NavBar = () => {
         {/* CTA */}
         <Link
           href="/contact"
-          className="hidden lg:block bg-dzignex-blue text-white px-4 py-2 uppercase hover:opacity-90 transition-opacity"
+          className="group hidden lg:flex gap-1 items-end bg-dzignex-blue text-white px-4 py-2 uppercase hover:opacity-90 transition-opacity"
         >
-          CONTACT US
+          CONTACT US <ArrowUpRight size={26} 
+            className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"
+           />
         </Link>
 
         {/* Hamburger */}

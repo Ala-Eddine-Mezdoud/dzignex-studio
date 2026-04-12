@@ -1,3 +1,6 @@
+import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
+
 const Landing = () => {
   return (
     <div className="border-b-2 border-dzignex-white/15">
@@ -26,9 +29,17 @@ const Landing = () => {
             A strategic studio crafting brand systems and digital design that elevate perception and support long-term growth.
           </p>
 
-          <button className="bg-dzignex-white text-dzignex-black px-4 py-2 text-base lg:text-xl font-semibold tracking-tight uppercase mt-8 md:mt-12">
-            Book Free Consultation
-          </button>
+          <Link href={"/contact"} >
+            <div className='flex gap-1 justify-center'>
+              <button className="group bg-dzignex-white text-dzignex-black flex gap-1 items-end px-4 py-2 text-base lg:text-xl font-semibold tracking-tight uppercase mt-8 md:mt-12">
+                Book Free Consultation
+                <ArrowUpRight
+                  size={30}
+                  className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"
+                />
+              </button>
+            </div>
+          </Link>
         </div>
 
       </div>

@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { ArrowUpRight } from 'lucide-react';
+
 
 interface Project {
   id: string;
@@ -50,26 +52,26 @@ const Latest = ({ projects }: LatestProps) => {
 
   return (
     <div className="border-b-2 border-dzignex-white/15">
-      <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 py-16 md:py-24 lg:py-32 px-5 sm:px-8 md:px-10 lg:px-16">
+      <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 py-16 lg:py-32 px-5 sm:px-8 lg:px-16">
 
         {/* Section Header */}
-        <div className="flex flex-col gap-3 md:grid md:grid-cols-6">
-          <p className="md:col-span-2 text-dzignex-blue font-bold text-base md:text-xl lg:text-2xl tracking-tight uppercase">
-            [More Projects]
+        <div className="flex flex-col gap-3 lg:grid lg:grid-cols-6">
+          <p className="lg:col-span-2 text-dzignex-blue font-bold text-base lg:text-2xl tracking-tight uppercase">
+            [Our Projects]
           </p>
-          <div className="md:col-span-4">
+          <div className="lg:col-span-4">
             <p className="text-dzignex-white tracking-tighter text-2xl sm:text-3xl lg:text-4xl font-medium">
-              Discover our latest work and see how we help brands stand out.
+              Work we've built with real clients, real constraints, and real results.
             </p>
           </div>
         </div>
 
-        <div className="mt-10 md:mt-16 relative md:grid md:grid-cols-6">
+        <div className="mt-10 lg:mt-16 relative lg:grid lg:grid-cols-6">
 
-          {/* Sticky Sidebar — md and up only */}
-          <div className="hidden md:block md:col-span-2 sticky top-10 self-start">
+          {/* Sticky Sidebar — lg and up only */}
+          <div className="hidden lg:block lg:col-span-2 sticky top-10 self-start">
             <ul className="flex flex-col gap-2">
-              {projects.map((project) => (
+              {projects.map((project, index) => (
                 <li
                   key={project.id}
                   className={`uppercase font-bold transition-all duration-300 ${
@@ -85,7 +87,7 @@ const Latest = ({ projects }: LatestProps) => {
           </div>
 
           {/* Project Cards */}
-          <div className="md:col-span-4 flex flex-col gap-8 md:gap-0">
+          <div className="lg:col-span-4 flex flex-col gap-8 lg:gap-0">
             {projects.map((project) => (
               <Link key={project.id} href={`/projects/${project.slug}`} className="block w-full">
                 <div
@@ -99,7 +101,7 @@ const Latest = ({ projects }: LatestProps) => {
                       <img 
                         src={project.thumbnailUrl} 
                         alt={project.title}
-                        className="w-full h-full object-cover "
+                        className="w-full h-full object-cover transition-all duration-700"
                       />
                     ) : (
                       <div className="bg-dzignex-blue/15 w-full h-full" />
@@ -107,17 +109,20 @@ const Latest = ({ projects }: LatestProps) => {
                   </div>
 
                   {/* Card Info */}
-                  <div className="p-4 md:p-5 flex flex-col sm:flex-row justify-between gap-4 md:gap-16">
-                    <p className="text-dzignex-blue text-lg sm:text-xl md:text-2xl uppercase font-bold tracking-tighter shrink-0">
+                  <div className="p-4 lg:p-5 grid grid-cols-3 justify-between gap-4 lg:gap-16">
+                    <p className="text-dzignex-blue text-lg sm:text-xl lg:text-2xl uppercase font-bold tracking-tighter shrink-0 col-span-1">
                       {project.title}
                     </p>
-                    <div className="flex flex-col justify-between gap-4">
-                      <p className="text-dzignex-white/80 text-sm md:text-base leading-relaxed">
+                    <div className="flex flex-col justify-between gap-4 col-span-2">
+                      <p className="text-dzignex-white/80 text-sm lg:text-base leading-relaxed">
                         {project.summary || "Case study detailing our process and visual identity solutions."}
                       </p>
-                      <div className="border-t border-dzignex-white/70 pt-4 mt-1">
+                      <div className="border-t border-dzignex-white/70 pt-4 mt-1 flex justify-between items-end">
+                      <div>
                         <p className="text-dzignex-white font-bold text-lg">Service:</p>
                         <p className="text-dzignex-white text-sm uppercase tracking-widest">{project.category || "Multidisciplinary Design"}</p>
+                      </div>
+                      <ArrowUpRight size={30} />
                       </div>
                     </div>
                   </div>
@@ -125,17 +130,13 @@ const Latest = ({ projects }: LatestProps) => {
               </Link>
             ))}
 
-            <div className="flex justify-end mt-4 md:mt-8">
-              <Link href="/projects" className="bg-dzignex-white text-dzignex-black px-6 py-3 text-sm md:text-base lg:text-lg font-bold tracking-tight uppercase w-full md:w-fit text-center hover:bg-dzignex-blue hover:text-white transition-all">
-                View All Projects
-              </Link>
-            </div>
           </div>
 
         </div>
       </div>
     </div>
   );
+  
 };
 
 export default Latest;

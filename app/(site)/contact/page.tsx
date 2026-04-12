@@ -55,7 +55,7 @@ const Page = () => {
                       <a
                         href={href}
                         aria-label={label}
-                        className="border-2 border-dzignex-white/20 h-14 w-14 flex items-center justify-center text-dzignex-white hover:border-dzignex-blue hover:text-dzignex-blue transition-all"
+                        className="border-2 border-dzignex-white/20 h-14 w-14 flex items-center justify-center text-dzignex-white "
                       >
                         <Icon className="size-6" aria-hidden />
                       </a>

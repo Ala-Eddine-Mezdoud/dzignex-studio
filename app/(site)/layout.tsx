@@ -24,6 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -43,7 +44,7 @@ export default function RootLayout({
           >
           <NavBar />
           {children}
-          <NextStep />
+           <NextStep />
           <Footer />
           <Toaster />
           <SupportChat />

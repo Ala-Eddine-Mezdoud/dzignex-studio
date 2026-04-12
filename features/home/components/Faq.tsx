@@ -3,6 +3,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from 'lucide-react';
+
 
 const faqData = [
   {
@@ -77,10 +79,10 @@ const Faq = () => {
                   </p>
                   <motion.button 
                     className="text-dzignex-white uppercase text-2xl lg:text-4xl flex items-center justify-center pointer-events-none shrink-0"
-                    animate={{ rotate: activeIndex === index ? 45 : 0, color: activeIndex === index ? "var(--dzignex-blue)" : "rgba(255, 255, 255, 1)" }}
+                    animate={{ rotate: activeIndex === index ? 90 : 0, color: activeIndex === index ? "var(--dzignex-blue)" : "rgba(255, 255, 255, 1)" }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                   >
-                    +
+                    <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]" size={30} />
                   </motion.button>
                 </div>
               </div>
