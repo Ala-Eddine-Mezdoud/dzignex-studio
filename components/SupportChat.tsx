@@ -19,9 +19,8 @@ export default function SupportChat() {
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const chatCardRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = useCallback(() => {
@@ -42,8 +41,8 @@ export default function SupportChat() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        chatCardRef.current &&
-        !chatCardRef.current.contains(event.target as Node) &&
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node) &&
         isOpen
       ) {
         setIsOpen(false);
@@ -78,16 +77,18 @@ export default function SupportChat() {
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsTyping(true);
-    setError(null);
 
     try {
+      const allMessages = [...messages, userMessage];
+      const firstUserIdx = allMessages.findIndex((m) => m.role === "user");
+      const sanitizedMessages = firstUserIdx === -1 ? allMessages : allMessages.slice(firstUserIdx);
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          messages: [...messages, userMessage],
+          messages: sanitizedMessages,
         }),
       });
 
@@ -104,7 +105,6 @@ export default function SupportChat() {
       }
     } catch (err) {
       console.error("Chat error:", err);
-      setError("Sorry, I'm having trouble connecting. Please try again later.");
       setMessages((prev) => [
         ...prev,
         {
@@ -126,17 +126,13 @@ export default function SupportChat() {
 
   const toggleChat = () => {
     setIsOpen((prev) => !prev);
-    if (!isOpen) {
-      setError(null);
-    }
   };
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+    <div ref={containerRef} className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            ref={chatCardRef}
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -243,7 +239,7 @@ export default function SupportChat() {
         onClick={toggleChat}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="w-14 h-14 rounded-full bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 shadow-lg flex items-center justify-center text-white transition-colors"
+        className="w-14 h-14 rounded-full bg-dzignex-blue hover:bg-dzignex-blue/80 border border-zinc-800 shadow-lg flex items-center justify-center text-white transition-colors"
         aria-label={isOpen ? "Close chat" : "Open chat"}
       >
         <AnimatePresence mode="wait">
