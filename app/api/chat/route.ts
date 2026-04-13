@@ -253,9 +253,6 @@ export async function POST(req: NextRequest) {
     if (!messages?.length) {
       return NextResponse.json({ error: "No messages provided" }, { status: 400 });
     }
-    // Add this right after the messages check
-    console.log("API KEY present:", !!process.env.GEMINI_API_KEY);
-    console.log("Messages received:", JSON.stringify(messages, null, 2));
 
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
