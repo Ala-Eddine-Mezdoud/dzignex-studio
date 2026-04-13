@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import {
+  SiBehance,
   SiFacebook,
   SiInstagram,
   SiLinkedin,
@@ -72,12 +73,21 @@ const Footer = () => {
                 {/* Social Media Icons */}
                 <div className="lg:mb-0 order-2 lg:order-1 mt-6 lg:mt-0">
                   <ul className="flex flex-wrap gap-2">
-                    {socialLinks.map(({ icon: Icon, label, href }) => (
+                    {[
+                      { icon: SiX, label: "X", href: "https://x.com/dzignexstudio" },
+                      { icon: SiLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/dzignexstudio/" },
+                      { icon: SiYoutube, label: "YouTube", href: "http://youtube.com/@Dzignex_lab" },
+                      { icon: SiInstagram, label: "Instagram", href: "https://www.instagram.com/dzignexstudio" },
+                      { icon: SiTiktok, label: "TikTok", href: "https://www.tiktok.com/@dzignex.studio_" },
+                      { icon: SiBehance, label: "Behance", href: "https://www.behance.net/dzignexstudio" },
+                    ].map(({ icon: Icon, label, href }) => (
                       <li key={label}>
                         <a
                           href={href}
                           aria-label={label}
                           className="border-2 border-dzignex-white h-10 w-10 lg:h-12 lg:w-12 flex items-center justify-center text-dzignex-white hover:opacity-80 transition-opacity"
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
                           <Icon className="size-5 lg:size-6" aria-hidden />
                         </a>

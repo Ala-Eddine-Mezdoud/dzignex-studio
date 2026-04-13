@@ -11,7 +11,7 @@ const Stats = () => {
               5<span className="text-dzignex-blue">+</span>
             </p>
             <p className="font-medium text-base sm:text-lg lg:text-xl mt-4 lg:mt-8 max-w-xs tracking-tighter">
-              Years of experience in creative industry
+              Deep experience across diverse industries
             </p>
           </div>
 
@@ -20,7 +20,7 @@ const Stats = () => {
               100<span className="text-dzignex-blue">+</span>
             </p>
             <p className="font-medium text-base sm:text-lg lg:text-xl mt-4 lg:mt-8 max-w-xs tracking-tighter">
-              Successful projects completed
+              From cosmetics, pharma to SaaS and event branding
             </p>
           </div>
 
@@ -29,7 +29,7 @@ const Stats = () => {
               50<span className="text-dzignex-blue">+</span>
             </p>
             <p className="font-medium text-base sm:text-lg lg:text-xl mt-4 lg:mt-8 max-w-xs tracking-tighter">
-              Happy clients
+              Partners who trust our work
             </p>
           </div>
 
@@ -38,7 +38,7 @@ const Stats = () => {
               97<span className="text-dzignex-blue">%</span>
             </p>
             <p className="font-medium text-base sm:text-lg lg:text-xl mt-4 lg:mt-8 tracking-tighter">
-              Customer <br className="hidden sm:block" /> Satisfaction rate
+              Delivering beyond expectations
             </p>
           </div>
 

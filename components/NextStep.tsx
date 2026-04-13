@@ -1,8 +1,13 @@
+"use client";
+
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
-
+import { usePathname } from 'next/navigation';
 
 const NextStep = () => {
+  const pathname = usePathname();
+
+  if (pathname === '/contact') return null;
 
   return (
     <div className="border-b-2 border-dzignex-white/15">
@@ -14,9 +19,9 @@ const NextStep = () => {
           </p>
 
           {/* Content */}
-          <div className="flex flex-col gap-6 md:gap-8">
-            <p className="text-dzignex-white tracking-tighter text-3xl md:text-4xl font-medium leading-tight">
-              Let’s Build the Brand You Imagine
+          <div className="flex flex-col gap-6 md:gap-8 items-center">
+            <p className="text-dzignex-white max-w-3xl tracking-tighter text-3xl md:text-4xl font-medium leading-tight">
+              Now you know how and what we do Imagine what we can build together
             </p>
             <p className="text-dzignex-white/80 tracking-[0.005em] font-medium text-base md:text-lg max-w-xl">Your brand deserves more than just a logo, it needs a story, a look, and a strategy. We’ll guide you every step of the way.</p>
           </div>

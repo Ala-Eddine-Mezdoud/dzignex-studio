@@ -23,7 +23,10 @@ import {
   MailOpen,
   Tag,
   AlertTriangle,
-  Flag
+  Flag,
+  Wallet,
+  Target,
+  AlertCircle
 } from "lucide-react"
 
 import {
@@ -57,6 +60,9 @@ interface Message {
   industry: string
   serviceRequired: string
   websiteOrInstagram: string | null
+  budgetRange: string | null
+  challenges: string | null
+  mainGoal: string | null
   message: string | null
   status: "UNREAD" | "READ" | "REPLIED"
   label: "important" | "normal" | "scam" | null
@@ -231,14 +237,52 @@ export function MessageDisplay({ message, onDelete, onMarkAsUnread, onUpdateLabe
                   <Globe className="h-4 w-4 text-dzignex-blue" />
                   <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Online Presence</span>
                 </div>
-                <a 
+                <a
                   href={message.websiteOrInstagram.startsWith('http') ? message.websiteOrInstagram : `https://${message.websiteOrInstagram}`}
-                  target="_blank" 
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-dzignex-blue hover:underline break-all"
                 >
                   {message.websiteOrInstagram}
                 </a>
+              </div>
+            )}
+
+            {message.budgetRange && (
+              <div className="rounded-lg border bg-card p-3 shadow-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <Wallet className="h-4 w-4 text-dzignex-blue" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Budget Range</span>
+                </div>
+                <p className="text-sm font-semibold">{message.budgetRange}</p>
+              </div>
+            )}
+
+            {message.challenges && (
+              <div className="rounded-lg border bg-card p-3 shadow-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <AlertCircle className="h-4 w-4 text-dzignex-blue" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Current Challenges</span>
+                </div>
+                <ul className="text-sm space-y-1">
+                  {message.challenges.split(", ").map((challenge, idx) => (
+                    <li key={idx} className="text-muted-foreground">• {challenge}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {message.mainGoal && (
+              <div className="rounded-lg border bg-card p-3 shadow-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <Target className="h-4 w-4 text-dzignex-blue" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Main Goals (3 months)</span>
+                </div>
+                <ul className="text-sm space-y-1">
+                  {message.mainGoal.split(", ").map((goal, idx) => (
+                    <li key={idx} className="text-muted-foreground">• {goal}</li>
+                  ))}
+                </ul>
               </div>
             )}
           </div>

@@ -3,11 +3,11 @@
 import { useState } from "react"
 
 const values = [
-  { number: "01", title: "Specialized Expertise", description: "Our team brings senior-level skills across Branding, Packaging, Editing and UI/UX Diverse backgrounds merge into one unified creative vision." },
-  { number: "02", title: "Clear Process", description: " Our team brings senior-level skills across Branding, Packaging, Editing and UI/UX Diverse backgrounds merge into one unified creative vision." },
-  { number: "03", title: "Real Collaboration", description: " Our team brings senior-level skills across Branding, Packaging, Editing and UI/UX Diverse backgrounds merge into one unified creative vision." },
-  { number: "04", title: "Built to Scale", description: "Our team brings senior-level skills across Branding, Packaging, Editing and UI/UX Diverse backgrounds merge into one unified creative vision. " },
-  { number: "05", title: "Honest Work", description: " Our team brings senior-level skills across Branding, Packaging, Editing and UI/UX Diverse backgrounds merge into one unified creative vision." },
+  { number: "01", title: "Specialized Expertise", description: "Senior-level skills across Branding, Packaging, Motion, and UI/UX. Different backgrounds, one unified creative vision." },
+  { number: "02", title: "Free Consultation", description: "Before anything starts — no cost, no commitment. We align on goals, scope, and expectations so there are zero surprises." },
+  { number: "03", title: "Strategic Thinking", description: "We don't jump straight into design. We start with analysis. Understanding your business objective is how we build solutions that actually support real outcomes." },
+  { number: "04", title: "Scalable Systems", description: "We build design systems that stay consistent and adapt as you grow — across platforms, products, and whatever comes next." },
+  { number: "05", title: "Integrated Ecosystem Design", description: "Design, content, and digital experience built as one connected system — not isolated deliverables. Everything points toward your business objectives." },
 ]
 
 const Values = () => {
@@ -27,7 +27,7 @@ const Values = () => {
           {/* Content */}
           <div className="lg:col-span-4 flex flex-col gap-6 lg:gap-8 w-full">
             <p className="text-dzignex-white tracking-tighter text-2xl sm:text-3xl lg:text-4xl font-medium leading-tight">
-              A proven process that delivers results, not surprises.
+              At Dzignex, every project starts with a question: “How can we make this unforgettable?”.
             </p>
 
             {/* Mobile & Tablet: vertical stacked cards */}

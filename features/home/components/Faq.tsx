@@ -10,27 +10,32 @@ const faqData = [
   {
     id: "01",
     question: "How many revision rounds do I get?",
-    answer: "You have between 1 to 3 revisions, depending on the project. Additional revisions can be added at an agreed extra cost."
+    answer: "Between 1 to 3 revisions, depending on the project. Additional revisions can be added at an agreed extra cost."
   },
   {
     id: "02",
-    question: "What is your typical turnaround time?",
-    answer: "Most projects take between 2 to 6 weeks, depending on the complexity and scope. Large scale applications may take longer."
+    question: "How does the payment work?",
+    answer: "Payments are made in two parts: 50% upfront and 50% upon project completion."
   },
   {
     id: "03",
-    question: "How do we handle intellectual property?",
-    answer: "Full ownership of the final design and code is transferred to you upon final payment, ensuring you have total control."
+    question: "Which file formats will I receive with my logo?",
+    answer: "You will receive your logo in PNG, JPEG, and PDF formats. Other formats (AI, PSD, or Figma) can be provided upon request. [Source files will be billed separately.]"
   },
   {
     id: "04",
-    question: "Do you offer maintenance after launch?",
-    answer: "Yes, we provide monthly maintenance packages to ensure your application remains secure, up-to-date, and performant."
+    question: "How long does a project usually take?",
+    answer: "Timelines depend on the project type, but most branding and design projects take 2–6 weeks. Larger projects like full websites may take longer."
   },
   {
     id: "05",
-    question: "Can you work with my existing branding?",
-    answer: "Absolutely! We can seamlessly integrate your current brand identity or help you evolve it into something refreshed and modern."
+    question: "Do you offer support after the project is finished?",
+    answer: "YES ! We are always here to help with anything you need after delivery."
+  },
+  {
+    id: "06",
+    question: "Can you help me with naming or brand strategy?",
+    answer: "Yes, we can assist with naming, positioning, and strategy to build a strong foundation for your brand."
   }
 ];
 

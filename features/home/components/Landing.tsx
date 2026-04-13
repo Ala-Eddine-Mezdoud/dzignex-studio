@@ -19,14 +19,13 @@ const Landing = () => {
         {/* Hero Content */}
         <div className="max-w-5xl mx-auto text-center mt-6 md:mt-8">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase font-bold tracking-tighter">
-            Building memorable brands
-            & digital experiences that
+      We Don’t Just Design, We Build Brands That Scale 
             <br className="hidden sm:block" />
-            <span className="text-dzignex-blue"> [grow businesses]</span>
+            <span className="text-dzignex-blue"> [Your Sales]</span>
           </h1>
 
           <p className="max-w-2xl text-base sm:text-lg lg:text-xl font-medium text-dzignex-white/80 mx-auto mt-6 md:mt-8">
-            A strategic studio crafting brand systems and digital design that elevate perception and support long-term growth.
+Design that speaks, packaging that sells, and brands people remember.
           </p>
 
           <Link href={"/contact"} >

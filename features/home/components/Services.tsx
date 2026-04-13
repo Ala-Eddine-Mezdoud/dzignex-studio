@@ -9,67 +9,88 @@ import { ArrowUpRight } from 'lucide-react';
 const servicesData = [
   {
     id: "01",
-    title: "Brand identity & Visual Identity",
+    title: "Brand Strategy & Visual Identity",
     tagline: "We don't just design your brand, we define its future.",
     details: [
       "Brand Positioning",
       "Audience & Persona Analysis",
       "Naming & Story Building",
-      "Visual Identity Design",
+      "Brand Voice & Messaging",
+      "Competitor Analysis & Differentiation Strategy",
+      "Logo & Identity Design",
+      "Color, Typography, Grid Systems",
       "Brand Guidelines",
-      "Brand Strategy"
+      "Brand Assets (business cards, templates, packaging, etc.)"
     ]
   },
   {
     id: "02",
-    title: "Web Design & Development",
-    tagline: "We build websites that are high-converting and user-centric.",
+    title: "Packaging & Product Design",
+    tagline: "Your product shouldn’t just sit on a shelf. It should live in memory.",
     details: [
-      "UX/UI Research & Strategy",
-      "Custom Website Design",
-      "Next.js & React Development",
-      "E-commerce Solutions",
-      "Performance Optimization",
-      "Mobile-First Design"
+      "Packaging Design",
+      "Customized Dielines & Product Design",
+      "Label & Box Design",
+      "Product Mockups & Renderings",
+      "Focused on FMCG, Cosmetics & Supplements",
+      "3D Product Modeling (with or without label UVs)",
+      "Realistic 3D Scene Composition",
+      "Art Direction for Product Shoots (Digital or Hybrid)",
+      "AI-enhanced renders & stylized mockups",
+      "High-impact visuals for digital shelves and campaigns"
     ]
   },
   {
     id: "03",
-    title: "Mobile App Development",
-    tagline: "Innovative apps designed for seamless user experiences.",
+    title: "Motion & Animation",
+    tagline: "Not just moving parts, but stories that demand attention.",
     details: [
-      "iOS & Android Development",
-      "React Native & Flutter Apps",
-      "App UI/UX Design",
-      "Backend Integration",
-      "Ongoing App Maintenance",
-      "Store Deployment"
+      "UI/UX Interaction Animation",
+      "Explainer & Product Demo Videos",
+      "2D & 3D Motion Design",
+      "Video Editing & Post-Production",
+      "Talking Head Videos [ Long & Short form ]",
+      "App Walkthroughs & Onboarding Guided Tours",
+      "High-Conversion SaaS Explainer Animations"
     ]
   },
   {
     id: "04",
-    title: "Motion Design & Video",
-    tagline: "Bring your brand to life with dynamic motion and storytelling.",
+    title: "Websites & Landing Pages",
+    tagline: "High-performance digital destinations engineered to convert traffic into revenue.",
     details: [
-      "2D/3D Motion Design",
-      "Brand Storytelling Videos",
-      "Product Demonstrations",
-      "Social Media Content",
-      "Post-production & Editing",
-      "Logo Animation"
+      "Website UI/UX Design",
+      "Landing Page Design",
+      "E-commerce Interfaces",
+      "No-code or Custom Delivery",
+      "Performance-Driven Structures",
+      "Front End & Back End Development"
     ]
   },
   {
     id: "05",
-    title: "Digital Growth & SEO",
-    tagline: "Drive traffic and convert users with data-driven strategies.",
+    title: "Performance & Social",
+    tagline: "Scroll-stopping social content and ad assets engineered for engagement and ROI.",
     details: [
-      "SEO Audit & Strategy",
-      "Content Marketing Plans",
-      "Social Media Strategy",
-      "Paid Advertising (PPC)",
-      "Growth Hacking",
-      "Analytics & Reporting"
+      "High-Conversion Paid Ad Creative (Meta, TikTok, LinkedIn)",
+      "Strategic Social Media Visual Language",
+      "Campaign Branding & Event Promotion Assets",
+      "Performance-Driven Carousel & Story Design",
+      "Platform-Specific Content Optimization",
+      "Influencer Collaboration Design Kits",
+      "Static & Animated Social Content Systems"
+    ]
+  },
+  {
+    id: "06",
+    title: "Ongoing Design Partnership",
+    tagline: "Not a one-time job. A creative arm for your brand.",
+    details: [
+      "Monthly Retainers",
+      "Dedicated Creative Support",
+      "Brand Consistency Over Time",
+      "Priority Access to the Team",
+      "Strategic Network Access"
     ]
   }
 ];

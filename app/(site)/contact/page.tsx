@@ -1,5 +1,5 @@
 import ContactForm from "../../../features/contact/components/ContactForm";
-import { SiFacebook, SiInstagram, SiLinkedin, SiTiktok, SiX, SiYoutube } from "react-icons/si";
+import { SiFacebook, SiInstagram, SiLinkedin, SiTiktok, SiX, SiYoutube ,SiBehance } from "react-icons/si";
 
 const socialLinks = [
   { icon: SiX, label: "X", href: "#" },
@@ -41,21 +41,28 @@ const Page = () => {
                   <p className="text-2xl md:text-3xl font-bold tracking-tight underline underline-offset-8 decoration-dzignex-white/20 hover:decoration-dzignex-blue transition-colors cursor-pointer">
                     dzignex.studio@gmail.com
                   </p>
-                  <p className="text-2xl md:text-3xl font-bold tracking-tight underline underline-offset-8 decoration-dzignex-white/20 hover:decoration-dzignex-blue transition-colors cursor-pointer">
-                    +213 (0) 555 123 456
-                  </p>
+
                 </div>
               </div>
 
               <div>
                 <h2 className="text-xs uppercase font-bold tracking-[0.2em] text-dzignex-blue mb-6">/Social Networks</h2>
                 <ul className="grid grid-cols-3 sm:flex sm:flex-wrap gap-4">
-                  {socialLinks.map(({ icon: Icon, label, href }) => (
+                  {[
+                    { icon: SiX, label: "X", href: "https://x.com/dzignexstudio" },
+                    { icon: SiLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/dzignexstudio/" },
+                    { icon: SiYoutube, label: "YouTube", href: "http://youtube.com/@Dzignex_lab" },
+                    { icon: SiInstagram, label: "Instagram", href: "https://www.instagram.com/dzignexstudio" },
+                    { icon: SiTiktok, label: "TikTok", href: "https://www.tiktok.com/@dzignex.studio_" },
+                    { icon: SiBehance, label: "Behance", href: "https://www.behance.net/dzignexstudio" },
+                  ].map(({ icon: Icon, label, href }) => (
                     <li key={label}>
                       <a
                         href={href}
                         aria-label={label}
-                        className="border-2 border-dzignex-white/20 h-14 w-14 flex items-center justify-center text-dzignex-white "
+                        className="border-2 border-dzignex-white/20 h-14 w-14 flex items-center justify-center text-dzignex-white"
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
                         <Icon className="size-6" aria-hidden />
                       </a>

@@ -12,6 +12,9 @@ const contactFormSchema = z.object({
   industry: z.string().min(1),
   serviceRequired: z.string().min(1),
   websiteOrInstagram: z.string().optional(),
+  budgetRange: z.string().optional(),
+  challenges: z.array(z.string()).optional(),
+  mainGoal: z.array(z.string()).optional(),
   message: z.string().optional(),
 })
 
@@ -27,6 +30,9 @@ export async function submitContactForm(data: z.infer<typeof contactFormSchema>)
       industry: validatedData.industry,
       serviceRequired: validatedData.serviceRequired,
       websiteOrInstagram: validatedData.websiteOrInstagram,
+      budgetRange: validatedData.budgetRange,
+      challenges: validatedData.challenges?.join(", "),
+      mainGoal: validatedData.mainGoal?.join(", "),
       message: validatedData.message,
     })
 
