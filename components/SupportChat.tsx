@@ -11,7 +11,7 @@ interface Message {
 
 const WELCOME_MESSAGE: Message = {
   role: "assistant",
-  content: "Hi 👋 I'm the Dzignex assistant. Ask me anything about our services.",
+  content: "Hi 👋 I'm Dex, the Dzignex assistant. Ask me anything about our services.",
 };
 
 export default function SupportChat() {
