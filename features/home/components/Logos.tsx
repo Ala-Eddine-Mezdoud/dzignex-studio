@@ -2,15 +2,16 @@ import LogoLoop from "../../../components/LogoLoop"
 
 // Logo images from public/logos
 const imageLogos = [
-  { src: "/logos/Dermology logo 1 2.svg", alt: "Dermology", href: "#" },
-  { src: "/logos/Logo 1.svg", alt: "Partner 1", href: "#" },
-  { src: "/logos/Logo 2.svg", alt: "Partner 2", href: "#" },
-  { src: "/logos/Logo 3.svg", alt: "Partner 3", href: "#" },
-  { src: "/logos/Logo 4.svg", alt: "Partner 4", href: "#" },
-  { src: "/logos/Logo 5.svg", alt: "Partner 5", href: "#" },
-  { src: "/logos/Logo 6.svg", alt: "Partner 6", href: "#" },
-  { src: "/logos/Logo 7.svg", alt: "Partner 7", href: "#" },
-  { src: "/logos/Ops-First Horizontal logo 9.svg", alt: "Ops-First", href: "#" },
+  { src: "/logos/Auravita Logo.svg", alt: "Auravita", href: "#" },
+  { src: "/logos/Avure.svg", alt: "Avure", href: "#" },
+  { src: "/logos/Dermology logo 1 2 1.svg", alt: "Dermology", href: "#" },
+  { src: "/logos/Estidama.svg", alt: "Estidama", href: "#" },
+  { src: "/logos/Formura.svg", alt: "Formura", href: "#" },
+  { src: "/logos/Ops-First.svg", alt: "Ops-First", href: "#" },
+  { src: "/logos/Ravelle.svg", alt: "Ravelle", href: "#" },
+  { src: "/logos/Saffron Brew.svg", alt: "Saffron Brew", href: "#" },
+  { src: "/logos/Swift Med.svg", alt: "Swift Med", href: "#" },
+  { src: "/logos/Vectorial.svg", alt: "Vectorial", href: "#" },
 ];
 
 
