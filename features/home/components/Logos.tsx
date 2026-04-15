@@ -1,19 +1,16 @@
 import LogoLoop from "../../../components/LogoLoop"
 
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
-
-const techLogos = [
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-];
-
-// Alternative with image sources
+// Logo images from public/logos
 const imageLogos = [
-  { src: "/logos/company1.png", alt: "Company 1", href: "https://company1.com" },
-  { src: "/logos/company2.png", alt: "Company 2", href: "https://company2.com" },
-  { src: "/logos/company3.png", alt: "Company 3", href: "https://company3.com" },
+  { src: "/logos/Dermology logo 1 2.svg", alt: "Dermology", href: "#" },
+  { src: "/logos/Logo 1.svg", alt: "Partner 1", href: "#" },
+  { src: "/logos/Logo 2.svg", alt: "Partner 2", href: "#" },
+  { src: "/logos/Logo 3.svg", alt: "Partner 3", href: "#" },
+  { src: "/logos/Logo 4.svg", alt: "Partner 4", href: "#" },
+  { src: "/logos/Logo 5.svg", alt: "Partner 5", href: "#" },
+  { src: "/logos/Logo 6.svg", alt: "Partner 6", href: "#" },
+  { src: "/logos/Logo 7.svg", alt: "Partner 7", href: "#" },
+  { src: "/logos/Ops-First Horizontal logo 9.svg", alt: "Ops-First", href: "#" },
 ];
 
 
@@ -23,7 +20,7 @@ const Logos = () => {
         <div className="container mx-auto border-l-2 border-r-2 border-dzignex-white/15 py-4 md:py-6 px-4 md:px-0">
 
                   <LogoLoop
-                    logos={techLogos}
+                    logos={imageLogos}
                     speed={100}
                     direction="left"
                     logoHeight={40}
