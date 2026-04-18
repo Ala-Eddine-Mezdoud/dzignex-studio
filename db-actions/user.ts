@@ -6,11 +6,13 @@ import { eq } from "drizzle-orm"
 import bcrypt from "bcryptjs"
 import { revalidatePath } from "next/cache"
 import { sendPasswordResetEmail, sendMagicLinkEmail } from "../lib/email"
+import { requireAuth, requireAdmin } from "../lib/auth-guard"
 
 /**
  * Get all users (Team members)
  */
 export async function getUsers() {
+  await requireAuth()
   try {
     return await db.query.users.findMany({
       orderBy: (users, { desc }) => [desc(users.createdAt)]
@@ -25,6 +27,7 @@ export async function getUsers() {
  * Get user by ID
  */
 export async function getUserById(id: string) {
+  await requireAuth()
   try {
     return await db.query.users.findFirst({
       where: eq(users.id, id),
@@ -39,8 +42,9 @@ export async function getUserById(id: string) {
  * Create a new user with hashed password
  */
 export async function createUser(data: typeof users.$inferInsert) {
+  await requireAdmin()
   try {
-    const password = data.password 
+    const password = data.password
       ? await bcrypt.hash(data.password, 12)
       : null
 
@@ -48,7 +52,7 @@ export async function createUser(data: typeof users.$inferInsert) {
       ...data,
       password,
     }).returning()
-    
+
     revalidatePath("/dashboard/team")
     return newUser
   } catch (error) {
@@ -61,9 +65,10 @@ export async function createUser(data: typeof users.$inferInsert) {
  * Update user
  */
 export async function updateUser(id: string, data: Partial<typeof users.$inferInsert>) {
+  await requireAuth()
   try {
     let updateData = { ...data }
-    
+
     // Hash password if it's being updated
     if (data.password) {
       updateData.password = await bcrypt.hash(data.password, 12)
@@ -73,7 +78,7 @@ export async function updateUser(id: string, data: Partial<typeof users.$inferIn
       .set(updateData)
       .where(eq(users.id, id))
       .returning()
-    
+
     revalidatePath("/dashboard/team")
     return updatedUser
   } catch (error) {
@@ -86,6 +91,7 @@ export async function updateUser(id: string, data: Partial<typeof users.$inferIn
  * Delete user
  */
 export async function deleteUser(id: string) {
+  await requireAdmin()
   try {
     await db.delete(users).where(eq(users.id, id))
     revalidatePath("/dashboard/team")
@@ -135,6 +141,7 @@ function generateToken(): string {
  * Send password reset email to user
  */
 export async function sendPasswordReset(userId: string) {
+  await requireAdmin()
   try {
     const user = await getUserById(userId)
     if (!user || !user.email) {
@@ -175,6 +182,7 @@ export async function sendPasswordReset(userId: string) {
  * Send magic link email to user for passwordless login
  */
 export async function sendMagicLink(userId: string) {
+  await requireAdmin()
   try {
     const user = await getUserById(userId)
     if (!user || !user.email) {
