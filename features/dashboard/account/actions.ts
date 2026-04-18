@@ -8,11 +8,13 @@ import { PutObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { r2Client, BUCKET_NAME } from "../../../lib/r2Client"
 import bcrypt from "bcryptjs"
+import { requireAuth } from "../../../lib/auth-guard"
 
 /**
  * Get current user by ID
  */
 export async function getCurrentUser(userId: string) {
+  await requireAuth()
   try {
     const user = await db.query.users.findFirst({
       where: eq(users.id, userId),
@@ -36,6 +38,7 @@ export async function getCurrentUser(userId: string) {
  * Update current user profile
  */
 export async function updateCurrentUser(userId: string, data: { name?: string; email?: string }) {
+  await requireAuth()
   try {
     const [updatedUser] = await db.update(users)
       .set(data)
@@ -47,7 +50,7 @@ export async function updateCurrentUser(userId: string, data: { name?: string; e
         image: users.image,
         role: users.role,
       })
-    
+
     revalidatePath("/dashboard/account")
     return { success: true, user: updatedUser }
   } catch (error) {
@@ -60,6 +63,7 @@ export async function updateCurrentUser(userId: string, data: { name?: string; e
  * Update user password
  */
 export async function updateUserPassword(userId: string, currentPassword: string, newPassword: string) {
+  await requireAuth()
   try {
     // Get user with password
     const user = await db.query.users.findFirst({
@@ -95,6 +99,7 @@ export async function updateUserPassword(userId: string, currentPassword: string
  * Update user avatar
  */
 export async function updateUserAvatar(userId: string, imageUrl: string) {
+  await requireAuth()
   try {
     const [updatedUser] = await db.update(users)
       .set({ image: imageUrl })
@@ -105,7 +110,7 @@ export async function updateUserAvatar(userId: string, imageUrl: string) {
         email: users.email,
         image: users.image,
       })
-    
+
     revalidatePath("/dashboard/account")
     return { success: true, user: updatedUser }
   } catch (error) {
@@ -118,6 +123,7 @@ export async function updateUserAvatar(userId: string, imageUrl: string) {
  * Get presigned URL for avatar upload
  */
 export async function getAvatarUploadUrl(key: string, contentType: string) {
+  await requireAuth()
   try {
     const normalizedKey = key.replace(/^\/+/, "")
     const command = new PutObjectCommand({

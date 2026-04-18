@@ -5,11 +5,13 @@ import { inviteTokens, users } from "../db/schema"
 import { eq, and, gt, isNull } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 import { getUserByEmail } from "./user"
+import { requireAdmin } from "../lib/auth-guard"
 
 /**
  * Create an invite token for a given email
  */
 export async function createInviteToken(email: string, createdBy: string) {
+  await requireAdmin()
   try {
     // Check if user already exists
     const existingUser = await getUserByEmail(email)
@@ -57,24 +59,24 @@ export async function createInviteToken(email: string, createdBy: string) {
 export async function validateInviteToken(token: string) {
   try {
     console.log("Validating token:", token)
-    
+
     // First check if token exists at all
     const anyInvite = await db.query.inviteTokens.findFirst({
       where: eq(inviteTokens.token, token),
     })
-    
+
     console.log("Any invite found:", anyInvite)
-    
+
     if (!anyInvite) {
       console.log("No invite found with this token")
       return null
     }
-    
+
     console.log("Invite found:", anyInvite)
     console.log("Used at:", anyInvite.usedAt)
     console.log("Expires at:", anyInvite.expiresAt)
     console.log("Current time:", new Date())
-    
+
     // Now check the full validation
     const invite = await db.query.inviteTokens.findFirst({
       where: and(
@@ -138,6 +140,7 @@ export async function completeInviteSetup(token: string, name: string, password:
  * Get all invite tokens (for admin management)
  */
 export async function getInviteTokens() {
+  await requireAdmin()
   try {
     return await db.query.inviteTokens.findMany({
       orderBy: (inviteTokens, { desc }) => [desc(inviteTokens.createdAt)],
@@ -152,6 +155,7 @@ export async function getInviteTokens() {
  * Delete an invite token
  */
 export async function deleteInviteToken(id: string) {
+  await requireAdmin()
   try {
     await db.delete(inviteTokens).where(eq(inviteTokens.id, id))
     revalidatePath("/dashboard/team")
@@ -166,6 +170,7 @@ export async function deleteInviteToken(id: string) {
  * Resend an invite (creates new token and invalidates old one)
  */
 export async function resendInvite(email: string, createdBy: string) {
+  await requireAdmin()
   try {
     // Mark existing invites as used (invalidate them)
     await db.update(inviteTokens)
@@ -187,27 +192,28 @@ export async function resendInvite(email: string, createdBy: string) {
  * Send an invitation email and create token (server action wrapper)
  */
 export async function sendInvitation(email: string, createdBy: string) {
+  await requireAdmin()
   try {
     console.log("Creating invitation for email:", email, "by user:", createdBy)
-    
+
     // Create invite token
     const inviteToken = await createInviteToken(email, createdBy)
-    
+
     console.log("Created invite token:", inviteToken)
 
     // Generate invite link
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
     const inviteLink = `${baseUrl}/invite/${inviteToken.token}`
-    
+
     console.log("Generated invite link:", inviteLink)
 
     // Import email function only in server context
     const { sendInviteEmail } = await import("../lib/email")
-    
+
     // Send invite email
     const emailResult = await sendInviteEmail(email, inviteLink)
-    
+
     console.log("Email result:", emailResult)
 
     if (!emailResult.success) {
@@ -228,10 +234,10 @@ export async function completeInviteSetupWithLogin(token: string, name: string, 
   try {
     // Complete the invite setup (creates user account)
     const user = await completeInviteSetup(token, name, password)
-    
+
     // Import signIn only in server context
     const { signIn } = await import("../auth")
-    
+
     // Auto-login the new user
     await signIn("credentials", {
       email: user.email!,
