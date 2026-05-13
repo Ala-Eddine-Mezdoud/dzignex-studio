@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, X, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Message {
   role: "user" | "assistant";
@@ -178,7 +180,36 @@ export default function SupportChat() {
                         : "bg-zinc-800 text-zinc-100 rounded-bl-md"
                     }`}
                   >
-                    {message.content}
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                        ul: ({ children }) => <ul className="list-disc list-inside mb-2">{children}</ul>,
+                        ol: ({ children }) => <ol className="list-decimal list-inside mb-2">{children}</ol>,
+                        li: ({ children }) => <li className="ml-2">{children}</li>,
+                        code: ({ node, children }) => {
+                          const isInline = !node || node.tagName !== 'pre';
+                          return isInline ? (
+                            <code className="bg-zinc-700/50 px-1.5 py-0.5 rounded text-xs font-mono">{children}</code>
+                          ) : (
+                            <code className="block bg-zinc-700/50 px-3 py-2 rounded text-xs font-mono overflow-x-auto">{children}</code>
+                          );
+                        },
+                        pre: ({ children }) => <pre className="bg-zinc-700/50 p-3 rounded-lg overflow-x-auto mb-2">{children}</pre>,
+                        strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                        em: ({ children }) => <em className="italic">{children}</em>,
+                        a: ({ children, href }) => (
+                          <a href={href} className="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">
+                            {children}
+                          </a>
+                        ),
+                        blockquote: ({ children }) => (
+                          <blockquote className="border-l-2 border-zinc-600 pl-3 italic text-zinc-300 mb-2">{children}</blockquote>
+                        ),
+                      }}
+                    >
+                      {message.content}
+                    </ReactMarkdown>
                   </div>
                 </div>
               ))}
