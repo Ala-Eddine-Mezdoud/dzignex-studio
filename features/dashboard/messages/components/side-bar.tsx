@@ -23,7 +23,7 @@ interface Message {
   whatsappNumber: string
   companyName: string
   industry: string
-  serviceRequired: string
+  serviceRequired: string[]
   websiteOrInstagram: string | null
   message: string | null
   status: "UNREAD" | "READ" | "REPLIED"
@@ -117,7 +117,7 @@ export function AppSidebar({ messages, selectedId, onSelectMessage, className, .
                       {msg.companyName}
                     </span>
                     <span className="text-[10px] bg-dzignex-blue/10 px-1.5 py-0.5 rounded text-dzignex-blue uppercase font-bold tracking-tighter">
-                      {msg.serviceRequired}
+                      {msg.serviceRequired.join(", ")}
                     </span>
                   </div>
                   <span className="line-clamp-2 text-xs text-muted-foreground/80 leading-relaxed">

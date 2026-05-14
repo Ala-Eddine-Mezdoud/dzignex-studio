@@ -14,11 +14,11 @@ interface Message {
   whatsappNumber: string
   companyName: string
   industry: string
-  serviceRequired: string
+  serviceRequired: string[]
   websiteOrInstagram: string | null
   budgetRange: string | null
-  challenges: string | null
-  mainGoal: string | null
+  challenges: string[] | null
+  mainGoal: string[] | null
   message: string | null
   status: "UNREAD" | "READ" | "REPLIED"
   label: "important" | "normal" | "scam" | null

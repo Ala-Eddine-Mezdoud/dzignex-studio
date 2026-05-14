@@ -58,11 +58,11 @@ interface Message {
   whatsappNumber: string
   companyName: string
   industry: string
-  serviceRequired: string
+  serviceRequired: string[]
   websiteOrInstagram: string | null
   budgetRange: string | null
-  challenges: string | null
-  mainGoal: string | null
+  challenges: string[] | null
+  mainGoal: string[] | null
   message: string | null
   status: "UNREAD" | "READ" | "REPLIED"
   label: "important" | "normal" | "scam" | null
@@ -228,7 +228,13 @@ export function MessageDisplay({ message, onDelete, onMarkAsUnread, onUpdateLabe
                 <MessageSquare className="h-4 w-4 text-dzignex-blue" />
                 <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Requested Service</span>
               </div>
-              <p className="text-sm font-semibold">{message.serviceRequired}</p>
+              <div className="flex flex-wrap gap-2">
+                {message.serviceRequired.map((service, idx) => (
+                  <div key={idx} className="bg-dzignex-blue/10 text-dzignex-blue text-[10px] font-bold px-2 py-0.5 rounded uppercase">
+                    {service}
+                  </div>
+                ))}
+              </div>
             </div>
 
             {message.websiteOrInstagram && (
@@ -265,7 +271,7 @@ export function MessageDisplay({ message, onDelete, onMarkAsUnread, onUpdateLabe
                   <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Current Challenges</span>
                 </div>
                 <ul className="text-sm space-y-1">
-                  {message.challenges.split(", ").map((challenge, idx) => (
+                  {message.challenges.map((challenge, idx) => (
                     <li key={idx} className="text-muted-foreground">• {challenge}</li>
                   ))}
                 </ul>
@@ -279,7 +285,7 @@ export function MessageDisplay({ message, onDelete, onMarkAsUnread, onUpdateLabe
                   <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Main Goals (3 months)</span>
                 </div>
                 <ul className="text-sm space-y-1">
-                  {message.mainGoal.split(", ").map((goal, idx) => (
+                  {message.mainGoal.map((goal, idx) => (
                     <li key={idx} className="text-muted-foreground">• {goal}</li>
                   ))}
                 </ul>

@@ -5,12 +5,19 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { Button } from "../../../components/ui/button"
 import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "../../../components/ui/dropdown-menu"
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "../../../components/ui/select"
+import { ChevronDown } from 'lucide-react';
 import { Input } from "../../../components/ui/input"
 import { Textarea } from "../../../components/ui/textarea"
 import { Label } from "../../../components/ui/label"
@@ -32,7 +39,7 @@ const contactFormSchema = z.object({
     message: "Please enter a valid email address.",
   }),
   industry: z.string().min(1, "Please select an industry."),
-  serviceRequired: z.string().min(1, "Please select a service."),
+  serviceRequired: z.array(z.string()).min(1, "Please select at least one service."),
   websiteOrInstagram: z.string().optional(),
   budgetRange: z.string().optional(),
   challenges: z.array(z.string()).optional(),
@@ -51,7 +58,8 @@ const ContactForm = () => {
       fullName: "",
       whatsappNumber: "",
       companyName: "",
-      email: "",
+      industry: "",
+      serviceRequired: [],
       websiteOrInstagram: "",
       budgetRange: "",
       challenges: [],
@@ -135,6 +143,14 @@ const ContactForm = () => {
       ? current.filter((g) => g !== value)
       : [...current, value]
     form.setValue("mainGoal", updated, { shouldValidate: true })
+  }
+
+  const toggleService = (value: string) => {
+    const current = form.getValues("serviceRequired") || []
+    const updated = current.includes(value)
+      ? current.filter((s) => s !== value)
+      : [...current, value]
+    form.setValue("serviceRequired", updated, { shouldValidate: true })
   }
 
   return (
@@ -228,22 +244,38 @@ const ContactForm = () => {
         </div>
 
         {/* Service Required */}
-        <div className="space-y-2">
+        <div className="space-y-2 col-span-1 ">
           <Label className="text-xs uppercase font-bold tracking-widest text-dzignex-white/60">
             Service Required*
           </Label>
-          <Select onValueChange={(value: string) => form.setValue("serviceRequired", value)}>
-            <SelectTrigger className="w-full bg-transparent border-dzignex-white/20 h-12 focus:border-dzignex-blue transition-colors rounded-none">
-              <SelectValue placeholder="Select a Service" />
-            </SelectTrigger>
-            <SelectContent className="bg-dzignex-black border-dzignex-white/20 text-white rounded-none">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                className="flex w-full items-center justify-between bg-transparent border border-dzignex-white/20 h-12 px-3 focus:border-dzignex-blue transition-colors rounded-none outline-none text-left"
+              >
+                <span className="text-xs font-bold uppercase tracking-widest truncate">
+                  {(form.watch("serviceRequired") || []).length > 0
+                    ? (form.watch("serviceRequired") || []).join(", ")
+                    : "Select Services"}
+                </span>
+                <ChevronDown className="h-4 w-4 opacity-50" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)] bg-dzignex-black border-dzignex-white/20 text-white rounded-none">
               {services.map((service) => (
-                <SelectItem key={service} value={service} className="focus:bg-dzignex-blue focus:text-white uppercase text-xs font-bold tracking-widest">
+                <DropdownMenuCheckboxItem
+                  key={service}
+                  className="focus:bg-dzignex-blue focus:text-white uppercase text-xs font-bold tracking-widest cursor-pointer"
+                  checked={(form.watch("serviceRequired") || []).includes(service)}
+                  onCheckedChange={() => toggleService(service)}
+                  onSelect={(e) => e.preventDefault()}
+                >
                   {service}
-                </SelectItem>
+                </DropdownMenuCheckboxItem>
               ))}
-            </SelectContent>
-          </Select>
+            </DropdownMenuContent>
+          </DropdownMenu>
           {form.formState.errors.serviceRequired && (
             <p className="text-dzignex-red text-xs">{form.formState.errors.serviceRequired.message}</p>
           )}

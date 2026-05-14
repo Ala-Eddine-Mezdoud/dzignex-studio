@@ -1,4 +1,5 @@
 import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const messageStatusEnum = pgEnum('message_status', ['UNREAD', 'READ', 'REPLIED']);
 export const messageLabelEnum = pgEnum('message_label', ['important', 'normal', 'scam']);
@@ -12,11 +13,11 @@ export const messages = pgTable("messages", {
   whatsappNumber: text("whatsapp_number").notNull(),
   companyName: text("company_name").notNull(),
   industry: text("industry").notNull(),
-  serviceRequired: text("service_required").notNull(),
+  serviceRequired: text("service_required").array().notNull().default(sql`ARRAY[]::text[]`),
   websiteOrInstagram: text("website_or_instagram"),
   budgetRange: text("budget_range"),
-  challenges: text("challenges"),
-  mainGoal: text("main_goal"),
+  challenges: text("challenges").array().default(sql`ARRAY[]::text[]`),
+  mainGoal: text("main_goal").array().default(sql`ARRAY[]::text[]`),
   message: text("message"),
   status: messageStatusEnum("status").notNull().default('UNREAD'),
   label: messageLabelEnum("label").default('normal'),
