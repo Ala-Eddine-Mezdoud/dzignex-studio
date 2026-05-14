@@ -61,6 +61,7 @@ export async function updateProjectBasic(id: string, data: Partial<typeof projec
     
     revalidatePath("/dashboard/projects");
     revalidatePath("/projects");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error(`Error updating project ${id}:`, error);
@@ -143,6 +144,7 @@ export async function updateProject(slug: string, data: UpdateProjectData) {
 
     revalidatePath("/dashboard/projects");
     revalidatePath("/projects");
+    revalidatePath("/");
     return { success: true, project: existingProject }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error)
@@ -165,6 +167,7 @@ export async function deleteProject(id: string) {
     
     revalidatePath("/dashboard/projects");
     revalidatePath("/projects");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error(`Error deleting project ${id}:`, error);
@@ -182,6 +185,7 @@ export async function toggleProjectPublish(id: string, isPublished: boolean) {
       .where(eq(projects.id, id));
     
     revalidatePath("/dashboard/projects");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error(`Error toggling publish for project ${id}:`, error);
@@ -260,6 +264,7 @@ export async function createProject(data: CreateProjectData) {
     }
 
     revalidatePath("/dashboard/projects");
+    revalidatePath("/");
     return { success: true, project: createdProject }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error)

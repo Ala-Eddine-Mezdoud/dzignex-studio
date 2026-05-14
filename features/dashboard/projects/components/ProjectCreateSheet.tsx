@@ -206,7 +206,7 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
     const [isSubmitting, setIsSubmitting] = useState(false)
   const [cropQueue, setCropQueue] = useState<CropQueueItem[]>([])
   const [cropSrc, setCropSrc] = useState("")
-  const [crop, setCrop] = useState<Crop>({ unit: "%", x: 0, y: 0, width: 80, height: 45 })
+  const [crop, setCrop] = useState<Crop>({ unit: "%", x: 0, y: 0, width: 100, height: 100 })
   const [completedCrop, setCompletedCrop] = useState<PixelCrop | null>(null)
   const imageRef = useRef<HTMLImageElement | null>(null)
 
@@ -226,7 +226,7 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
       cropQueue.forEach((item) => URL.revokeObjectURL(item.previewUrl))
       setCropQueue([])
       setCropSrc("")
-      setCrop({ unit: "%", x: 0, y: 0, width: 80, height: 45 })
+      setCrop({ unit: "%", x: 0, y: 0, width: 100, height: 100 })
       setCompletedCrop(null)
     }
   }, [open, form])
@@ -234,7 +234,7 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
   useEffect(() => {
     if (currentCropItem) {
       setCropSrc(currentCropItem.previewUrl)
-      setCrop({ unit: "%", x: 0, y: 0, width: 80, height: 45 })
+      setCrop({ unit: "%", x: 0, y: 0, width: 100, height: 100 })
       setCompletedCrop(null)
       imageRef.current = null
     } else {
@@ -686,7 +686,7 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
                         <div className="flex items-center justify-between gap-3">
                           <div>
                             <Label className="font-medium">Images</Label>
-                            <p className="text-xs text-muted-foreground">Upload images with 16:9 aspect ratio.</p>
+                            <p className="text-xs text-muted-foreground">Upload images (full width recommended, height is flexible).</p>
                           </div>
                           <label className="inline-flex cursor-pointer items-center rounded-md border border-input bg-background px-3 py-2 text-sm font-medium transition hover:bg-accent/50">
                             <ImagePlus className="mr-2 h-4 w-4" />
@@ -899,7 +899,7 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
             <DialogHeader>
               <DialogTitle>Crop image</DialogTitle>
               <DialogDescription>
-                Confirm the locked 16:9 crop before adding the image to the detail section.
+                Confirm the crop before adding the image to the detail section.
               </DialogDescription>
             </DialogHeader>
 
@@ -912,8 +912,7 @@ export function ProjectCreateSheet({ open, onOpenChange }: ProjectCreateSheetPro
                 <div className="rounded-xl border p-2">
                   <ReactCrop
                     crop={crop}
-                    aspect={16 / 9}
-                    onChange={(nextCrop) => setCrop(nextCrop)}
+                    onChange={(crop, percentCrop) => setCrop({ ...percentCrop, width: 100, x: 0 })}
                     onComplete={(nextCrop) => setCompletedCrop(nextCrop)}
                   >
                     <img
