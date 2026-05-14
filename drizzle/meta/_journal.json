@@ -36,6 +36,13 @@
       "when": 1776088567655,
       "tag": "0004_add_contact_form_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1778748343559,
+      "tag": "0005_tidy_sugar_man",
+      "breakpoints": true
     }
   ]
 }
