@@ -24,6 +24,22 @@ export async function getProjects() {
 }
 
 /**
+ * Get featured projects (first 4 published ones)
+ */
+export async function getFeaturedProjects() {
+  try {
+    return await db.query.projects.findMany({
+      where: eq(projects.isPublished, true),
+      orderBy: [desc(projects.id)],
+      limit: 4,
+    });
+  } catch (error) {
+    console.error("Error fetching featured projects:", error);
+    throw new Error("Failed to fetch featured projects");
+  }
+}
+
+/**
  * Get a detailed project by its slug (or ID)
  * This includes all detail sections and their associated images
  */
