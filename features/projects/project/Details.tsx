@@ -1,5 +1,8 @@
 'use client'
 import { useState, useEffect, useRef } from "react";
+import { useLenis } from "lenis/react";
+import ScrollSpyRail from "../../../components/ScrollSpyRail";
+import RevealImage from "../../../components/RevealImage";
 
 interface ProjectDetail {
   id: string;
@@ -19,6 +22,7 @@ interface DetailsProps {
 const Details = ({ details }: DetailsProps) => {
   const [activeProject, setActiveProject] = useState(details[0]?.id || "");
   const projectRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const lenis = useLenis();
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -47,6 +51,16 @@ const Details = ({ details }: DetailsProps) => {
     return () => observers.forEach((obs) => obs.disconnect());
   }, [details]);
 
+  const handleSectionClick = (id: string) => {
+    const el = projectRefs.current[id];
+    if (!el) return;
+    if (lenis) {
+      lenis.scrollTo(el, { offset: -120, duration: 1.2 });
+    } else {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
   if (!details || details.length === 0) return null;
 
   return (
@@ -69,20 +83,23 @@ const Details = ({ details }: DetailsProps) => {
 
           {/* Sticky Sidebar — md and up only */}
           <div className="hidden md:block md:col-span-2 sticky top-10 self-start">
-            <ul className="flex flex-col gap-2">
+            <ScrollSpyRail activeId={activeProject} ulClassName="flex flex-col gap-2 pl-5">
               {details.map(({ id, label }) => (
-                <li
-                  key={id}
-                  className={`uppercase font-bold transition-all duration-300 ${
-                    activeProject === id
-                      ? "text-dzignex-blue text-lg lg:text-xl"
-                      : "text-dzignex-white/70 text-lg lg:text-lg"
-                  }`}
-                >
-                  /{label}
+                <li key={id} data-spy-id={id}>
+                  <button
+                    type="button"
+                    onClick={() => handleSectionClick(id)}
+                    className={`text-left uppercase font-bold transition-all duration-300 cursor-pointer hover:text-dzignex-blue ${
+                      activeProject === id
+                        ? "text-dzignex-blue text-lg lg:text-xl"
+                        : "text-dzignex-white/70 text-lg lg:text-lg"
+                    }`}
+                  >
+                    /{label}
+                  </button>
                 </li>
               ))}
-            </ul>
+            </ScrollSpyRail>
           </div>
 
           {/* Project Cards */}
@@ -110,13 +127,14 @@ const Details = ({ details }: DetailsProps) => {
                 <div className="flex flex-col gap-4 p-4 md:p-6 border-t border-dzignex-white/15">
                   {images && images.length > 0 ? (
                     images.map((img) => (
-                      <div key={img.id} className="w-full relative overflow-hidden bg-dzignex-blue/5 border border-dzignex-white/10">
-                        <img 
-                          src={img.imageUrl} 
-                          alt={img.altText || label}
-                          className="w-full h-auto object-cover"
-                        />
-                      </div>
+                      <RevealImage
+                        key={img.id}
+                        fluid
+                        src={img.imageUrl}
+                        alt={img.altText || label}
+                        className="w-full bg-dzignex-blue/5 border border-dzignex-white/10"
+                        imgClassName="object-cover"
+                      />
                     ))
                   ) : (
                     <div className="bg-dzignex-blue/15 aspect-video w-full" />

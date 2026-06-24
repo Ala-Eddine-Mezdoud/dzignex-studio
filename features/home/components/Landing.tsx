@@ -1,7 +1,16 @@
 'use client'
 import {ArrowUpRight} from 'lucide-react';
 import Link from 'next/link';
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import Magnetic from "../../../components/Magnetic";
+
+// The headline is split into deliberate display lines so each one can be
+// revealed independently behind its own clipping mask.
+const HEADLINE_LINES = [
+  { text: "We Don’t Just Design,", className: "" },
+  { text: "We Build Brands That Scale", className: "" },
+  { text: "[Your Sales]", className: "text-dzignex-blue" },
+] as const;
 
 const DEMO_IMAGES = [
   "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/33ef9e7b-8ca6-4758-9a19-5c4b4024ea64-f46ed080-327d-4a29-9781-5c1a244434f4.jpg",
@@ -27,12 +36,12 @@ const DEMO_IMAGES = [
 
 
 const Landing = () => {
-
+  const reduceMotion = useReducedMotion();
 
   return (
 
     <div className="border-b-2 border-dzignex-white/15">
-      <div className="container mx-auto border-dzignex-white/15 py-16 md:py-24 lg:py-32 px-5 sm:px-8 md:px-10 lg:px-16 z-9999 relative overflow-hidden">
+      <div className="container mx-auto border-dzignex-white/15 py-16 md:py-24 lg:py-32 px-5 sm:px-8 md:px-10 lg:px-16 relative overflow-hidden">
 
         {/* Service Tags */}
         <div className="justify-center max-w-5xl mx-auto hidden md:flex">
@@ -46,77 +55,63 @@ const Landing = () => {
 
         {/* Hero Content */}
         <div className="max-w-5xl mx-auto text-center mt-6 md:mt-8">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase font-bold tracking-tighter"
-          >
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="inline-block"
-            >
-              We Don’t Just Design, We Build Brands That Scale
-            </motion.span>
-            <br className="hidden sm:block" />
-            <motion.span
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-dzignex-blue inline-block"
-            >
-              {" "}
-              [Your Sales]
-            </motion.span>
-          </motion.h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase font-bold tracking-tighter leading-[1.05]">
+            {HEADLINE_LINES.map((line, i) => (
+              // Mask: clips the line; the inner span starts fully below it.
+              // The small pb/-mb pair gives glyphs breathing room without
+              // shifting layout, so nothing is clipped at rest.
+              <span
+                key={line.text}
+                className="block overflow-hidden pb-[0.08em] -mb-[0.08em]"
+              >
+                <motion.span
+                  className={`block ${line.className}`}
+                  initial={reduceMotion ? false : { y: "115%" }}
+                  animate={{ y: "0%" }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.15 + i * 0.12,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                >
+                  {line.text}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
-            className="max-w-2xl text-base sm:text-lg lg:text-xl font-medium text-dzignex-white/80 mx-auto mt-6 md:mt-8 z-9999"
+            className="max-w-2xl text-base sm:text-lg lg:text-xl font-medium text-dzignex-white/80 mx-auto mt-6 md:mt-8"
           >
             Design that speaks, packaging that sells, and brands people remember.
           </motion.p>
 
           <Link href={"/contact"}>
             <div className="flex gap-1 justify-center">
+              <Magnetic className="inline-block mt-8 md:mt-12">
               <motion.button
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: 1.1, duration: 0.6, ease: [0.175, 0.885, 0.32, 1.275] }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className="group bg-dzignex-white text-dzignex-black flex gap-1 items-end px-4 py-2 text-base lg:text-xl font-semibold tracking-tight uppercase mt-8 md:mt-12 z-9999 relative overflow-hidden"
+                className="group bg-dzignex-white text-dzignex-black flex gap-1 items-end px-4 py-2 text-base lg:text-xl font-semibold tracking-tight uppercase relative"
               >
-                <span className="relative z-10 flex items-center gap-1">
-                  Book Free Consultation
-                  <motion.span
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <ArrowUpRight
-                      size={30}
-                      className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"
-                    />
-                  </motion.span>
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-dzignex-blue"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "0%" }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                />
-                <span className="absolute inset-0 flex items-center justify-center text-dzignex-white z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Book Free Consultation
+                Book Free Consultation
+                <motion.span
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
                   <ArrowUpRight
                     size={30}
                     className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"
                   />
-                </span>
+                </motion.span>
               </motion.button>
+              </Magnetic>
             </div>
           </Link>
         </div>
@@ -129,7 +124,8 @@ const Landing = () => {
           transition={{ delay: 1.4, duration: 0.8, ease: "easeOut" }}
           className="mt-12 md:mt-16 relative"
         >
-          <div className="w-full h-48 md:h-64 lg:h-80 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] z-1">
+          <div className="w-full h-48 md:h-64 lg:h-96 pt-8  [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] z-1">
+            {/* center this without using flex bcz it breaks the animation  */}
             <motion.div
               className="flex gap-4"
               animate={{

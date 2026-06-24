@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from 'lucide-react';
+import ScrollSpyRail from "../../../components/ScrollSpyRail";
+import RevealImage from "../../../components/RevealImage";
 
 
 interface Project {
@@ -63,7 +65,7 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
           </p>
           <div className="lg:col-span-4">
             <p className="text-dzignex-white tracking-tighter text-2xl sm:text-3xl lg:text-4xl font-medium">
-              Work we've built with real clients, real constraints, and real results.
+              Work we&apos;ve built with real clients, real constraints, and real results.
             </p>
           </div>
         </div>
@@ -72,10 +74,11 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
 
           {/* Sticky Sidebar — lg and up only */}
           <div className="hidden lg:block lg:col-span-2 sticky top-10 self-start">
-            <ul className="flex flex-col gap-2">
-              {initialProjects.map((project, index) => (
+            <ScrollSpyRail activeId={activeProject} ulClassName="flex flex-col gap-2 pl-5">
+              {initialProjects.map((project) => (
                 <li
                   key={project.id}
+                  data-spy-id={project.id}
                   className={`uppercase font-bold transition-all duration-300 ${
                     activeProject === project.id
                       ? "text-dzignex-blue text-xl lg:text-2xl"
@@ -85,7 +88,7 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
                   /{project.title}
                 </li>
               ))}
-            </ul>
+            </ScrollSpyRail>
           </div>
 
           {/* Project Cards */}
@@ -98,17 +101,16 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
                 className="w-full border border-dzignex-white/15 group"
                 >
                   {/* Card Image */}
-                  <div className="w-full aspect-video relative overflow-hidden bg-dzignex-blue/5">
-                    {project.thumbnailUrl ? (
-                      <img 
-                        src={project.thumbnailUrl} 
-                        alt={project.title}
-                        className="w-full h-full object-cover transition-all duration-700"
-                      />
-                    ) : (
-                      <div className="bg-dzignex-blue/15 w-full h-full" />
-                    )}
-                  </div>
+                  {project.thumbnailUrl ? (
+                    <RevealImage
+                      src={project.thumbnailUrl}
+                      alt={project.title}
+                      className="w-full aspect-video bg-dzignex-blue/5"
+                      imgClassName="transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full aspect-video bg-dzignex-blue/15" />
+                  )}
 
                   {/* Card Info */}
                   <div className="p-4 lg:p-5 grid grid-cols-3 justify-between gap-4 lg:gap-16">

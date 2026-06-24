@@ -39,7 +39,7 @@ const Page = () => {
                 <h2 className="text-xs uppercase font-bold tracking-[0.2em] text-dzignex-blue mb-6">/Contact Details</h2>
                 <div className="space-y-4">
                   <p className="text-2xl md:text-3xl font-bold tracking-tight underline underline-offset-8 decoration-dzignex-white/20 hover:decoration-dzignex-blue transition-colors cursor-pointer">
-                    dzignex.studio@gmail.com
+                    hello@dzignex.studio
                   </p>
 
                 </div>

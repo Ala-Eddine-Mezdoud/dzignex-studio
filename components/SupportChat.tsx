@@ -131,7 +131,7 @@ export default function SupportChat() {
   };
 
   return (
-    <div ref={containerRef} className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+    <div ref={containerRef} className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999]">
       <AnimatePresence>
         {isOpen && (
           <motion.div

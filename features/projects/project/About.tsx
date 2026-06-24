@@ -1,5 +1,7 @@
 'use client'
 
+import RevealBorder from "../../../components/RevealBorder";
+
 interface AboutProps {
   project: {
     thumbnailUrl: string | null;
@@ -21,7 +23,7 @@ const About = ({ project }: AboutProps) => {
           </p>
 
           {/* Content */}
-          <div className="md:col-span-4 flex flex-col w-full border border-dzignex-white/15">
+          <RevealBorder className="md:col-span-4 flex flex-col w-full">
                 <div className="aspect-video w-full relative overflow-hidden bg-dzignex-blue/5">
                     {project.thumbnailUrl ? (
                       <img 
@@ -50,7 +52,7 @@ const About = ({ project }: AboutProps) => {
                       </div>
                   </div>
                 )}
-          </div>
+          </RevealBorder>
         </div>
       </div>
     </div>

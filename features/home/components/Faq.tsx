@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from 'lucide-react';
+import RevealBorder from "../../../components/RevealBorder";
 
 
 const faqData = [
@@ -67,11 +68,11 @@ const Faq = () => {
 
         <div className="mt-16 space-y-5">
           {faqData.map((item, index) => (
-            <div 
-              key={item.id} 
-              className={`bg-dzignex-white/3 border border-dzignex-white/15 transition-all duration-300 ${activeIndex === index ? 'bg-dzignex-white/7' : ''}`}
+            <RevealBorder
+              key={item.id}
+              className={`bg-dzignex-white/3 transition-all duration-300 ${activeIndex === index ? 'bg-dzignex-white/7' : ''}`}
             >
-              <div 
+              <div
                 className="flex flex-col lg:grid lg:grid-cols-6 p-6 lg:p-8 cursor-pointer group gap-4 lg:gap-0"
                 onClick={() => toggleAccordion(index)}
               >
@@ -112,7 +113,7 @@ const Faq = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </RevealBorder>
           ))}
         </div>
       </div>

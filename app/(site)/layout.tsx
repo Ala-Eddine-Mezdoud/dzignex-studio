@@ -4,6 +4,9 @@ import NavBar from "../../components/NavBar";
 import NextStep from "../../components/NextStep";
 import Footer from "../../components/Footer";
 import SupportChat from "../../components/SupportChat";
+import SmoothScroll from "../../components/SmoothScroll";
+import PageTransition from "../../components/PageTransition";
+import ScrollProgress from "../../components/ScrollProgress";
 import "../globals.css";
 import { ThemeProvider } from "../../components/theme-provider";
 import { Toaster } from "../../components/ui/sonner";
@@ -42,12 +45,16 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <NavBar />
-          {children}
-           <NextStep />
-          <Footer />
-          <Toaster />
-          <SupportChat />
+          <SmoothScroll>
+            <PageTransition />
+            <ScrollProgress />
+            <NavBar />
+            {children}
+            <NextStep />
+            <Footer />
+            <Toaster />
+            <SupportChat />
+          </SmoothScroll>
         </ThemeProvider>
       </body>
     </html>

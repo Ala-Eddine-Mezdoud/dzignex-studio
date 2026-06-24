@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import RevealText from "./RevealText"
 import {
   SiBehance,
   SiFacebook,
@@ -30,7 +31,7 @@ const Footer = () => {
 
             <div className="mt-8 lg:mt-16 flex flex-col lg:flex-row lg:justify-between gap-8 lg:gap-0">
               <div className="flex flex-col gap-4 lg:gap-0 lg:justify-between">
-                <div className="font-bold text-lg lg:text-2xl tracking-tighter underline underline-offset-8">dzignex.studio@gmail.com</div>
+                <div className="font-bold text-lg lg:text-2xl tracking-tighter underline underline-offset-8">hello@dzignex.studio</div>
                 <div className="flex gap-4 lg:gap-0 lg:justify-between font-medium underline underline-offset-8">
                   <Link href={'/terms-of-services'}><p>Terms of Services</p></Link> 
                   <Link href={'/privacy-policy'}><p>Privacy Policy</p></Link> 
@@ -64,7 +65,11 @@ const Footer = () => {
 
             <div className="mt-12 lg:mt-16 hidden lg:block">
               <div className="flex flex-col lg:flex-row lg:align-bottom lg:items-end lg:justify-between lg:mb-8">
-                <div className="text-5xl sm:text-7xl md:text-8xl lg:text-[220px] font-bold tracking-[-0.08em]">DZIGNEX </div>
+                <RevealText
+                  text="DZIGNEX"
+                  drift={60}
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[220px] font-bold tracking-[-0.08em]"
+                />
 
                   <p className="text-sm lg:text-xl font-medium tracking-[-0.08em] lg:mb-12 mt-4 lg:mt-0">All rights reserved © 2026.</p>
 
@@ -95,14 +100,26 @@ const Footer = () => {
                     ))}
                   </ul>
                 </div>
-                <div className="text-5xl sm:text-7xl md:text-8xl lg:text-[220px] font-bold tracking-[-0.08em] lg:-mb-16 order-1 lg:order-2">STUDIO</div>
+                <RevealText
+                  text="STUDIO"
+                  drift={-60}
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[220px] font-bold tracking-[-0.08em] lg:-mb-16 order-1 lg:order-2"
+                />
               </div>
             </div>
 
             <div className="mt-12 lg:mt-16 block lg:hidden">
               <div className="flex flex-col lg:flex-row lg:align-bottom lg:items-end lg:justify-between lg:mb-8">
-                <div className="text-5xl sm:text-7xl md:text-8xl lg:text-[220px] font-bold tracking-[-0.08em]">DZIGNEX </div>
-                <div className="text-5xl sm:text-7xl md:text-8xl lg:text-[220px] font-bold tracking-[-0.08em] lg:-mb-16 order-1 lg:order-2">STUDIO</div>
+                <RevealText
+                  text="DZIGNEX"
+                  drift={24}
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[220px] font-bold tracking-[-0.08em]"
+                />
+                <RevealText
+                  text="STUDIO"
+                  drift={-24}
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[220px] font-bold tracking-[-0.08em] lg:-mb-16 order-1 lg:order-2"
+                />
 
 
               </div>

@@ -2,6 +2,9 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight } from 'lucide-react';
 import Link from "next/link";
+import ScrollSpyRail from "../../../components/ScrollSpyRail";
+import Magnetic from "../../../components/Magnetic";
+import RevealImage from "../../../components/RevealImage";
 
 interface Project {
   id: string;
@@ -69,10 +72,11 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
 
           {/* Sticky Sidebar — lg and up only */}
           <div className="hidden lg:block lg:col-span-2 sticky top-10 self-start">
-            <ul className="flex flex-col gap-2">
-              {initialProjects.map((project, index) => (
+            <ScrollSpyRail activeId={activeProject} ulClassName="flex flex-col gap-2 pl-5">
+              {initialProjects.map((project) => (
                 <li
                   key={project.id}
+                  data-spy-id={project.id}
                   className={`uppercase font-bold transition-all duration-300 ${
                     activeProject === project.id
                       ? "text-dzignex-blue text-xl lg:text-2xl"
@@ -82,7 +86,7 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
                   /{project.title}
                 </li>
               ))}
-            </ul>
+            </ScrollSpyRail>
           </div>
 
           {/* Project Cards */}
@@ -95,17 +99,16 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
                 className="w-full border border-dzignex-white/15 group"
                 >
                   {/* Card Image */}
-                  <div className="w-full aspect-video relative overflow-hidden bg-dzignex-blue/5">
-                    {project.thumbnailUrl ? (
-                      <img 
-                        src={project.thumbnailUrl} 
-                        alt={project.title}
-                        className="w-full h-full object-cover transition-all duration-700"
-                      />
-                    ) : (
-                      <div className="bg-dzignex-blue/15 w-full h-full" />
-                    )}
-                  </div>
+                  {project.thumbnailUrl ? (
+                    <RevealImage
+                      src={project.thumbnailUrl}
+                      alt={project.title}
+                      className="w-full aspect-video bg-dzignex-blue/5"
+                      imgClassName="transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full aspect-video bg-dzignex-blue/15" />
+                  )}
 
                   {/* Card Info */}
                   <div className="p-4 lg:p-5 grid grid-cols-3 justify-between gap-4 lg:gap-16">
@@ -132,12 +135,13 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
             ))}
 
             <div className="flex justify-end mt-4 lg:mt-8 group">
-              <Link href="/projects" className="bg-dzignex-white text-dzignex-black flex gap-1 items-end px-6 py-3 text-sm lg:text-base lg:text-xl font-bold tracking-tight uppercase w-full lg:w-fit text-center hover:bg-dzignex-blue hover:text-white transition-all">
-                View All Projects <ArrowUpRight size={30} 
-      className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"
-
-/>
-              </Link>
+              <Magnetic className="w-full lg:w-fit" strength={0.3}>
+                <Link href="/projects" className="bg-dzignex-white text-dzignex-black flex gap-1 items-end justify-center px-6 py-3 text-sm lg:text-base lg:text-xl font-bold tracking-tight uppercase w-full lg:w-fit text-center hover:bg-dzignex-blue hover:text-white transition-all">
+                  View All Projects <ArrowUpRight size={30}
+                    className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"
+                  />
+                </Link>
+              </Magnetic>
             </div>
           </div>
 
