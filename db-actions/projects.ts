@@ -8,6 +8,7 @@ import { revalidatePath } from "next/cache";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { r2Client, BUCKET_NAME } from "../lib/r2Client";
+import { requireAuth, requireAdmin } from "../lib/auth-guard";
 
 /**
  * Get all projects ordered by title
@@ -70,11 +71,12 @@ export async function getProjectBySlug(slug: string) {
  * Update a project's main information
  */
 export async function updateProjectBasic(id: string, data: Partial<typeof projects.$inferInsert>) {
+  await requireAdmin()
   try {
     await db.update(projects)
       .set(data)
       .where(eq(projects.id, id));
-    
+
     revalidatePath("/dashboard/projects");
     revalidatePath("/projects");
     revalidatePath("/");
@@ -91,6 +93,7 @@ export async function updateProjectBasic(id: string, data: Partial<typeof projec
 export type UpdateProjectData = CreateProjectData
 
 export async function updateProject(slug: string, data: UpdateProjectData) {
+  await requireAdmin()
   try {
     console.log("Updating project with data:", JSON.stringify(data, null, 2))
     const { details, testimonials: testimonialEntries, ...projectData } = data
@@ -166,8 +169,8 @@ export async function updateProject(slug: string, data: UpdateProjectData) {
     const errorMessage = error instanceof Error ? error.message : String(error)
     console.error("Error updating project:", errorMessage)
     console.error("Full error:", error)
-    return { 
-      success: false, 
+    return {
+      success: false,
       error: errorMessage
     }
   }
@@ -177,10 +180,11 @@ export async function updateProject(slug: string, data: UpdateProjectData) {
  * Delete a project and all its associated details/images (cascaded in DB)
  */
 export async function deleteProject(id: string) {
+  await requireAdmin()
   try {
     await db.delete(projects)
       .where(eq(projects.id, id));
-    
+
     revalidatePath("/dashboard/projects");
     revalidatePath("/projects");
     revalidatePath("/");
@@ -195,11 +199,12 @@ export async function deleteProject(id: string) {
  * Toggle publication status
  */
 export async function toggleProjectPublish(id: string, isPublished: boolean) {
+  await requireAdmin()
   try {
     await db.update(projects)
       .set({ isPublished })
       .where(eq(projects.id, id));
-    
+
     revalidatePath("/dashboard/projects");
     revalidatePath("/");
     return { success: true };
@@ -232,6 +237,7 @@ export type CreateProjectData = Omit<typeof projects.$inferInsert, "id"> & {
 }
 
 export async function createProject(data: CreateProjectData) {
+  await requireAdmin()
   try {
     console.log("Creating project with data:", JSON.stringify(data, null, 2))
     const { details, testimonials: testimonialEntries, ...projectData } = data
@@ -286,14 +292,15 @@ export async function createProject(data: CreateProjectData) {
     const errorMessage = error instanceof Error ? error.message : String(error)
     console.error("Error creating project:", errorMessage)
     console.error("Full error:", error)
-    return { 
-      success: false, 
+    return {
+      success: false,
       error: errorMessage
     }
   }
 }
 
 export async function getProjectUploadPresignedUrl(key: string, contentType: string) {
+  await requireAuth()
   try {
     const normalizedKey = key.replace(/^\/+/, "")
     const command = new PutObjectCommand({

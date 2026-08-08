@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache"
 
 import { BUCKET_NAME, r2Client } from "../../../lib/r2Client"
 import { MediaFile, MediaFolder, normalizeMediaPrefix, getFileType } from "./types"
+import { requireAuth } from "../../../lib/auth-guard"
 
 
 function extractName(key: string) {
@@ -13,6 +14,7 @@ function extractName(key: string) {
 }
 
 export async function listMedia(prefix?: string) {
+  await requireAuth()
   try {
     const normalizedPrefix = normalizeMediaPrefix(prefix)
 
@@ -72,6 +74,7 @@ export async function listMedia(prefix?: string) {
 }
 
 export async function getUploadPresignedUrl(key: string, contentType: string) {
+  await requireAuth()
   try {
     const normalizedKey = key.replace(/^\/+/, "")
     const command = new PutObjectCommand({
@@ -97,6 +100,7 @@ export async function getUploadPresignedUrl(key: string, contentType: string) {
 }
 
 export async function createFolder(folderName: string, parentPath?: string) {
+  await requireAuth()
   try {
     const normalizedParent = normalizeMediaPrefix(parentPath)
     const sanitizedFolder = folderName.replace(/\/+$/, "").trim()
@@ -163,6 +167,7 @@ async function gatherFolderKeys(prefix: string) {
 }
 
 export async function deleteMedia(key: string) {
+  await requireAuth()
   try {
     const normalizedKey = key.replace(/^\/+/, "")
 
@@ -225,6 +230,7 @@ export async function deleteMultipleMedia(keys: string[]) {
 }
 
 export async function getStorageUsage() {
+  await requireAuth()
   try {
     let totalSize = 0
     let continuationToken: string | undefined = undefined

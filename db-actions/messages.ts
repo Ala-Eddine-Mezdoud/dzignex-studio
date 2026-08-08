@@ -3,6 +3,7 @@
 import { db } from "../db/drizzle";
 import { messages } from "../db/schema/messages";
 import { eq, desc, sql } from "drizzle-orm";
+import { requireAuth } from "../lib/auth-guard";
 
 export type MessageLabel = "important" | "normal" | "scam";
 
@@ -10,6 +11,7 @@ export type MessageLabel = "important" | "normal" | "scam";
  * Get all messages ordered by creation date (newest first)
  */
 export async function getMessages() {
+  await requireAuth()
   try {
     return await db.query.messages.findMany({
       orderBy: [desc(messages.createdAt)],
@@ -24,6 +26,7 @@ export async function getMessages() {
  * Get a single message by ID
  */
 export async function getMessageById(id: string) {
+  await requireAuth()
   try {
     const message = await db.query.messages.findFirst({
       where: eq(messages.id, id),
@@ -39,6 +42,7 @@ export async function getMessageById(id: string) {
  * Update message status (e.g., mark as READ or REPLIED)
  */
 export async function updateMessageStatus(id: string, status: "UNREAD" | "READ" | "REPLIED") {
+  await requireAuth()
   try {
     await db.update(messages)
       .set({ status })
@@ -54,6 +58,7 @@ export async function updateMessageStatus(id: string, status: "UNREAD" | "READ" 
  * Delete a message by ID
  */
 export async function deleteMessage(id: string) {
+  await requireAuth()
   try {
     await db.delete(messages)
       .where(eq(messages.id, id));
@@ -68,13 +73,14 @@ export async function deleteMessage(id: string) {
  * Get total messages count or count by status
  */
 export async function getMessagesCount(status?: "UNREAD" | "READ" | "REPLIED") {
+  await requireAuth()
   try {
     const whereClause = status ? eq(messages.status, status) : undefined;
     const result = await db
       .select({ count: sql<number>`count(*)` })
       .from(messages)
       .where(whereClause);
-    
+
     return Number(result[0]?.count || 0);
   } catch (error) {
     console.error("Error counting messages:", error);
@@ -86,6 +92,7 @@ export async function getMessagesCount(status?: "UNREAD" | "READ" | "REPLIED") {
  * Update message label (important, normal, scam)
  */
 export async function updateMessageLabel(id: string, label: MessageLabel) {
+  await requireAuth()
   try {
     await db.update(messages)
       .set({ label })
