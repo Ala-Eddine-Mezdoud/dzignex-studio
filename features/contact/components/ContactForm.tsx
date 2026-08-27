@@ -24,6 +24,7 @@ import { Label } from "../../../components/ui/label"
 import { useState } from "react"
 import { toast } from "sonner"
 import { submitContactForm } from "../actions/submit-contact-form"
+import BriefReceived from "../../../components/BriefReceived"
 
 const contactFormSchema = z.object({
   fullName: z.string().min(2, {
@@ -51,6 +52,7 @@ type ContactFormValues = z.infer<typeof contactFormSchema>
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [brief, setBrief] = useState<{ data: ContactFormValues; reference: string } | null>(null)
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -74,7 +76,10 @@ const ContactForm = () => {
     try {
       const result = await submitContactForm(data)
       if (result.success) {
-        toast.success("Message sent successfully! We'll get back to you soon.")
+        const now = new Date()
+        const mmdd = `${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`
+        const reference = `DZX-${mmdd}-${String(Math.floor(1000 + Math.random() * 9000))}`
+        setBrief({ data, reference })
         form.reset()
       } else {
         toast.error(result.error || "Failed to send message. Please try again.")
@@ -154,6 +159,13 @@ const ContactForm = () => {
   }
 
   return (
+    <>
+    <BriefReceived
+      open={!!brief}
+      data={brief?.data ?? null}
+      reference={brief?.reference ?? null}
+      onClose={() => setBrief(null)}
+    />
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {/* Full Name */}
@@ -399,6 +411,7 @@ const ContactForm = () => {
         {isSubmitting ? "Sending..." : "Send Message"} <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-[2px]"  size={30} />
       </button>
     </form>
+    </>
   )
 }
 
