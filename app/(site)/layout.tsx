@@ -7,6 +7,8 @@ import SupportChat from "../../components/SupportChat";
 import SmoothScroll from "../../components/SmoothScroll";
 import PageTransition from "../../components/PageTransition";
 import ScrollProgress from "../../components/ScrollProgress";
+import GrainOverlay from "../../components/GrainOverlay";
+import CustomCursor from "../../components/CustomCursor";
 import "../globals.css";
 import { ThemeProvider } from "../../components/theme-provider";
 import { Toaster } from "../../components/ui/sonner";
@@ -48,6 +50,8 @@ export default function RootLayout({
           <SmoothScroll>
             <PageTransition />
             <ScrollProgress />
+            <GrainOverlay />
+            <CustomCursor />
             <NavBar />
             {children}
             <NextStep />

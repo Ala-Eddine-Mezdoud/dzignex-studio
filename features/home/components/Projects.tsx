@@ -96,7 +96,8 @@ const Projects = ({ initialProjects }: ProjectsProps) => {
                 <div
                   id={project.id}
                   ref={(el) => { projectRefs.current[project.id] = el; }}
-                className="w-full border border-dzignex-white/15 group"
+                  data-cursor="View"
+                  className="w-full border border-dzignex-white/15 group"
                 >
                   {/* Card Image */}
                   {project.thumbnailUrl ? (
