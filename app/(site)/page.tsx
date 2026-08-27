@@ -30,7 +30,6 @@ export default async function HomePage() {
       <Services />
       <Process />
       <Testimonials />
-      <Team />
       <Faq />
     </div>
   )
