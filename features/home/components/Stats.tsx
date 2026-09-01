@@ -17,8 +17,8 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: 5, suffix: "+", label: "Deep experience across diverse industries" },
-  { value: 100, suffix: "+", label: "From cosmetics, pharma to SaaS and event branding" },
+  { value: 5, suffix: "+", label: "Years of deep experience across diverse industries" },
+  { value: 100, suffix: "+", label: "Projects across cosmetics, pharma, SaaS and event branding" },
   { value: 50, suffix: "+", label: "Partners who trust our work" },
   { value: 97, suffix: "%", label: "Delivering beyond expectations" },
 ];

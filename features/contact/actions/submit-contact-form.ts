@@ -2,6 +2,7 @@
 
 import { db } from "../../../db/drizzle"
 import { messages } from "../../../db/schema/messages"
+import { sendContactNotificationEmail } from "../../../lib/email"
 import { z } from "zod"
 
 const contactFormSchema = z.object({
@@ -34,6 +35,11 @@ export async function submitContactForm(data: z.infer<typeof contactFormSchema>)
       challenges: validatedData.challenges,
       mainGoal: validatedData.mainGoal,
       message: validatedData.message,
+    })
+
+    // Best-effort notification — a failed email should never fail the submission.
+    sendContactNotificationEmail(validatedData).catch((error) => {
+      console.error("Error sending contact notification email:", error)
     })
 
     return { success: true }

@@ -24,8 +24,8 @@ const testimonialsData = [
     logoSrc: "/logos/Avure.svg",
     authorName: "Abdennour. A",
     authorRole: "Founder, Avure Skincare",
-    feedback: "We've been working with Dzignex Studio for months and we are truly impressed by your professionalism, responsiveness, and eye for modern, minimalist design. You perfectly captured our vision at Avure and translated it into a strong visual identity. A talented and dedicated partner we highly recommend. Thank you for your great work!",
-    statValue: "+12",
+    feedback: "We've been working with Dzignex Studio and are truly impressed by their professionalism, responsiveness, and eye for modern, minimalist design. They perfectly captured our brand vision at Avure and translated it into a strong identity we're proud of.",
+    statValue: "+24",
     statLabel: "Months Partnership",
     imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/bc304a5a-66cc-422f-b4bf-635667becf75-2876f8e0-a67e-4573-a45e-6e3e264c1eab.jpg"
   },
@@ -34,106 +34,80 @@ const testimonialsData = [
     brandName: "Formura Labs",
     logoType: "image",
     logoSrc: "/logos/Formura.svg",
-    authorName: "Lyes. K",
-    authorRole: "Co-Founder, Formura Labs",
-    feedback: "Dzignex took our packaging from concept to a premium retail-ready product. Their attention to detail on custom dielines, print specifications, and rendering was stellar. The brand voice is fully integrated into every single box design. Outstanding work that significantly drove our initial launch sales.",
-    statValue: "+8",
-    statLabel: "Products Launched",
+    authorName: "Samira Belounnas",
+    authorRole: "Founder, Formura Labs",
+    feedback: "Dzignex delivered a clean, professional, and visually appealing design for Formura Labs. We're very happy with the overall result and how it elevated every sub-brand under our umbrella.",
+    statValue: "+5",
+    statLabel: "Sub-brands Launched",
     imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/a100133d-94b3-4413-8910-8c0a227ec460-Formura Presentation Cover.png"
   },
   {
-    id: "auravita",
-    brandName: "AURAVITA",
+    id: "opsfirst",
+    brandName: "Ops First",
     logoType: "image",
-    logoSrc: "/logos/Auravita Logo.svg",
-    authorName: "Sofia. M",
-    authorRole: "Creative Director, Auravita",
-    feedback: "Working with Dzignex was a collaborative masterclass. They helped us restructure our visual identity and product aesthetics to capture a sophisticated, modern demographic. We saw a huge increase in social engagement and customer retention since releasing the new identity.",
-    statValue: "+150%",
-    statLabel: "Brand Value Growth",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/6e71fd23-d0d8-4188-80c5-a7edb7795470-27ca1135-1774-417b-aea9-e76d7cc6942d.jpg"
-  },
-  {
-    id: "ravelle",
-    brandName: "Ravelle",
-    logoType: "image",
-    logoSrc: "/logos/Ravelle.svg",
-    authorName: "Amine. T",
-    authorRole: "Marketing Lead, Ravelle",
-    feedback: "The motion and landing page designs delivered by Dzignex have completely transformed our lead generation. The animations are fluid, scroll interactions are smooth, and the design language communicates premium quality instantly. Highly responsive team.",
-    statValue: "+45%",
-    statLabel: "Conversion Rate Increase",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/e4fa9617-312f-4a48-8296-8903d5b1fca6-d5575c70-2335-48cc-ac27-c065a2e023f7.jpg"
+    logoSrc: "/logos/Ops-First.svg",
+    authorName: "Anis Hacini",
+    authorRole: "CEO & Founder, Ops First",
+    feedback: "Onboarding with Dzignex was smooth from day one. They took the time to truly understand our brand, did their due diligence, and delivered far beyond visual assets — they built us a complete identity.",
+    statValue: "+28%",
+    statLabel: "Service Improvement",
+    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/2853ac4b-01ea-4946-b82f-bab45620f40b-OPS Presentation Cover.jpg"
   },
   {
     id: "chayame",
     brandName: "CHAYAME",
     logoType: "custom-chayame",
-    authorName: "Yuki. T",
-    authorRole: "Founder, Chayame",
-    feedback: "The visual language and packaging built by Dzignex brought our premium tea collection to life. They created a gorgeous fusion of traditional minimalism and contemporary layout that instantly grabs attention on retail shelves and online campaigns.",
-    statValue: "+15k",
-    statLabel: "Packets Sold Globally",
+    authorName: "Achraf. D",
+    authorRole: "Marketing Manager, Chayame",
+    feedback: "Dzignex offered strong customer service throughout a smooth process. They understood our brand quickly and executed with real precision, exactly what Chayame needed.",
+    statValue: "+35%",
+    statLabel: "Brand Appeal",
     imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/3894e74a-e2aa-4a3a-a202-df82d325ba4a-55f83111-75de-46ae-acba-32606ba23803.jpg"
   },
   {
-    id: "timeplus",
-    brandName: "TimePlus",
-    logoType: "custom-timeplus",
-    authorName: "Omar. B",
-    authorRole: "Founder, TimePlus",
-    feedback: "Very satisfied with the experience with Dzignex Studio! Thank you for the fast service, attentive listening to our needs, and the professional quality of communication and execution. Excellent value for money that exceeded our expectations.",
-    statValue: "+20",
-    statLabel: "Custom Assets Delivered",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/b09e9cd3-be7b-4789-a125-60cd0d4f6e19-menotopia-02.png"
+    id: "onaira",
+    brandName: "Onaira",
+    logoType: "custom-onaira",
+    authorName: "Chouaa. B",
+    authorRole: "Founder, Onaira",
+    feedback: "The whole process with Dzignex was smooth, communication was easy, and the final result exceeded our expectations. We'd happily recommend Dzignex for future projects.",
+    statValue: "+10",
+    statLabel: "Product Designs",
+    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/e4fa9617-312f-4a48-8296-8903d5b1fca6-d5575c70-2335-48cc-ac27-c065a2e023f7.jpg"
   },
   {
     id: "dermology",
     brandName: "Dermology",
     logoType: "image",
     logoSrc: "/logos/Dermology logo 1 2 1.svg",
-    authorName: "Sarah. H",
-    authorRole: "Founder, Dermology",
-    feedback: "Dzignex is the ultimate design partner. They understood our clean, clinical brand approach and created packaging and graphics that stood out instantly in a saturated market. Their execution speed and constant communication made the process seamless.",
-    statValue: "+10",
-    statLabel: "Skincare Product Lines",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/bc304a5a-66cc-422f-b4bf-635667becf75-2876f8e0-a67e-4573-a45e-6e3e264c1eab.jpg"
+    authorName: "Islem Benbrahim",
+    authorRole: "Founder, Dermology Skincare",
+    feedback: "Our experience with Dzignex has been overwhelmingly positive. We're looking forward to building a long-term partnership with the team.",
+    statValue: "+12",
+    statLabel: "Months Partnership",
+    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/6e71fd23-d0d8-4188-80c5-a7edb7795470-27ca1135-1774-417b-aea9-e76d7cc6942d.jpg"
   },
   {
-    id: "estidama",
-    brandName: "Estidama",
-    logoType: "image",
-    logoSrc: "/logos/Estidama.svg",
-    authorName: "Yasmine. A",
-    authorRole: "Sustainability Officer, Estidama",
-    feedback: "Their sustainable packaging guidelines and visual assets perfectly aligned with our ecological vision. Dzignex knows how to combine green, eco-friendly messaging with high-end, premium minimalist branding without compromises.",
-    statValue: "100%",
-    statLabel: "Eco-Friendly Materials",
+    id: "menotopia",
+    brandName: "Menotopia",
+    logoType: "custom-menotopia",
+    authorName: "Mohamed Ghazali",
+    authorRole: "Founder, Menotopia",
+    feedback: "Collaborating with Dzignex was smooth and reactive. They understood our feedback quickly, brought real creativity to the table, and combined professionalism with a genuine human touch.",
+    statValue: "+5",
+    statLabel: "Brands Launched",
+    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/b09e9cd3-be7b-4789-a125-60cd0d4f6e19-menotopia-02.png"
+  },
+  {
+    id: "timeplus",
+    brandName: "TimePlus",
+    logoType: "custom-timeplus",
+    authorName: "Omar Bekelli",
+    authorRole: "Founder, Timeplus",
+    feedback: "Very satisfied with the experience with Dzignex Studio! Thank you for the prompt service, attentive communication, and professional quality of execution. Excellent value that exceeded our expectations.",
+    statValue: "+50",
+    statLabel: "Assets Delivered",
     imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/a4947593-08d7-42b1-8aea-e1b1dd6cd68a-a8dd04fe-08cf-4ffb-8610-641926359a4d.jpg"
-  },
-  {
-    id: "opsfirst",
-    brandName: "Ops-First",
-    logoType: "image",
-    logoSrc: "/logos/Ops-First.svg",
-    authorName: "Karim. Z",
-    authorRole: "COO, Ops-First",
-    feedback: "Dzignex built our complete brand identity and sales decks. They managed to take complex operations workflows and structure them into highly intuitive, premium presentations. Their work has been crucial in securing our Series A funding.",
-    statValue: "+$5M",
-    statLabel: "Capital Raised Safely",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/2853ac4b-01ea-4946-b82f-bab45620f40b-OPS Presentation Cover.jpg"
-  },
-  {
-    id: "vectorial",
-    brandName: "Vectorial",
-    logoType: "image",
-    logoSrc: "/logos/Vectorial.svg",
-    authorName: "Mourad. B",
-    authorRole: "CEO, Vectorial",
-    feedback: "Their ability to translate technical SaaS interfaces into elegant visual graphics for social marketing is unparalleled. We've seen a direct impact on trial signups since working with Dzignex on our organic channels.",
-    statValue: "+80%",
-    statLabel: "Trial Signups Boost",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/636210e3-b3af-43ef-a9cf-dd528fcec50f-e83fe148-7dbf-48d2-967b-33ba19d8ae41.jpg"
   }
 ];
 
@@ -196,13 +170,13 @@ const Testimonials = () => {
 
   const getBorderClass = (index: number) => {
     let classes = "border-dzignex-white/15 ";
-    
+
     // Horizontal borders
-    classes += index < 5 ? "border-b " : "md:border-b-0 ";
-    classes += index < 8 ? "max-md:border-b " : "max-md:border-b-0 ";
+    classes += index < 4 ? "border-b " : "md:border-b-0 ";
+    classes += index < 6 ? "max-md:border-b " : "max-md:border-b-0 ";
 
     // Vertical borders
-    classes += (index % 5 !== 4) ? "md:border-r " : "md:border-r-0 ";
+    classes += (index % 4 !== 3) ? "md:border-r " : "md:border-r-0 ";
     classes += (index % 2 === 0) ? "max-md:border-r " : "max-md:border-r-0 ";
 
     return classes;
@@ -349,7 +323,7 @@ const Testimonials = () => {
         </div>
 
         {/* Interactive Brand Grid */}
-        <div className="mx-6 lg:mx-16 grid grid-cols-2 md:grid-cols-5 border border-t-0 border-dzignex-white/15">
+        <div className="mx-6 lg:mx-16 grid grid-cols-2 md:grid-cols-4 border border-t-0 border-dzignex-white/15">
           {testimonialsData.map((brand, index) => {
             const isSelected = selectedBrandId === brand.id;
 
@@ -392,6 +366,14 @@ const Testimonials = () => {
                   ) : brand.logoType === "custom-chayame" ? (
                     <div className="flex items-center gap-1 font-bold text-white text-base lg:text-lg tracking-widest uppercase font-serif">
                       CHAYAME
+                    </div>
+                  ) : brand.logoType === "custom-onaira" ? (
+                    <div className="flex items-center gap-1 font-bold text-white text-base lg:text-lg tracking-tighter">
+                      Onaira
+                    </div>
+                  ) : brand.logoType === "custom-menotopia" ? (
+                    <div className="flex items-center gap-1 font-bold text-white text-base lg:text-lg tracking-tighter">
+                      Menotopia
                     </div>
                   ) : null}
                 </div>

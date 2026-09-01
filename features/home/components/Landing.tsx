@@ -13,23 +13,22 @@ const HEADLINE_LINES = [
 ] as const;
 
 const DEMO_IMAGES = [
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/33ef9e7b-8ca6-4758-9a19-5c4b4024ea64-f46ed080-327d-4a29-9781-5c1a244434f4.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/6e71fd23-d0d8-4188-80c5-a7edb7795470-27ca1135-1774-417b-aea9-e76d7cc6942d.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/b3a735cf-fdb0-4f28-b482-7bbbb5b9b64a-bf056ce7-c864-4ebb-bec6-f1999d3c92a2.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/2853ac4b-01ea-4946-b82f-bab45620f40b-OPS Presentation Cover.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/aeada02a-1b83-4bc9-88c1-e22d32dc996c-ARC - Presentation Cover.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/a100133d-94b3-4413-8910-8c0a227ec460-Formura Presentation Cover.png",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/bc304a5a-66cc-422f-b4bf-635667becf75-2876f8e0-a67e-4573-a45e-6e3e264c1eab.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/a4947593-08d7-42b1-8aea-e1b1dd6cd68a-a8dd04fe-08cf-4ffb-8610-641926359a4d.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/636210e3-b3af-43ef-a9cf-dd528fcec50f-e83fe148-7dbf-48d2-967b-33ba19d8ae41.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/3894e74a-e2aa-4a3a-a202-df82d325ba4a-55f83111-75de-46ae-acba-32606ba23803.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/e4fa9617-312f-4a48-8296-8903d5b1fca6-d5575c70-2335-48cc-ac27-c065a2e023f7.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/b09e9cd3-be7b-4789-a125-60cd0d4f6e19-menotopia-02.png",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/2853ac4b-01ea-4946-b82f-bab45620f40b-OPS Presentation Cover.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/aeada02a-1b83-4bc9-88c1-e22d32dc996c-ARC - Presentation Cover.jpg",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/a100133d-94b3-4413-8910-8c0a227ec460-Formura Presentation Cover.png",
-  "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/e4fa9617-312f-4a48-8296-8903d5b1fca6-d5575c70-2335-48cc-ac27-c065a2e023f7.jpg",
-
+  "/hero/hero-1.png",
+  "/hero/hero-2.png",
+  "/hero/hero-3.png",
+  "/hero/hero-4.png",
+  "/hero/hero-5.png",
+  "/hero/hero-6.png",
+  "/hero/hero-7.png",
+  "/hero/hero-8.png",
+  "/hero/hero-9.png",
+  "/hero/hero-1.png",
+  "/hero/hero-2.png",
+  "/hero/hero-3.png",
+  "/hero/hero-4.png",
+  "/hero/hero-5.png",
+  "/hero/hero-6.png",
+  "/hero/hero-7.png",
 ];
 
 

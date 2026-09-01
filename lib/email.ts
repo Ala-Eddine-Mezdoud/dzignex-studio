@@ -516,3 +516,100 @@ The Dzignex Studio Team`;
     senderEmail,
   });
 }
+
+/**
+ * Notify the studio inbox that a new contact form submission came in.
+ */
+export async function sendContactNotificationEmail(submission: {
+  fullName: string;
+  email: string;
+  whatsappNumber: string;
+  companyName: string;
+  industry: string;
+  serviceRequired: string[];
+  websiteOrInstagram?: string;
+  budgetRange?: string;
+  challenges?: string[];
+  mainGoal?: string[];
+  message?: string;
+}): Promise<SendEmailResult> {
+  const notifyTo = process.env.CONTACT_NOTIFICATION_EMAIL || process.env.SMTP_USER || "";
+
+  const row = (label: string, value?: string | string[]) => {
+    const display = Array.isArray(value) ? value.join(", ") : value;
+    if (!display) return "";
+    return `
+      <tr>
+        <td style="padding:10px 0; border-bottom:1px solid #222; font-size:13px; color:#888888; white-space:nowrap; vertical-align:top;">${label}</td>
+        <td style="padding:10px 0 10px 20px; border-bottom:1px solid #222; font-size:15px; color:#ffffff;">${display}</td>
+      </tr>
+    `;
+  };
+
+  const html = `
+    <body style="margin:0; padding:0; background:#010110; font-family:'DM Sans', Arial, sans-serif;">
+      <div style="max-width:600px; margin:auto; background:#010110; color:#ffffff; padding:40px 30px;">
+
+        <h1 style="text-align:center; color:#ffffff; font-size:32px; font-weight:700; margin:0 0 30px;">
+          NEW <span style="color:#0C3EFF;">CONTACT FORM</span> SUBMISSION
+        </h1>
+
+        <p style="font-size:15px; line-height:1.6; color:#cccccc; margin-bottom:25px; text-align:center;">
+          A new lead just submitted the contact form on the website.
+        </p>
+
+        <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
+          ${row("Full Name", submission.fullName)}
+          ${row("Email", submission.email)}
+          ${row("WhatsApp", submission.whatsappNumber)}
+          ${row("Company", submission.companyName)}
+          ${row("Industry", submission.industry)}
+          ${row("Services", submission.serviceRequired)}
+          ${row("Website / Instagram", submission.websiteOrInstagram)}
+          ${row("Budget Range", submission.budgetRange)}
+          ${row("Challenges", submission.challenges)}
+          ${row("Main Goal", submission.mainGoal)}
+          ${row("Message", submission.message)}
+        </table>
+
+        <div style="border-top: 1px solid #333; padding-top: 20px; text-align: center;">
+          <p style="font-size:12px; color:#888888; margin:0;">
+            © ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
+          </p>
+        </div>
+
+      </div>
+    </body>
+  `;
+
+  const textLine = (label: string, value?: string | string[]) => {
+    const display = Array.isArray(value) ? value.join(", ") : value;
+    return display ? `${label}: ${display}` : "";
+  };
+
+  const text = [
+    "New Contact Form Submission",
+    "",
+    textLine("Full Name", submission.fullName),
+    textLine("Email", submission.email),
+    textLine("WhatsApp", submission.whatsappNumber),
+    textLine("Company", submission.companyName),
+    textLine("Industry", submission.industry),
+    textLine("Services", submission.serviceRequired),
+    textLine("Website / Instagram", submission.websiteOrInstagram),
+    textLine("Budget Range", submission.budgetRange),
+    textLine("Challenges", submission.challenges),
+    textLine("Main Goal", submission.mainGoal),
+    textLine("Message", submission.message),
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  return sendEmail({
+    to: notifyTo,
+    subject: `New Contact Form Submission — ${submission.fullName} (${submission.companyName})`,
+    html,
+    text,
+    category: "contact_notification",
+  });
+}
