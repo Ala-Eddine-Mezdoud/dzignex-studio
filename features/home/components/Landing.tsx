@@ -3,6 +3,7 @@ import {ArrowUpRight} from 'lucide-react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from "framer-motion";
 import Magnetic from "../../../components/Magnetic";
+import { useIntroGate } from "../../../components/introGate";
 
 // The headline is split into deliberate display lines so each one can be
 // revealed independently behind its own clipping mask.
@@ -13,22 +14,22 @@ const HEADLINE_LINES = [
 ] as const;
 
 const DEMO_IMAGES = [
-  "/hero/hero-1.png",
-  "/hero/hero-2.png",
-  "/hero/hero-3.png",
-  "/hero/hero-4.png",
-  "/hero/hero-5.png",
-  "/hero/hero-6.png",
-  "/hero/hero-7.png",
-  "/hero/hero-8.png",
-  "/hero/hero-9.png",
-  "/hero/hero-1.png",
-  "/hero/hero-2.png",
-  "/hero/hero-3.png",
-  "/hero/hero-4.png",
-  "/hero/hero-5.png",
-  "/hero/hero-6.png",
-  "/hero/hero-7.png",
+  "/hero/hero-1.webp",
+  "/hero/hero-2.webp",
+  "/hero/hero-3.webp",
+  "/hero/hero-4.webp",
+  "/hero/hero-5.webp",
+  "/hero/hero-6.webp",
+  "/hero/hero-7.webp",
+  "/hero/hero-8.webp",
+  "/hero/hero-9.webp",
+  "/hero/hero-1.webp",
+  "/hero/hero-2.webp",
+  "/hero/hero-3.webp",
+  "/hero/hero-4.webp",
+  "/hero/hero-5.webp",
+  "/hero/hero-6.webp",
+  "/hero/hero-7.webp",
 ];
 
 
@@ -36,6 +37,9 @@ const DEMO_IMAGES = [
 
 const Landing = () => {
   const reduceMotion = useReducedMotion();
+  // Held until the loading screen's curtain starts lifting, so this entrance
+  // plays into view instead of finishing unseen behind it.
+  const ready = useIntroGate();
 
   return (
 
@@ -66,10 +70,10 @@ const Landing = () => {
                 <motion.span
                   className={`block ${line.className}`}
                   initial={reduceMotion ? false : { y: "115%" }}
-                  animate={{ y: "0%" }}
+                  animate={ready ? { y: "0%" } : { y: "115%" }}
                   transition={{
-                    duration: 1,
-                    delay: 0.15 + i * 0.12,
+                    duration: 0.85,
+                    delay: 0.08 + i * 0.1,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                 >
@@ -81,8 +85,8 @@ const Landing = () => {
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
+            animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
             className="max-w-2xl text-base sm:text-lg lg:text-xl font-medium text-dzignex-white/80 mx-auto mt-6 md:mt-8"
           >
             Design that speaks, packaging that sells, and brands people remember.
@@ -93,8 +97,8 @@ const Landing = () => {
               <Magnetic className="inline-block mt-8 md:mt-12">
               <motion.button
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ delay: 1.1, duration: 0.6, ease: [0.175, 0.885, 0.32, 1.275] }}
+                animate={ready ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ delay: 0.65, duration: 0.5, ease: [0.175, 0.885, 0.32, 1.275] }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="group bg-dzignex-white text-dzignex-black flex gap-1 items-end px-4 py-2 text-base lg:text-xl font-semibold tracking-tight uppercase relative"
@@ -119,8 +123,8 @@ const Landing = () => {
         {/* Animated Image Marquee */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.8, ease: "easeOut" }}
+          animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
           className="mt-12 md:mt-16 relative"
         >
           <div className="w-full h-48 md:h-64 lg:h-96 pt-8  [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] z-1">
@@ -150,19 +154,30 @@ const Landing = () => {
                     transition: { duration: 0.3 },
                   }}
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    transition: {
-                      delay: 1.6 + index * 0.05,
-                      duration: 0.5,
-                      ease: "backOut",
-                    },
-                  }}
+                  animate={
+                    ready
+                      ? {
+                          opacity: 1,
+                          scale: 1,
+                          transition: {
+                            delay: 0.9 + index * 0.035,
+                            duration: 0.45,
+                            ease: "backOut",
+                          },
+                        }
+                      : { opacity: 0, scale: 0.8 }
+                  }
                 >
                   <img
                     src={src}
                     alt={`Showcase image ${index + 1}`}
+                    width={720}
+                    height={960}
+                    // The row slides from x:-100% to 0, so the tail of the
+                    // list is what crosses the viewport first — fetch those
+                    // up front and let the rest stream in lazily.
+                    loading={index >= DEMO_IMAGES.length - 5 ? "eager" : "lazy"}
+                    decoding="async"
                     className="w-full h-full object-cover rounded-2xl shadow-md transition-shadow duration-300 hover:shadow-2xl hover:shadow-dzignex-blue/20"
                   />
                 </motion.div>

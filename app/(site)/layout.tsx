@@ -3,12 +3,12 @@ import { DM_Sans } from "next/font/google";
 import NavBar from "../../components/NavBar";
 import NextStep from "../../components/NextStep";
 import Footer from "../../components/Footer";
-import SupportChat from "../../components/SupportChat";
 import SmoothScroll from "../../components/SmoothScroll";
 import PageTransition from "../../components/PageTransition";
 import ScrollProgress from "../../components/ScrollProgress";
+import LoadingScreen from "../../components/LoadingScreen";
+import SupportChatLazy from "../../components/SupportChatLazy";
 import GrainOverlay from "../../components/GrainOverlay";
-import CustomCursor from "../../components/CustomCursor";
 import "../globals.css";
 import { ThemeProvider } from "../../components/theme-provider";
 import { Toaster } from "../../components/ui/sonner";
@@ -18,6 +18,7 @@ import Script from "next/script";
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 export const metadata: Metadata = {
   title: "Dzignex Studio",
@@ -37,8 +38,18 @@ export default function RootLayout({
           defer
           src="https://cloud.umami.is/script.js"
           data-website-id="88862ea3-0787-4a41-b529-d603e616a87b"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
+        {/* Runs before first paint: a visitor who already watched the intro
+            this tab never sees even one frame of it again. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('dzx-intro')==='1')document.documentElement.classList.add('dzx-intro-seen')}catch(e){}",
+          }}
+        />
+        {/* First hero tile to cross the viewport as the marquee slides in. */}
+        <link rel="preload" as="image" href="/hero/hero-7.webp" />
       </head>
       <body className={[dmSans.className, "antialiased bg-dzignex-black text-white"].join(" ")}>
         <ThemeProvider
@@ -47,17 +58,17 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+          <LoadingScreen />
           <SmoothScroll>
             <PageTransition />
             <ScrollProgress />
             <GrainOverlay />
-            <CustomCursor />
             <NavBar />
             {children}
             <NextStep />
             <Footer />
             <Toaster />
-            <SupportChat />
+            <SupportChatLazy />
           </SmoothScroll>
         </ThemeProvider>
       </body>

@@ -49,7 +49,7 @@ function ErrorState({
         <Image
           width={1920}
           height={1080}
-          src="/footerBg.png"
+          src="/footerBg.webp"
           alt="Image"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />

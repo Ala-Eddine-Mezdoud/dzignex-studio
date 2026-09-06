@@ -22,7 +22,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <div className="w-full min-h-screen bg-[url('/footerBg.png')] overflow-hidden">
+    <div className="w-full min-h-screen bg-[url('/footerBg.webp')] overflow-hidden">
 
         <div className="container mx-auto border-r-2 border-l-2 border-dzignex-white/15 p-6 lg:p-16">
             <div>

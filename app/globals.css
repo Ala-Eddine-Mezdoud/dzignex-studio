@@ -176,19 +176,6 @@
   .grain-overlay { animation: none; }
 }
 
-/* ---- Custom cursor --------------------------------------------------- */
-/* Hide the native cursor only once the custom one is actually running,
-   but keep it on real text-entry fields so typing still feels normal. */
-html.has-custom-cursor,
-html.has-custom-cursor * {
-  cursor: none;
-}
-html.has-custom-cursor input,
-html.has-custom-cursor textarea,
-html.has-custom-cursor [contenteditable="true"] {
-  cursor: auto;
-}
-
 /* ---- Dex chat scrollbar --------------------------------------------- */
 .dex-scroll {
   scrollbar-width: thin;
@@ -206,4 +193,11 @@ html.has-custom-cursor [contenteditable="true"] {
 }
 .dex-scroll::-webkit-scrollbar-thumb:hover {
   background: color-mix(in oklab, #0C3EFF 75%, transparent);
+}
+/* ---- First-load intro ------------------------------------------------- */
+/* Paired with the inline guard in the site layout: hides the loader before
+   the first paint for anyone who already watched it this tab, so a warm
+   navigation never flashes the screen it's meant to replace. */
+.dzx-intro-seen [data-dzx-loader] {
+  display: none !important;
 }
