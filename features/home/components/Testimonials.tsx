@@ -20,94 +20,90 @@ const testimonialsData = [
   {
     id: "avure",
     brandName: "Avure",
-    logoType: "image",
-    logoSrc: "/logos/Avure.svg",
+    logoSrc: "/testimonials/avure-logo.svg",
     authorName: "Abdennour. A",
     authorRole: "Founder, Avure Skincare",
     feedback: "We've been working with Dzignex Studio and are truly impressed by their professionalism, responsiveness, and eye for modern, minimalist design. They perfectly captured our brand vision at Avure and translated it into a strong identity we're proud of.",
     statValue: "+24",
     statLabel: "Months Partnership",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/bc304a5a-66cc-422f-b4bf-635667becf75-2876f8e0-a67e-4573-a45e-6e3e264c1eab.jpg"
+    imageSrc: "/testimonials/avure.webp"
   },
   {
     id: "formura",
     brandName: "Formura Labs",
-    logoType: "image",
-    logoSrc: "/logos/Formura.svg",
+    logoSrc: "/testimonials/formura-logo.svg",
     authorName: "Samira Belounnas",
     authorRole: "Founder, Formura Labs",
     feedback: "Dzignex delivered a clean, professional, and visually appealing design for Formura Labs. We're very happy with the overall result and how it elevated every sub-brand under our umbrella.",
     statValue: "+5",
     statLabel: "Sub-brands Launched",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/a100133d-94b3-4413-8910-8c0a227ec460-Formura Presentation Cover.png"
+    imageSrc: "/testimonials/formura.webp"
   },
   {
     id: "opsfirst",
     brandName: "Ops First",
-    logoType: "image",
-    logoSrc: "/logos/Ops-First.svg",
+    logoSrc: "/testimonials/opsfirst-logo.svg",
     authorName: "Anis Hacini",
     authorRole: "CEO & Founder, Ops First",
     feedback: "Onboarding with Dzignex was smooth from day one. They took the time to truly understand our brand, did their due diligence, and delivered far beyond visual assets — they built us a complete identity.",
     statValue: "+28%",
     statLabel: "Service Improvement",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/2853ac4b-01ea-4946-b82f-bab45620f40b-OPS Presentation Cover.jpg"
+    imageSrc: "/testimonials/opsfirst.webp"
   },
   {
     id: "chayame",
     brandName: "CHAYAME",
-    logoType: "custom-chayame",
+    logoSrc: "/testimonials/chayame-logo.svg",
     authorName: "Achraf. D",
     authorRole: "Marketing Manager, Chayame",
     feedback: "Dzignex offered strong customer service throughout a smooth process. They understood our brand quickly and executed with real precision, exactly what Chayame needed.",
     statValue: "+35%",
     statLabel: "Brand Appeal",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/3894e74a-e2aa-4a3a-a202-df82d325ba4a-55f83111-75de-46ae-acba-32606ba23803.jpg"
+    imageSrc: "/testimonials/chayame.webp"
   },
   {
     id: "onaira",
     brandName: "Onaira",
-    logoType: "custom-onaira",
+    logoSrc: "/testimonials/onaira-logo.svg",
     authorName: "Chouaa. B",
     authorRole: "Founder, Onaira",
     feedback: "The whole process with Dzignex was smooth, communication was easy, and the final result exceeded our expectations. We'd happily recommend Dzignex for future projects.",
     statValue: "+10",
     statLabel: "Product Designs",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/e4fa9617-312f-4a48-8296-8903d5b1fca6-d5575c70-2335-48cc-ac27-c065a2e023f7.jpg"
+    imageSrc: "/testimonials/onaira.webp"
   },
   {
     id: "dermology",
     brandName: "Dermology",
-    logoType: "image",
-    logoSrc: "/logos/Dermology logo 1 2 1.svg",
+    logoSrc: "/testimonials/dermology-logo.svg",
     authorName: "Islem Benbrahim",
     authorRole: "Founder, Dermology Skincare",
     feedback: "Our experience with Dzignex has been overwhelmingly positive. We're looking forward to building a long-term partnership with the team.",
     statValue: "+12",
     statLabel: "Months Partnership",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/6e71fd23-d0d8-4188-80c5-a7edb7795470-27ca1135-1774-417b-aea9-e76d7cc6942d.jpg"
+    imageSrc: "/testimonials/dermology.webp"
   },
   {
     id: "menotopia",
     brandName: "Menotopia",
-    logoType: "custom-menotopia",
+    logoSrc: "/testimonials/menotopia-logo.svg",
     authorName: "Mohamed Ghazali",
     authorRole: "Founder, Menotopia",
     feedback: "Collaborating with Dzignex was smooth and reactive. They understood our feedback quickly, brought real creativity to the table, and combined professionalism with a genuine human touch.",
     statValue: "+5",
     statLabel: "Brands Launched",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/thumbnails/b09e9cd3-be7b-4789-a125-60cd0d4f6e19-menotopia-02.png"
+    imageSrc: "/testimonials/menotopia.webp"
   },
   {
     id: "timeplus",
     brandName: "TimePlus",
-    logoType: "custom-timeplus",
+    logoSrc: "/testimonials/timeplus-logo.svg",
     authorName: "Omar Bekelli",
     authorRole: "Founder, Timeplus",
     feedback: "Very satisfied with the experience with Dzignex Studio! Thank you for the prompt service, attentive communication, and professional quality of execution. Excellent value that exceeded our expectations.",
     statValue: "+50",
     statLabel: "Assets Delivered",
-    imageSrc: "https://pub-eb9df4e4e43449d7812ea91fc1940651.r2.dev/projects/details/a4947593-08d7-42b1-8aea-e1b1dd6cd68a-a8dd04fe-08cf-4ffb-8610-641926359a4d.jpg"
+    imageSrc: "/testimonials/timeplus.webp"
   }
 ];
 
@@ -349,33 +345,11 @@ const Testimonials = () => {
 
                 {/* Brand Render */}
                 <div className={`transition-opacity duration-300 ${isSelected ? "opacity-100" : "opacity-40 group-hover:opacity-100"}`}>
-                  {brand.logoType === "image" ? (
-                    <img
-                      src={brand.logoSrc}
-                      alt={brand.brandName}
-                      className="h-7 lg:h-8 w-auto max-w-[140px] object-contain brightness-0 invert"
-                    />
-                  ) : brand.logoType === "custom-timeplus" ? (
-                    <div className="flex items-center gap-1 font-bold text-white text-base lg:text-lg tracking-tighter">
-                      <svg className="w-5 h-5 text-dzignex-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                        <circle cx="12" cy="12" r="10" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4" />
-                      </svg>
-                      TimePlus
-                    </div>
-                  ) : brand.logoType === "custom-chayame" ? (
-                    <div className="flex items-center gap-1 font-bold text-white text-base lg:text-lg tracking-widest uppercase font-serif">
-                      CHAYAME
-                    </div>
-                  ) : brand.logoType === "custom-onaira" ? (
-                    <div className="flex items-center gap-1 font-bold text-white text-base lg:text-lg tracking-tighter">
-                      Onaira
-                    </div>
-                  ) : brand.logoType === "custom-menotopia" ? (
-                    <div className="flex items-center gap-1 font-bold text-white text-base lg:text-lg tracking-tighter">
-                      Menotopia
-                    </div>
-                  ) : null}
+                  <img
+                    src={brand.logoSrc}
+                    alt={brand.brandName}
+                    className="h-7 lg:h-8 w-auto max-w-[140px] object-contain brightness-0 invert"
+                  />
                 </div>
               </button>
             );

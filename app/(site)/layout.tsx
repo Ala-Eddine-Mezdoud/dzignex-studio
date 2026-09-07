@@ -6,7 +6,6 @@ import Footer from "../../components/Footer";
 import SmoothScroll from "../../components/SmoothScroll";
 import PageTransition from "../../components/PageTransition";
 import ScrollProgress from "../../components/ScrollProgress";
-import LoadingScreen from "../../components/LoadingScreen";
 import SupportChatLazy from "../../components/SupportChatLazy";
 import GrainOverlay from "../../components/GrainOverlay";
 import "../globals.css";
@@ -40,14 +39,6 @@ export default function RootLayout({
           data-website-id="88862ea3-0787-4a41-b529-d603e616a87b"
           strategy="lazyOnload"
         />
-        {/* Runs before first paint: a visitor who already watched the intro
-            this tab never sees even one frame of it again. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{if(sessionStorage.getItem('dzx-intro')==='1')document.documentElement.classList.add('dzx-intro-seen')}catch(e){}",
-          }}
-        />
         {/* First hero tile to cross the viewport as the marquee slides in. */}
         <link rel="preload" as="image" href="/hero/hero-7.webp" />
       </head>
@@ -58,7 +49,6 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <LoadingScreen />
           <SmoothScroll>
             <PageTransition />
             <ScrollProgress />

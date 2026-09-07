@@ -3,7 +3,6 @@ import {ArrowUpRight} from 'lucide-react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from "framer-motion";
 import Magnetic from "../../../components/Magnetic";
-import { useIntroGate } from "../../../components/introGate";
 
 // The headline is split into deliberate display lines so each one can be
 // revealed independently behind its own clipping mask.
@@ -37,9 +36,6 @@ const DEMO_IMAGES = [
 
 const Landing = () => {
   const reduceMotion = useReducedMotion();
-  // Held until the loading screen's curtain starts lifting, so this entrance
-  // plays into view instead of finishing unseen behind it.
-  const ready = useIntroGate();
 
   return (
 
@@ -70,7 +66,7 @@ const Landing = () => {
                 <motion.span
                   className={`block ${line.className}`}
                   initial={reduceMotion ? false : { y: "115%" }}
-                  animate={ready ? { y: "0%" } : { y: "115%" }}
+                  animate={{ y: "0%" }}
                   transition={{
                     duration: 0.85,
                     delay: 0.08 + i * 0.1,
@@ -85,7 +81,7 @@ const Landing = () => {
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
             className="max-w-2xl text-base sm:text-lg lg:text-xl font-medium text-dzignex-white/80 mx-auto mt-6 md:mt-8"
           >
@@ -97,7 +93,7 @@ const Landing = () => {
               <Magnetic className="inline-block mt-8 md:mt-12">
               <motion.button
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={ready ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: 0.65, duration: 0.5, ease: [0.175, 0.885, 0.32, 1.275] }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
@@ -123,7 +119,7 @@ const Landing = () => {
         {/* Animated Image Marquee */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
           className="mt-12 md:mt-16 relative"
         >
@@ -154,19 +150,15 @@ const Landing = () => {
                     transition: { duration: 0.3 },
                   }}
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={
-                    ready
-                      ? {
-                          opacity: 1,
-                          scale: 1,
-                          transition: {
-                            delay: 0.9 + index * 0.035,
-                            duration: 0.45,
-                            ease: "backOut",
-                          },
-                        }
-                      : { opacity: 0, scale: 0.8 }
-                  }
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      delay: 0.9 + index * 0.035,
+                      duration: 0.45,
+                      ease: "backOut",
+                    },
+                  }}
                 >
                   <img
                     src={src}

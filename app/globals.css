@@ -194,10 +194,3 @@
 .dex-scroll::-webkit-scrollbar-thumb:hover {
   background: color-mix(in oklab, #0C3EFF 75%, transparent);
 }
-/* ---- First-load intro ------------------------------------------------- */
-/* Paired with the inline guard in the site layout: hides the loader before
-   the first paint for anyone who already watched it this tab, so a warm
-   navigation never flashes the screen it's meant to replace. */
-.dzx-intro-seen [data-dzx-loader] {
-  display: none !important;
-}
