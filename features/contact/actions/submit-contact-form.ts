@@ -49,10 +49,30 @@ export async function submitContactForm(
       message: validatedData.message,
     })
 
-    // Best-effort notification — a failed email should never fail the submission.
-    sendContactNotificationEmail({ ...validatedData, reference }).catch((error) => {
-      console.error("Error sending contact notification email:", error)
-    })
+    // The notification MUST be awaited. On serverless the instance is frozen as
+    // soon as this action returns, so a fire-and-forget promise is killed
+    // mid-SMTP-handshake and the studio never hears about the lead. The race
+    // caps how long the visitor waits: a slow or broken mailbox degrades to a
+    // logged failure, never to a failed submission.
+    const notification = await Promise.race([
+      sendContactNotificationEmail({ ...validatedData, reference }),
+      new Promise<{ success: false; error: string }>((resolve) =>
+        setTimeout(
+          () => resolve({ success: false, error: "Timed out after 9s" }),
+          9_000,
+        ),
+      ),
+    ]).catch((error) => ({
+      success: false as const,
+      error: error instanceof Error ? error.message : "Unknown error",
+    }))
+
+    if (!notification.success) {
+      // Loud on purpose: the brief is safely stored, but nobody has been told.
+      console.error(
+        `[contact] ${reference} saved but notification FAILED: ${notification.error}`,
+      )
+    }
 
     return { success: true, reference }
   } catch (error) {

@@ -47,6 +47,11 @@ function createTransporter() {
       user,
       pass,
     },
+    // Serverless has a hard execution ceiling, so fail fast and surface a real
+    // error rather than hanging until the platform kills the instance.
+    connectionTimeout: 7_000,
+    greetingTimeout: 5_000,
+    socketTimeout: 7_000,
   });
 }
 
@@ -64,10 +69,10 @@ export async function sendEmail(
     console.log(`Sending email to: ${options.to}, Subject: ${options.subject}`);
     const transporter = createTransporter();
 
-    // Verify connection
-    await transporter.verify();
-
-    await transporter.sendMail({
+    // No transporter.verify() here: it opens a second full connection and
+    // handshake before every send, roughly doubling the time to deliver. It
+    // proves nothing sendMail won't report on its own.
+    const info = await transporter.sendMail({
       from: `${fromName} <${fromEmail}>`,
       to: options.to,
       subject: options.subject,
@@ -76,6 +81,7 @@ export async function sendEmail(
       attachments: options.attachments,
     });
 
+    console.log(`Email accepted for delivery: ${info.messageId}`);
 
     return { success: true };
   } catch (error) {
