@@ -519,6 +519,11 @@ The Dzignex Studio Team`;
 
 /**
  * Notify the studio inbox that a new contact form submission came in.
+ *
+ * Designed to be read on a phone in ten seconds: who it is, what they want,
+ * what they'll spend — then reply / WhatsApp straight from the message.
+ * Table-based and fully inline-styled so it survives Gmail, Outlook and Apple
+ * Mail; every visitor-supplied value is HTML-escaped before it lands in markup.
  */
 export async function sendContactNotificationEmail(submission: {
   fullName: string;
@@ -532,84 +537,302 @@ export async function sendContactNotificationEmail(submission: {
   challenges?: string[];
   mainGoal?: string[];
   message?: string;
+  reference?: string;
 }): Promise<SendEmailResult> {
-  const notifyTo = process.env.CONTACT_NOTIFICATION_EMAIL || process.env.SMTP_USER || "";
+  const notifyTo =
+    process.env.CONTACT_NOTIFICATION_EMAIL ||
+    process.env.SMTP_USER ||
+    "dzignex.studio@gmail.com";
 
-  const row = (label: string, value?: string | string[]) => {
-    const display = Array.isArray(value) ? value.join(", ") : value;
-    if (!display) return "";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.dzignex.studio";
+
+  const BLUE = "#0C3EFF";
+  const INK = "#010110";
+  const CARD = "#07071c";
+  const LINE = "#1c1c3a";
+  const MUTED = "#8b8fae";
+
+  const esc = (value: string) =>
+    value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+  const submittedAt = new Intl.DateTimeFormat("en-GB", {
+    dateStyle: "full",
+    timeStyle: "short",
+    timeZone: process.env.STUDIO_TIMEZONE || "Africa/Algiers",
+  }).format(new Date());
+
+  const firstName = submission.fullName.trim().split(/\s+/)[0] || "there";
+  const waDigits = submission.whatsappNumber.replace(/\D/g, "");
+  const services = submission.serviceRequired ?? [];
+  const challenges = submission.challenges ?? [];
+  const goals = submission.mainGoal ?? [];
+
+  const replyHref = `mailto:${encodeURIComponent(submission.email)}?subject=${encodeURIComponent(
+    `Re: your brief for ${submission.companyName} — Dzignex Studio`,
+  )}&body=${encodeURIComponent(`Hi ${firstName},\n\nThanks for your brief — `)}`;
+
+  /** Visitor text that may be a URL, rendered as a link only when it looks like one. */
+  const linkify = (value: string) => {
+    const trimmed = value.trim();
+    if (/^https?:\/\/\S+$/i.test(trimmed) || /^www\.\S+$/i.test(trimmed)) {
+      const href = trimmed.startsWith("http") ? trimmed : `https://${trimmed}`;
+      return `<a href="${esc(href)}" style="color:${BLUE}; text-decoration:none; border-bottom:1px solid ${LINE};">${esc(trimmed)}</a>`;
+    }
+    return esc(trimmed);
+  };
+
+  const chips = (values: string[]) =>
+    values
+      .map(
+        (value) =>
+          `<span style="display:inline-block; margin:0 6px 6px 0; padding:6px 12px; background:#0d1030; border:1px solid #262d5c; border-radius:100px; font-size:13px; line-height:1.2; color:#d5d8ee;">${esc(value)}</span>`,
+      )
+      .join("");
+
+  const row = (label: string, valueHtml?: string) => {
+    if (!valueHtml) return "";
     return `
       <tr>
-        <td style="padding:10px 0; border-bottom:1px solid #222; font-size:13px; color:#888888; white-space:nowrap; vertical-align:top;">${label}</td>
-        <td style="padding:10px 0 10px 20px; border-bottom:1px solid #222; font-size:15px; color:#ffffff;">${display}</td>
+        <td style="padding:14px 0 14px 0; border-bottom:1px solid ${LINE}; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:${MUTED}; white-space:nowrap; vertical-align:top; width:132px;">${label}</td>
+        <td style="padding:14px 0 14px 20px; border-bottom:1px solid ${LINE}; font-size:15px; line-height:1.5; color:#ffffff; vertical-align:top;">${valueHtml}</td>
       </tr>
     `;
   };
 
-  const html = `
-    <body style="margin:0; padding:0; background:#010110; font-family:'DM Sans', Arial, sans-serif;">
-      <div style="max-width:600px; margin:auto; background:#010110; color:#ffffff; padding:40px 30px;">
+  const stackedBlock = (label: string, valuesHtml?: string) => {
+    if (!valuesHtml) return "";
+    return `
+      <tr>
+        <td colspan="2" style="padding:18px 0 4px;">
+          <p style="margin:0 0 10px; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:${MUTED};">${label}</p>
+          <div>${valuesHtml}</div>
+        </td>
+      </tr>
+    `;
+  };
 
-        <h1 style="text-align:center; color:#ffffff; font-size:32px; font-weight:700; margin:0 0 30px;">
-          NEW <span style="color:#0C3EFF;">CONTACT FORM</span> SUBMISSION
-        </h1>
-
-        <p style="font-size:15px; line-height:1.6; color:#cccccc; margin-bottom:25px; text-align:center;">
-          A new lead just submitted the contact form on the website.
+  const sectionHeading = (title: string) => `
+    <tr>
+      <td colspan="2" style="padding:34px 0 6px;">
+        <p style="margin:0; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:${BLUE}; font-weight:700;">
+          <span style="color:${MUTED};">[</span> ${title} <span style="color:${MUTED};">]</span>
         </p>
-
-        <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
-          ${row("Full Name", submission.fullName)}
-          ${row("Email", submission.email)}
-          ${row("WhatsApp", submission.whatsappNumber)}
-          ${row("Company", submission.companyName)}
-          ${row("Industry", submission.industry)}
-          ${row("Services", submission.serviceRequired)}
-          ${row("Website / Instagram", submission.websiteOrInstagram)}
-          ${row("Budget Range", submission.budgetRange)}
-          ${row("Challenges", submission.challenges)}
-          ${row("Main Goal", submission.mainGoal)}
-          ${row("Message", submission.message)}
-        </table>
-
-        <div style="border-top: 1px solid #333; padding-top: 20px; text-align: center;">
-          <p style="font-size:12px; color:#888888; margin:0;">
-            © ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
-          </p>
-        </div>
-
-      </div>
-    </body>
+      </td>
+    </tr>
   `;
 
+  /** Three headline signals, side by side — the at-a-glance read. */
+  const statCell = (label: string, value: string, last = false) => `
+    <td width="33.33%" style="padding:18px 14px; background:#0b0b24; border-right:${last ? "none" : `1px solid ${LINE}`}; vertical-align:top;">
+      <p style="margin:0 0 8px; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:${MUTED};">${label}</p>
+      <p style="margin:0; font-size:16px; line-height:1.35; color:#ffffff; font-weight:700;">${esc(value)}</p>
+    </td>
+  `;
+
+  const preheader = [
+    submission.fullName,
+    submission.companyName,
+    services[0],
+    submission.budgetRange ? `${submission.budgetRange} budget` : "",
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
+  const html = `
+<div style="margin:0; padding:0; background:${INK};">
+  <div style="display:none; max-height:0; overflow:hidden; opacity:0; color:transparent; font-size:1px; line-height:1px;">${esc(preheader)}</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${INK}; margin:0; padding:0;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%; background:${CARD}; border:1px solid ${LINE}; border-radius:16px; overflow:hidden; font-family:'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">
+
+          <!-- BRAND BLUE EDGE -->
+          <tr><td style="height:4px; background:${BLUE}; font-size:0; line-height:0;">&nbsp;</td></tr>
+
+          <!-- HEADER -->
+          <tr>
+            <td style="padding:28px 36px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="left" style="vertical-align:middle;">
+                    <img src="${baseUrl}/dzignex_logo.svg" alt="Dzignex Studio" width="104" style="width:104px; height:auto; display:block; border:0;" />
+                  </td>
+                  <td align="right" style="vertical-align:middle;">
+                    <span style="display:inline-block; padding:7px 14px; background:${BLUE}; border-radius:100px; font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#ffffff;">New brief</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- HEADLINE -->
+          <tr>
+            <td style="padding:30px 36px 0;">
+              <p style="margin:0 0 14px; font-size:12px; letter-spacing:0.1em; color:${MUTED};">
+                ${submission.reference ? `<span style="color:${BLUE}; font-weight:700;">${esc(submission.reference)}</span> &nbsp;·&nbsp; ` : ""}${esc(submittedAt)}
+              </p>
+              <h1 style="margin:0 0 8px; font-size:34px; line-height:1.15; font-weight:700; color:#ffffff;">
+                ${esc(submission.fullName)}
+              </h1>
+              <p style="margin:0; font-size:18px; line-height:1.4; color:${BLUE}; font-weight:700;">
+                ${esc(submission.companyName)}
+              </p>
+            </td>
+          </tr>
+
+          <!-- SIGNAL ROW -->
+          <tr>
+            <td style="padding:26px 36px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${LINE}; border-radius:12px; overflow:hidden;">
+                <tr>
+                  ${statCell("Budget", submission.budgetRange || "Not stated")}
+                  ${statCell("Industry", submission.industry)}
+                  ${statCell("Services", `${services.length} selected`, true)}
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ACTIONS -->
+          <tr>
+            <td style="padding:24px 36px 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="border-radius:8px; background:${BLUE};">
+                    <a href="${esc(replyHref)}" style="display:inline-block; padding:14px 26px; font-size:15px; font-weight:700; color:#ffffff; text-decoration:none;">Reply to ${esc(firstName)}</a>
+                  </td>
+                  ${
+                    waDigits
+                      ? `<td style="width:12px;">&nbsp;</td>
+                  <td style="border-radius:8px; border:1px solid #2a3163;">
+                    <a href="https://wa.me/${esc(waDigits)}" style="display:inline-block; padding:13px 24px; font-size:15px; font-weight:700; color:#ffffff; text-decoration:none;">WhatsApp</a>
+                  </td>`
+                      : ""
+                  }
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- DETAILS -->
+          <tr>
+            <td style="padding:6px 36px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+
+                ${sectionHeading("Contact")}
+                ${row("Email", `<a href="mailto:${esc(submission.email)}" style="color:#ffffff; text-decoration:none; border-bottom:1px solid ${BLUE};">${esc(submission.email)}</a>`)}
+                ${row("WhatsApp", esc(submission.whatsappNumber))}
+                ${submission.websiteOrInstagram ? row("Web / IG", linkify(submission.websiteOrInstagram)) : ""}
+
+                ${sectionHeading("Project")}
+                ${stackedBlock("Services required", services.length ? chips(services) : "")}
+                ${goals.length ? stackedBlock("Main goal", chips(goals)) : ""}
+
+                ${challenges.length ? sectionHeading("Context") : ""}
+                ${challenges.length ? stackedBlock("Challenges", chips(challenges)) : ""}
+
+              </table>
+            </td>
+          </tr>
+
+          ${
+            submission.message
+              ? `<!-- MESSAGE -->
+          <tr>
+            <td style="padding:32px 36px 0;">
+              <p style="margin:0 0 12px; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:${BLUE}; font-weight:700;">
+                <span style="color:${MUTED};">[</span> In their words <span style="color:${MUTED};">]</span>
+              </p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0b0b24; border-left:3px solid ${BLUE}; border-radius:0 10px 10px 0;">
+                <tr>
+                  <td style="padding:18px 20px; font-size:15px; line-height:1.65; color:#d5d8ee;">${esc(submission.message).replace(/\n/g, "<br />")}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>`
+              : ""
+          }
+
+          <!-- DASHBOARD -->
+          <tr>
+            <td style="padding:32px 36px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid ${LINE};">
+                <tr>
+                  <td style="padding-top:22px; font-size:14px; line-height:1.6; color:${MUTED};">
+                    Manage this lead in the studio dashboard —
+                    <a href="${baseUrl}/dashboard/messages" style="color:${BLUE}; font-weight:700; text-decoration:none;">open messages &rarr;</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="padding:26px 36px 34px;">
+              <p style="margin:0 0 6px; font-size:12px; line-height:1.6; color:#5f6484;">
+                Sent automatically when the contact form on dzignex.studio is submitted. Replying to this email goes to the studio inbox, not to ${esc(firstName)} — use the button above to reach them.
+              </p>
+              <p style="margin:0; font-size:12px; color:#5f6484;">
+                &copy; ${new Date().getFullYear()} Dzignex Studio. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+  `;
+
+  // Returns null (not "") for missing values so blank separator lines survive
+  // the filter below.
   const textLine = (label: string, value?: string | string[]) => {
     const display = Array.isArray(value) ? value.join(", ") : value;
-    return display ? `${label}: ${display}` : "";
+    return display ? `${label}: ${display}` : null;
   };
 
   const text = [
-    "New Contact Form Submission",
+    "NEW BRIEF — Dzignex Studio",
+    submission.reference ? `Reference: ${submission.reference}` : null,
+    submittedAt,
     "",
-    textLine("Full Name", submission.fullName),
+    `${submission.fullName} — ${submission.companyName}`,
+    "",
     textLine("Email", submission.email),
     textLine("WhatsApp", submission.whatsappNumber),
-    textLine("Company", submission.companyName),
+    textLine("Web / IG", submission.websiteOrInstagram),
+    "",
     textLine("Industry", submission.industry),
-    textLine("Services", submission.serviceRequired),
-    textLine("Website / Instagram", submission.websiteOrInstagram),
-    textLine("Budget Range", submission.budgetRange),
-    textLine("Challenges", submission.challenges),
-    textLine("Main Goal", submission.mainGoal),
-    textLine("Message", submission.message),
+    textLine("Budget", submission.budgetRange || "Not stated"),
+    textLine("Services", services),
+    textLine("Main goal", goals),
+    textLine("Challenges", challenges),
+    submission.message ? `\nIn their words:\n${submission.message}` : null,
+    "",
+    `Open messages: ${baseUrl}/dashboard/messages`,
   ]
-    .filter(Boolean)
+    .filter((line): line is string => line !== null)
     .join("\n");
+
+  const subject = `New brief — ${submission.fullName}, ${submission.companyName}${
+    submission.budgetRange ? ` (${submission.budgetRange} budget)` : ""
+  }`;
 
   return sendEmail({
     to: notifyTo,
-    subject: `New Contact Form Submission — ${submission.fullName} (${submission.companyName})`,
+    subject,
     html,
     text,
     category: "contact_notification",
+    senderEmail: submission.email,
   });
 }

@@ -19,9 +19,21 @@ const contactFormSchema = z.object({
   message: z.string().optional(),
 })
 
-export async function submitContactForm(data: z.infer<typeof contactFormSchema>) {
+type SubmitContactFormResult =
+  | { success: true; reference: string }
+  | { success: false; error: string }
+
+export async function submitContactForm(
+  data: z.infer<typeof contactFormSchema>,
+): Promise<SubmitContactFormResult> {
   try {
     const validatedData = contactFormSchema.parse(data)
+
+    // Shared between the visitor's confirmation screen and the studio's
+    // notification email, so both sides quote the same brief.
+    const now = new Date()
+    const mmdd = `${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`
+    const reference = `DZX-${mmdd}-${String(Math.floor(1000 + Math.random() * 9000))}`
 
     await db.insert(messages).values({
       fullName: validatedData.fullName,
@@ -38,11 +50,11 @@ export async function submitContactForm(data: z.infer<typeof contactFormSchema>)
     })
 
     // Best-effort notification — a failed email should never fail the submission.
-    sendContactNotificationEmail(validatedData).catch((error) => {
+    sendContactNotificationEmail({ ...validatedData, reference }).catch((error) => {
       console.error("Error sending contact notification email:", error)
     })
 
-    return { success: true }
+    return { success: true, reference }
   } catch (error) {
     console.error("Error submitting contact form:", error)
     if (error instanceof z.ZodError) {

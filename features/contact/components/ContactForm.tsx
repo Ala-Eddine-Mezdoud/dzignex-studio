@@ -76,10 +76,8 @@ const ContactForm = () => {
     try {
       const result = await submitContactForm(data)
       if (result.success) {
-        const now = new Date()
-        const mmdd = `${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`
-        const reference = `DZX-${mmdd}-${String(Math.floor(1000 + Math.random() * 9000))}`
-        setBrief({ data, reference })
+        // The server issues the reference so it matches the studio's notification email.
+        setBrief({ data, reference: result.reference })
         form.reset()
       } else {
         toast.error(result.error || "Failed to send message. Please try again.")
